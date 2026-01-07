@@ -1,0 +1,27 @@
+{
+  "name": "tank-adventure-game",
+  "version": "0.1.0",
+  "description": "Tank's Great Adventure - A 1990s style adventure game built with Phaser 3",
+  "main": "src/main.ts",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "generate-art": "python scripts/generate_art.py"
+  },
+  "keywords": [
+    "phaser",
+    "adventure-game",
+    "typescript"
+  ],
+  "author": "Alex Brown & Alexander Brown",
+  "license": "UNLICENSED",
+  "private": true,
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10"
+  },
+  "dependencies": {
+    "phaser": "^3.70.0"
+  }
+}
