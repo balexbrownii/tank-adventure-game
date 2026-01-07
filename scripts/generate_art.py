@@ -84,11 +84,12 @@ def poll_generation(uuid: str, max_attempts: int = 60, delay: int = 5) -> dict:
         response.raise_for_status()
         data = response.json()
 
-        status = data.get("status", "")
-        if status == "completed":
+        status = data.get("processing_state", "")
+        if status == "done":
             return data
         elif status == "failed":
-            raise Exception(f"Generation failed: {data.get('error', 'Unknown error')}")
+            result = data.get("processing_result", {})
+            raise Exception(f"Generation failed: {result.get('error_message', 'Unknown error')}")
 
         print(f"  Status: {status} (attempt {attempt + 1}/{max_attempts})")
         time.sleep(delay)
@@ -129,15 +130,22 @@ def generate_asset(asset_type: str) -> None:
     print("  Waiting for generation...")
     data = poll_generation(uuid)
 
-    # Download first image
-    images = data.get("images", [])
-    if not images:
+    # Download first image from slots
+    result = data.get("processing_result", {})
+    slots = result.get("slots", [])
+    if not slots:
         print("  ERROR: No images returned")
         return
 
-    image_url = images[0].get("url")
+    # Find first successful slot
+    image_url = None
+    for slot in slots:
+        if slot.get("status") == "success":
+            image_url = slot.get("url")
+            break
+
     if not image_url:
-        print("  ERROR: No image URL in response")
+        print("  ERROR: No successful image URL in response")
         return
 
     print(f"  Downloading image...")
@@ -150,7 +158,7 @@ def generate_asset(asset_type: str) -> None:
         json.dump({
             "uuid": uuid,
             "prompt": prompt,
-            "images": images,
+            "slots": slots,
             "generated_at": time.strftime("%Y-%m-%d %H:%M:%S")
         }, f, indent=2)
 
