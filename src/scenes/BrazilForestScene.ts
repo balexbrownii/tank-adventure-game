@@ -1,8 +1,6 @@
 import Phaser from 'phaser';
 
 export class BrazilForestScene extends Phaser.Scene {
-  private tank?: Phaser.GameObjects.Sprite;
-
   constructor() {
     super({ key: 'BrazilForestScene' });
   }
