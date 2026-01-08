@@ -44,6 +44,50 @@ export class PreloadScene extends Phaser.Scene {
   }
 
   create(): void {
+    // Generate inventory item icons programmatically
+    this.createItemIcons();
+
     this.scene.start('TitleScene');
+  }
+
+  private createItemIcons(): void {
+    const iconSize = 48;
+
+    // Machete icon - silver blade with brown handle
+    const macheteGraphics = this.add.graphics();
+    macheteGraphics.fillStyle(0x8B4513); // Brown handle
+    macheteGraphics.fillRect(4, 30, 12, 16);
+    macheteGraphics.fillStyle(0xC0C0C0); // Silver blade
+    macheteGraphics.beginPath();
+    macheteGraphics.moveTo(8, 30);
+    macheteGraphics.lineTo(4, 8);
+    macheteGraphics.lineTo(20, 4);
+    macheteGraphics.lineTo(40, 8);
+    macheteGraphics.lineTo(44, 14);
+    macheteGraphics.lineTo(14, 30);
+    macheteGraphics.closePath();
+    macheteGraphics.fillPath();
+    macheteGraphics.lineStyle(2, 0x888888);
+    macheteGraphics.strokePath();
+    macheteGraphics.generateTexture('machete', iconSize, iconSize);
+    macheteGraphics.destroy();
+
+    // Flower icon - red petals with yellow center and green stem
+    const flowerGraphics = this.add.graphics();
+    // Stem
+    flowerGraphics.fillStyle(0x228B22);
+    flowerGraphics.fillRect(21, 28, 6, 18);
+    // Petals
+    flowerGraphics.fillStyle(0xFF4444);
+    flowerGraphics.fillCircle(24, 12, 8);
+    flowerGraphics.fillCircle(14, 18, 8);
+    flowerGraphics.fillCircle(34, 18, 8);
+    flowerGraphics.fillCircle(18, 28, 8);
+    flowerGraphics.fillCircle(30, 28, 8);
+    // Center
+    flowerGraphics.fillStyle(0xFFD700);
+    flowerGraphics.fillCircle(24, 20, 6);
+    flowerGraphics.generateTexture('flower', iconSize, iconSize);
+    flowerGraphics.destroy();
   }
 }

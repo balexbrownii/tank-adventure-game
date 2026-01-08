@@ -188,13 +188,16 @@ export class BrazilForestScene extends Phaser.Scene {
           },
           {
             verb: 'USE',
-            response: "You need something sharp to cut through these vines.",
+            response: "You hack through the vines with the machete! The path ahead is now clear.",
             requiresItem: 'machete',
             onExecute: () => {
               gameState.setFlag('vines_cut', true);
-              this.messageBox.show('You hack through the vines with the machete! The path ahead is now clear.', 4000);
               this.hotspotManager.setEnabled('vines', false);
             },
+          },
+          {
+            verb: 'USE',
+            response: "You need something sharp to cut through these vines.",
           },
           {
             verb: 'PUSH',
