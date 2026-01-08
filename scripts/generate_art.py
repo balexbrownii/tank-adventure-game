@@ -49,13 +49,13 @@ PROMPTS = {
 
     LEFT SIDE: A striking bright red exotic flower on a tall stem, clearly visible and pickable, growing among ferns.
 
-    CENTER-RIGHT FOREGROUND: An old weathered tree stump with a rusty machete blade stuck in the top, handle pointing up. The stump is mossy and about waist-height.
+    CENTER-RIGHT FOREGROUND: An old weathered tree stump, mossy and about waist-height. The stump is EMPTY - no machete or tools in it, just an old cut tree stump with moss and wood grain visible on top.
 
     RIGHT SIDE: Thick tangled jungle vines hanging down like a curtain, blocking a narrow dirt path that leads deeper into the jungle. The vines are dense and clearly impassable without cutting.
 
     The clearing has a dirt floor with tropical plants. Golden afternoon sunlight filters through the canopy. Dense jungle trees in the background.
 
-    Style: Hand-painted 1990s Sierra adventure game background like King's Quest V or Monkey Island 2. Rich saturated colors, detailed painterly look, atmospheric perspective. Widescreen game scene, 16:9 aspect ratio composition. The three interactive elements (flower, stump with machete, vines) should be clearly visible and distinct from the background.""",
+    Style: Hand-painted 1990s Sierra adventure game background like King's Quest V or Monkey Island 2. Rich saturated colors, detailed painterly look, atmospheric perspective. Widescreen game scene, 16:9 aspect ratio composition. The interactive elements (flower, empty stump, vines) should be clearly visible and distinct from the background.""",
 
     "group": """Three adventure game characters standing together as a team: Tank (athletic muscular woman in red martial arts gi with black belt, confident heroic pose, dark ponytail), a pink pig wearing cowboy hat and red bandana standing on hind legs with charming smirk, and Mr. Snuggles the deer with small antlers and gentle kind eyes. They stand together in a forest clearing as companions ready for adventure. Warm golden sunlight filtering through trees behind them. Style: Hand-painted 1990s adventure game art like King's Quest or Monkey Island. Character group shot, rich colors, heroic and charming feeling.""",
 
@@ -66,7 +66,7 @@ PROMPTS = {
 
     "flower-sprite": """Video game object sprite of a beautiful exotic tropical flower. Single striking red flower with large vibrant petals, bright yellow center with visible stamens. Long green stem with a few leaves. The flower is eye-catching and clearly pickable. Rainforest orchid or heliconia style. Isolated object on transparent or simple background. Style: Hand-painted 1990s Sierra adventure game art like King's Quest. Vivid saturated colors, detailed botanical illustration style, collectible game item sprite.""",
 
-    "machete-stump": """Video game object sprite of a rusty machete blade stuck in wood, handle pointing upward. Old weathered machete with worn wooden handle, rusty but sharp blade wedged firmly into the top of a tree stump. The handle sticks up invitingly, clearly meant to be grabbed and pulled out. Jungle adventure item. Isolated object on transparent or solid color background. Style: Hand-painted 1990s Sierra adventure game art like King's Quest V or Monkey Island. Detailed painterly texture, warm lighting, interactive game item sprite.""",
+    "machete-stump": """Video game sprite of a rusty machete blade stuck vertically in wood. The machete has a weathered brown wooden handle pointing straight up and a rusty gray metal blade wedged into a mossy tree stump. The handle is worn but sturdy, clearly meant to be grabbed. Just the machete and small portion of stump top visible - this is a close-up sprite to overlay on a background. Jungle adventure game item. Transparent background. Style: Hand-painted 1990s Sierra adventure game art like King's Quest V. Muted earth tones, rusty metal, worn wood texture. Game collectible sprite.""",
 
     "village": """Video game background scene of a small indigenous Brazilian village in a jungle clearing.
 

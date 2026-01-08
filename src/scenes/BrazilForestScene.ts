@@ -14,6 +14,8 @@ export class BrazilForestScene extends Phaser.Scene {
   private pig!: Phaser.GameObjects.Image;
   private deer!: Phaser.GameObjects.Image;
 
+  // Interactive sprites
+  private macheteSprite!: Phaser.GameObjects.Image;
 
   // Systems
   private hotspotManager!: HotspotManager;
@@ -73,6 +75,14 @@ export class BrazilForestScene extends Phaser.Scene {
     this.deer = this.add.image(width / 2 + 200, groundY, 'deer');
     this.deer.setScale(characterScale * 0.85);
     this.deer.setOrigin(0.5, 1);
+
+    // Machete in stump - only visible if not yet taken
+    // Position on the stump (center-right of scene)
+    this.macheteSprite = this.add.image(635, playableHeight - 195, 'machete-in-stump');
+    this.macheteSprite.setScale(0.12);
+    this.macheteSprite.setOrigin(0.5, 1);
+    this.macheteSprite.setDepth(10);
+    this.macheteSprite.setVisible(!gameState.hasItem('machete'));
 
     // Register hotspots
     this.registerHotspots(playableHeight);
@@ -274,18 +284,18 @@ export class BrazilForestScene extends Phaser.Scene {
           },
         ],
       },
-      // Old tree stump - CENTER-RIGHT FOREGROUND of scene
+      // Old tree stump - CENTER of scene
       {
         id: 'stump',
         name: 'tree stump',
-        x: 750,
-        y: playableHeight - 150,
-        width: 180,
-        height: 180,
+        x: 635,
+        y: playableHeight - 120,
+        width: 150,
+        height: 150,
         actions: [
           {
             verb: 'LOOK',
-            response: "An old tree stump. There seems to be something shiny stuck in it...",
+            response: "An old tree stump. There's a rusty machete stuck in the top!",
             enabled: () => !gameState.hasItem('machete'),
           },
           {
@@ -295,7 +305,7 @@ export class BrazilForestScene extends Phaser.Scene {
           },
           {
             verb: 'TAKE',
-            response: "You pull out an old machete from the stump! This could be useful.",
+            response: "You pull out the old machete from the stump! This could be useful.",
             onExecute: () => {
               gameState.addItem({
                 id: 'machete',
@@ -303,6 +313,8 @@ export class BrazilForestScene extends Phaser.Scene {
                 description: 'A rusty but sharp machete.',
                 icon: 'machete',
               });
+              // Hide the machete sprite
+              this.macheteSprite.setVisible(false);
             },
             enabled: () => !gameState.hasItem('machete'),
           },
