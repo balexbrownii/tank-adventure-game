@@ -1,0 +1,35 @@
+{
+  "uuid": "66541e39e2ca6789e3ee154627432dc0",
+  "prompt": "Video game object sprite of a rusty machete blade stuck in wood, handle pointing upward. Old weathered machete with worn wooden handle, rusty but sharp blade wedged firmly into the top of a tree stump. The handle sticks up invitingly, clearly meant to be grabbed and pulled out. Jungle adventure item. Isolated object on transparent or solid color background. Style: Hand-painted 1990s Sierra adventure game art like King's Quest V or Monkey Island. Detailed painterly texture, warm lighting, interactive game item sprite.",
+  "slots": [
+    {
+      "index": 0,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/66541e39e2ca6789e3ee154627432dc0/0_Video_game_object_sprite_of_a_rusty_machete_blade_stuck_in_woodu002c_handle_poin.webp",
+      "charged": true,
+      "error_message": null
+    },
+    {
+      "index": 1,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/66541e39e2ca6789e3ee154627432dc0/1_Video_game_object_sprite_of_a_rusty_machete_blade_stuck_in_woodu002c_handle_poin.webp",
+      "charged": true,
+      "error_message": null
+    },
+    {
+      "index": 2,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/66541e39e2ca6789e3ee154627432dc0/2_Video_game_object_sprite_of_a_rusty_machete_blade_stuck_in_woodu002c_handle_poin.webp",
+      "charged": true,
+      "error_message": null
+    },
+    {
+      "index": 3,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/66541e39e2ca6789e3ee154627432dc0/3_Video_game_object_sprite_of_a_rusty_machete_blade_stuck_in_woodu002c_handle_poin.webp",
+      "charged": true,
+      "error_message": null
+    }
+  ],
+  "generated_at": "2026-01-07 20:24:56"
+}

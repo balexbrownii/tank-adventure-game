@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { Hotspot, HotspotConfig, InteractionVerb } from '../entities/Hotspot';
+import { responseGenerator } from '../services/ResponseGenerator';
 
 /**
  * HotspotManager - Manages all interactive hotspots in a scene
@@ -119,10 +120,18 @@ export class HotspotManager {
       return null;
     }
 
-    const response = await this.hoveredHotspot.executeAction(verb, heldItemId);
+    const baseResponse = await this.hoveredHotspot.executeAction(verb, heldItemId);
     this.onHotspotClick.forEach(cb => cb(this.hoveredHotspot!, verb));
 
-    return response;
+    // Generate dynamic response using Claude Haiku
+    const dynamicResponse = await responseGenerator.generate({
+      verb,
+      target: this.hoveredHotspot.hotspotName,
+      baseResponse,
+      context: heldItemId ? `Player is holding: ${heldItemId}` : undefined,
+    });
+
+    return dynamicResponse;
   }
 
   /**

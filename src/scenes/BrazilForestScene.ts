@@ -5,12 +5,17 @@ import { MessageBox } from '../ui/MessageBox';
 import { InventoryPanel } from '../ui/InventoryPanel';
 import { gameState } from '../managers/GameStateManager';
 import { HotspotConfig } from '../entities/Hotspot';
+import { audioManager } from '../managers/AudioManager';
+import { responseGenerator } from '../services/ResponseGenerator';
 
 export class BrazilForestScene extends Phaser.Scene {
   // Characters
   private tank!: Phaser.GameObjects.Image;
   private pig!: Phaser.GameObjects.Image;
   private deer!: Phaser.GameObjects.Image;
+
+  // Interactive sprites
+  private macheteSprite!: Phaser.GameObjects.Image;
 
   // Systems
   private hotspotManager!: HotspotManager;
@@ -71,6 +76,14 @@ export class BrazilForestScene extends Phaser.Scene {
     this.deer.setScale(characterScale * 0.85);
     this.deer.setOrigin(0.5, 1);
 
+    // Interactive sprites - Machete stuck in stump
+    // Position on the stump, scale to fit, only visible if not yet taken
+    this.macheteSprite = this.add.image(750, playableHeight - 180, 'machete-stump');
+    this.macheteSprite.setScale(0.15);
+    this.macheteSprite.setOrigin(0.5, 1);
+    this.macheteSprite.setDepth(50);
+    this.macheteSprite.setVisible(!gameState.hasItem('machete'));
+
     // Register hotspots
     this.registerHotspots(playableHeight);
 
@@ -104,6 +117,31 @@ export class BrazilForestScene extends Phaser.Scene {
       const currentDebug = this.hotspotManager['debugMode'];
       this.hotspotManager.setDebugMode(!currentDebug);
       this.messageBox.show(currentDebug ? 'Debug mode OFF' : 'Debug mode ON', 1500);
+    });
+
+    // Music toggle (press M)
+    this.input.keyboard?.on('keydown-M', async () => {
+      await audioManager.toggleAmbient();
+      this.messageBox.show(
+        audioManager.getIsPlaying() ? 'Jungle ambience ON' : 'Jungle ambience OFF',
+        1500
+      );
+    });
+
+    // Start ambient music on first click (requires user interaction for Web Audio)
+    this.input.once('pointerdown', async () => {
+      if (!audioManager.getIsPlaying()) {
+        await audioManager.startAmbient();
+      }
+    });
+
+    // Dynamic responses toggle (press H for Haiku)
+    this.input.keyboard?.on('keydown-H', () => {
+      responseGenerator.setEnabled(!responseGenerator.isEnabled());
+      this.messageBox.show(
+        responseGenerator.isEnabled() ? 'Dynamic responses ON (Haiku)' : 'Dynamic responses OFF (static)',
+        1500
+      );
     });
 
     // Show intro message if first visit
@@ -275,6 +313,8 @@ export class BrazilForestScene extends Phaser.Scene {
                 description: 'A rusty but sharp machete.',
                 icon: 'machete',
               });
+              // Hide the machete sprite since player took it
+              this.macheteSprite.setVisible(false);
             },
             enabled: () => !gameState.hasItem('machete'),
           },

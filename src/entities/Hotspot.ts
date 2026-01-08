@@ -31,7 +31,6 @@ export class Hotspot extends Phaser.GameObjects.Zone {
   private actions: HotspotAction[] = [];
   private visualSprite?: Phaser.GameObjects.Sprite;
   private debugRect?: Phaser.GameObjects.Rectangle;
-  private highlightRect?: Phaser.GameObjects.Rectangle;
   private isEnabled: boolean = true;
   private debugColor: number;
 
@@ -54,32 +53,6 @@ export class Hotspot extends Phaser.GameObjects.Zone {
       this.visualSprite = scene.add.sprite(config.x, config.y, config.sprite);
       this.visualSprite.setVisible(config.visible ?? true);
     }
-
-    // Create highlight rectangle (shown on hover)
-    this.highlightRect = scene.add.rectangle(
-      config.x,
-      config.y,
-      config.width,
-      config.height,
-      0xffff00,
-      0
-    );
-    this.highlightRect.setStrokeStyle(2, 0xffff00, 0);
-
-    // Hover effects
-    this.on('pointerover', () => {
-      if (this.highlightRect && this.isEnabled) {
-        this.highlightRect.setStrokeStyle(2, 0xffff00, 0.8);
-        this.highlightRect.setFillStyle(0xffff00, 0.1);
-      }
-    });
-
-    this.on('pointerout', () => {
-      if (this.highlightRect) {
-        this.highlightRect.setStrokeStyle(2, 0xffff00, 0);
-        this.highlightRect.setFillStyle(0xffff00, 0);
-      }
-    });
 
     // Add to scene
     scene.add.existing(this);
@@ -181,9 +154,6 @@ export class Hotspot extends Phaser.GameObjects.Zone {
     if (this.visualSprite) {
       this.visualSprite.setVisible(enabled);
     }
-    if (this.highlightRect) {
-      this.highlightRect.setVisible(enabled);
-    }
     this.setActive(enabled);
 
     // Disable interaction when disabled
@@ -245,9 +215,6 @@ export class Hotspot extends Phaser.GameObjects.Zone {
     if (this.debugRect) {
       this.debugRect.setPosition(x, y);
     }
-    if (this.highlightRect) {
-      this.highlightRect.setPosition(x, y);
-    }
   }
 
   /**
@@ -261,9 +228,6 @@ export class Hotspot extends Phaser.GameObjects.Zone {
       const label = this.debugRect.getData('label') as Phaser.GameObjects.Text;
       if (label) label.destroy();
       this.debugRect.destroy();
-    }
-    if (this.highlightRect) {
-      this.highlightRect.destroy();
     }
     super.destroy(fromScene);
   }

@@ -64,7 +64,9 @@ PROMPTS = {
 
     "vines": """Video game object sprite of thick jungle vines blocking a path. Dense tangled mass of green tropical vines hanging down and across, forming a natural barrier. Some vines have large leaves, others are woody and thick. Clearly too dense to push through without cutting. The vines span across like a curtain blocking passage. Isolated object on transparent or simple background. Style: Hand-painted 1990s Sierra adventure game art. Rich greens, detailed foliage texture, game obstacle sprite.""",
 
-    "flower-sprite": """Video game object sprite of a beautiful exotic tropical flower. Single striking red flower with large vibrant petals, bright yellow center with visible stamens. Long green stem with a few leaves. The flower is eye-catching and clearly pickable. Rainforest orchid or heliconia style. Isolated object on transparent or simple background. Style: Hand-painted 1990s Sierra adventure game art like King's Quest. Vivid saturated colors, detailed botanical illustration style, collectible game item sprite."""
+    "flower-sprite": """Video game object sprite of a beautiful exotic tropical flower. Single striking red flower with large vibrant petals, bright yellow center with visible stamens. Long green stem with a few leaves. The flower is eye-catching and clearly pickable. Rainforest orchid or heliconia style. Isolated object on transparent or simple background. Style: Hand-painted 1990s Sierra adventure game art like King's Quest. Vivid saturated colors, detailed botanical illustration style, collectible game item sprite.""",
+
+    "machete-stump": """Video game object sprite of a rusty machete blade stuck in wood, handle pointing upward. Old weathered machete with worn wooden handle, rusty but sharp blade wedged firmly into the top of a tree stump. The handle sticks up invitingly, clearly meant to be grabbed and pulled out. Jungle adventure item. Isolated object on transparent or solid color background. Style: Hand-painted 1990s Sierra adventure game art like King's Quest V or Monkey Island. Detailed painterly texture, warm lighting, interactive game item sprite."""
 }
 
 # Map asset types to output directories
@@ -78,6 +80,7 @@ OUTPUT_DIRS = {
     "stump": OBJECTS_DIR,
     "vines": OBJECTS_DIR,
     "flower-sprite": OBJECTS_DIR,
+    "machete-stump": OBJECTS_DIR,
 }
 
 
