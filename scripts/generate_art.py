@@ -30,7 +30,7 @@ HEADERS = {
 
 # Output directories
 PROJECT_ROOT = Path(__file__).parent.parent
-IMAGES_DIR = PROJECT_ROOT / "assets" / "images"
+IMAGES_DIR = PROJECT_ROOT / "public" / "assets" / "images"
 CHARACTERS_DIR = IMAGES_DIR / "characters"
 BACKGROUNDS_DIR = IMAGES_DIR / "backgrounds"
 
