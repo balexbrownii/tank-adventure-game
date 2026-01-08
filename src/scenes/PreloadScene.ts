@@ -35,15 +35,12 @@ export class PreloadScene extends Phaser.Scene {
 
     // Load game assets
     // Characters
-    // this.load.image('tank', 'assets/images/characters/tank.png');
-    // this.load.image('pig', 'assets/images/characters/pig.png');
-    // this.load.image('mr-snuggles', 'assets/images/characters/mr-snuggles.png');
+    this.load.image('tank', 'assets/images/characters/tank.png');
+    this.load.image('pig', 'assets/images/characters/pig.png');
+    this.load.image('deer', 'assets/images/characters/deer.png');
 
     // Backgrounds
-    // this.load.image('brazil-forest', 'assets/images/backgrounds/brazil-forest.png');
-
-    // Audio
-    // this.load.audio('theme', 'assets/audio/theme.mp3');
+    this.load.image('brazil-forest', 'assets/images/backgrounds/forest.png');
   }
 
   create(): void {

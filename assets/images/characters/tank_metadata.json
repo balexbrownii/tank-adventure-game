@@ -1,0 +1,35 @@
+{
+  "uuid": "17f52408b9032ebe07b5ba67aebb64cd",
+  "prompt": "Video game character art of Tank, a heroic female martial artist. Athletic muscular woman in her late 20s with confident determined expression. She wears a weathered red sleeveless martial arts gi top with black belt, dark cargo pants, wrapped forearms, practical combat boots. Dark hair pulled back in a ponytail. Strong arms showing defined muscles. Standing in a confident martial arts ready stance with fists raised. Full body view, dynamic pose showing she's ready for action. Style: Hand-painted 1990s adventure game art like King's Quest V, Monkey Island 2. Rich saturated colors, detailed painterly brushwork, warm dramatic lighting. Professional video game character illustration, high detail, expressive.",
+  "slots": [
+    {
+      "index": 0,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/17f52408b9032ebe07b5ba67aebb64cd/0_Video_game_character_art_of_Tanku002c_a_heroic_female_martial_artistu002e_Athlet.webp",
+      "charged": true,
+      "error_message": null
+    },
+    {
+      "index": 1,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/17f52408b9032ebe07b5ba67aebb64cd/1_Video_game_character_art_of_Tanku002c_a_heroic_female_martial_artistu002e_Athlet.webp",
+      "charged": true,
+      "error_message": null
+    },
+    {
+      "index": 2,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/17f52408b9032ebe07b5ba67aebb64cd/2_Video_game_character_art_of_Tanku002c_a_heroic_female_martial_artistu002e_Athlet.webp",
+      "charged": true,
+      "error_message": null
+    },
+    {
+      "index": 3,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/17f52408b9032ebe07b5ba67aebb64cd/3_Video_game_character_art_of_Tanku002c_a_heroic_female_martial_artistu002e_Athlet.webp",
+      "charged": true,
+      "error_message": null
+    }
+  ],
+  "generated_at": "2026-01-07 19:05:14"
+}
