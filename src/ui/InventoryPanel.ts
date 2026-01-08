@@ -19,14 +19,13 @@ export class InventoryPanel extends Phaser.GameObjects.Container {
   // Callbacks
   private onItemSelect: ((item: InventoryItem | null) => void)[] = [];
 
-  constructor(scene: Phaser.Scene, _verbBarY: number) {
+  constructor(scene: Phaser.Scene, verbBarY: number) {
     const gameWidth = scene.cameras.main.width;
-    const gameHeight = scene.cameras.main.height;
     const panelWidth = MAX_VISIBLE_SLOTS * (INVENTORY_SLOT_SIZE + INVENTORY_PADDING) + INVENTORY_MARGIN * 2;
     const panelHeight = INVENTORY_SLOT_SIZE + INVENTORY_MARGIN * 2;
 
-    // Position at bottom-right, aligned with verb bar
-    super(scene, gameWidth - panelWidth - 10, gameHeight - panelHeight - 15);
+    // Position at bottom-right, ABOVE the verb bar (not overlapping)
+    super(scene, gameWidth - panelWidth - 10, verbBarY - panelHeight - 10);
 
     // Background
     this.background = scene.add.rectangle(
