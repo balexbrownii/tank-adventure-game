@@ -173,14 +173,14 @@ export class BrazilForestScene extends Phaser.Scene {
           },
         ],
       },
-      // Jungle vines (blocking path)
+      // Jungle vines (blocking path) - RIGHT SIDE of scene
       {
         id: 'vines',
         name: 'thick vines',
-        x: 1100,
-        y: playableHeight / 2 + 50,
-        width: 160,
-        height: 240,
+        x: 1050,
+        y: playableHeight / 2,
+        width: 200,
+        height: 350,
         actions: [
           {
             verb: 'LOOK',
@@ -213,14 +213,14 @@ export class BrazilForestScene extends Phaser.Scene {
           },
         ],
       },
-      // Exotic flower
+      // Exotic flower - LEFT SIDE of scene
       {
         id: 'flower',
         name: 'exotic flower',
-        x: 180,
-        y: playableHeight / 2 - 30,
-        width: 100,
-        height: 100,
+        x: 200,
+        y: playableHeight / 2 + 50,
+        width: 150,
+        height: 200,
         actions: [
           {
             verb: 'LOOK',
@@ -246,14 +246,14 @@ export class BrazilForestScene extends Phaser.Scene {
           },
         ],
       },
-      // Old tree stump
+      // Old tree stump - CENTER-RIGHT FOREGROUND of scene
       {
         id: 'stump',
         name: 'tree stump',
-        x: 850,
-        y: playableHeight - 90,
-        width: 130,
-        height: 80,
+        x: 750,
+        y: playableHeight - 150,
+        width: 180,
+        height: 180,
         actions: [
           {
             verb: 'LOOK',
@@ -284,14 +284,14 @@ export class BrazilForestScene extends Phaser.Scene {
           },
         ],
       },
-      // Path to village (exit)
+      // Path to village (exit) - same area as vines, becomes accessible after cutting
       {
         id: 'path-village',
         name: 'path to village',
-        x: 1150,
-        y: playableHeight / 2 + 130,
-        width: 100,
-        height: 130,
+        x: 1050,
+        y: playableHeight / 2 + 100,
+        width: 180,
+        height: 200,
         actions: [
           {
             verb: 'LOOK',
