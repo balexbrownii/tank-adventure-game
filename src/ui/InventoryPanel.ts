@@ -1,14 +1,14 @@
 import Phaser from 'phaser';
 import { InventoryItem, gameState } from '../managers/GameStateManager';
 
-const INVENTORY_SLOT_SIZE = 64;
-const INVENTORY_PADDING = 6;
-const INVENTORY_MARGIN = 10;
-const MAX_VISIBLE_SLOTS = 8;
+const INVENTORY_SLOT_SIZE = 50;
+const INVENTORY_PADDING = 4;
+const INVENTORY_MARGIN = 6;
+const MAX_VISIBLE_SLOTS = 6;
 
 /**
- * InventoryPanel - Displays player's inventory items
- * Allows selecting items for use with hotspots
+ * InventoryPanel - Compact inventory display in the verb bar area
+ * Positioned at bottom-right, within the UI zone
  */
 export class InventoryPanel extends Phaser.GameObjects.Container {
   private background: Phaser.GameObjects.Rectangle;
@@ -19,12 +19,14 @@ export class InventoryPanel extends Phaser.GameObjects.Container {
   // Callbacks
   private onItemSelect: ((item: InventoryItem | null) => void)[] = [];
 
-  constructor(scene: Phaser.Scene, y: number) {
+  constructor(scene: Phaser.Scene, _verbBarY: number) {
     const gameWidth = scene.cameras.main.width;
+    const gameHeight = scene.cameras.main.height;
     const panelWidth = MAX_VISIBLE_SLOTS * (INVENTORY_SLOT_SIZE + INVENTORY_PADDING) + INVENTORY_MARGIN * 2;
-    const panelHeight = INVENTORY_SLOT_SIZE + INVENTORY_MARGIN * 2 + 20; // Extra for label
+    const panelHeight = INVENTORY_SLOT_SIZE + INVENTORY_MARGIN * 2;
 
-    super(scene, gameWidth - panelWidth - 10, y - panelHeight - 10);
+    // Position at bottom-right, aligned with verb bar
+    super(scene, gameWidth - panelWidth - 10, gameHeight - panelHeight - 15);
 
     // Background
     this.background = scene.add.rectangle(
@@ -33,28 +35,28 @@ export class InventoryPanel extends Phaser.GameObjects.Container {
       panelWidth,
       panelHeight,
       0x1a1a2e,
-      0.9
+      0.95
     );
     this.background.setStrokeStyle(2, 0x4a4a6a);
     this.add(this.background);
 
-    // Label
+    // Label (small, top-left corner)
     this.itemLabel = scene.add.text(
-      panelWidth / 2,
       INVENTORY_MARGIN,
+      2,
       'Inventory',
       {
-        font: '14px monospace',
-        color: '#aaaaaa',
+        font: '10px monospace',
+        color: '#888888',
       }
     );
-    this.itemLabel.setOrigin(0.5, 0);
+    this.itemLabel.setOrigin(0, 0);
     this.add(this.itemLabel);
 
-    // Create empty slots
+    // Create slots in a horizontal row
     for (let i = 0; i < MAX_VISIBLE_SLOTS; i++) {
       const slotX = INVENTORY_MARGIN + i * (INVENTORY_SLOT_SIZE + INVENTORY_PADDING) + INVENTORY_SLOT_SIZE / 2;
-      const slotY = INVENTORY_MARGIN + 18 + INVENTORY_SLOT_SIZE / 2;
+      const slotY = INVENTORY_MARGIN + INVENTORY_SLOT_SIZE / 2;
       const slot = this.createSlot(slotX, slotY, i);
       this.slots.push(slot);
       this.add(slot);
@@ -146,7 +148,7 @@ export class InventoryPanel extends Phaser.GameObjects.Container {
         } else {
           // Text placeholder
           const text = this.scene.add.text(0, 0, item.name.substring(0, 2).toUpperCase(), {
-            font: 'bold 20px monospace',
+            font: 'bold 16px monospace',
             color: '#ffffff',
           });
           text.setOrigin(0.5, 0.5);
