@@ -3,6 +3,7 @@ import { BootScene } from './scenes/BootScene';
 import { PreloadScene } from './scenes/PreloadScene';
 import { TitleScene } from './scenes/TitleScene';
 import { BrazilForestScene } from './scenes/BrazilForestScene';
+import { BrazilVillageScene } from './scenes/BrazilVillageScene';
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
@@ -21,7 +22,7 @@ const config: Phaser.Types.Core.GameConfig = {
       debug: false,
     },
   },
-  scene: [BootScene, PreloadScene, TitleScene, BrazilForestScene],
+  scene: [BootScene, PreloadScene, TitleScene, BrazilForestScene, BrazilVillageScene],
 };
 
 new Phaser.Game(config);

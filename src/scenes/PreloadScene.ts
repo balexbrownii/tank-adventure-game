@@ -39,11 +39,9 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image('pig', 'assets/images/characters/pig.png');
     this.load.image('deer', 'assets/images/characters/deer.png');
 
-    // Backgrounds (using integrated version with interactive elements painted in)
+    // Backgrounds
     this.load.image('brazil-forest', 'assets/images/backgrounds/forest-interactive.png');
-
-    // Interactive object sprites (overlaid on backgrounds)
-    this.load.image('machete-stump', 'assets/images/objects/machete-stump.png');
+    this.load.image('brazil-village', 'assets/images/backgrounds/village.png');
   }
 
   create(): void {
@@ -92,5 +90,24 @@ export class PreloadScene extends Phaser.Scene {
     flowerGraphics.fillCircle(24, 20, 6);
     flowerGraphics.generateTexture('flower', iconSize, iconSize);
     flowerGraphics.destroy();
+
+    // Rope icon - coiled brown rope
+    const ropeGraphics = this.add.graphics();
+    ropeGraphics.lineStyle(6, 0xD2691E); // Chocolate brown
+    // Draw coiled rope
+    ropeGraphics.beginPath();
+    ropeGraphics.arc(24, 24, 16, 0, Math.PI * 1.7);
+    ropeGraphics.strokePath();
+    ropeGraphics.beginPath();
+    ropeGraphics.arc(24, 24, 10, Math.PI * 0.3, Math.PI * 2);
+    ropeGraphics.strokePath();
+    ropeGraphics.beginPath();
+    ropeGraphics.arc(24, 24, 4, Math.PI * 0.8, Math.PI * 2.3);
+    ropeGraphics.strokePath();
+    // Rope end
+    ropeGraphics.lineStyle(4, 0xD2691E);
+    ropeGraphics.lineBetween(38, 18, 44, 10);
+    ropeGraphics.generateTexture('rope', iconSize, iconSize);
+    ropeGraphics.destroy();
   }
 }

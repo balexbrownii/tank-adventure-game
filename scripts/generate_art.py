@@ -66,7 +66,21 @@ PROMPTS = {
 
     "flower-sprite": """Video game object sprite of a beautiful exotic tropical flower. Single striking red flower with large vibrant petals, bright yellow center with visible stamens. Long green stem with a few leaves. The flower is eye-catching and clearly pickable. Rainforest orchid or heliconia style. Isolated object on transparent or simple background. Style: Hand-painted 1990s Sierra adventure game art like King's Quest. Vivid saturated colors, detailed botanical illustration style, collectible game item sprite.""",
 
-    "machete-stump": """Video game object sprite of a rusty machete blade stuck in wood, handle pointing upward. Old weathered machete with worn wooden handle, rusty but sharp blade wedged firmly into the top of a tree stump. The handle sticks up invitingly, clearly meant to be grabbed and pulled out. Jungle adventure item. Isolated object on transparent or solid color background. Style: Hand-painted 1990s Sierra adventure game art like King's Quest V or Monkey Island. Detailed painterly texture, warm lighting, interactive game item sprite."""
+    "machete-stump": """Video game object sprite of a rusty machete blade stuck in wood, handle pointing upward. Old weathered machete with worn wooden handle, rusty but sharp blade wedged firmly into the top of a tree stump. The handle sticks up invitingly, clearly meant to be grabbed and pulled out. Jungle adventure item. Isolated object on transparent or solid color background. Style: Hand-painted 1990s Sierra adventure game art like King's Quest V or Monkey Island. Detailed painterly texture, warm lighting, interactive game item sprite.""",
+
+    "village": """Video game background scene of a small indigenous Brazilian village in a jungle clearing.
+
+    Several thatched-roof huts made of wood and palm leaves arranged in a semi-circle. A central fire pit with smoke rising. Colorful woven blankets and pottery visible near the huts. Tropical plants and palm trees frame the scene.
+
+    LEFT SIDE: A trading post area with a wooden table displaying various tools - stone axes, wooden bowls, woven baskets, and beaded jewelry laid out for trade.
+
+    CENTER: The main village clearing with packed dirt ground. A friendly indigenous trader standing near the trading table, wearing traditional clothing with feathers and beads.
+
+    RIGHT SIDE: A path leading back into the jungle (the way the player came from).
+
+    Warm afternoon sunlight filtering through the canopy. Peaceful, welcoming atmosphere. Parrots and monkeys visible in the trees.
+
+    Style: Hand-painted 1990s Sierra adventure game background like King's Quest V or Monkey Island 2. Rich saturated colors, detailed painterly look, atmospheric perspective. Widescreen 16:9 game scene composition with clear walkable foreground area."""
 }
 
 # Map asset types to output directories
@@ -76,6 +90,7 @@ OUTPUT_DIRS = {
     "deer": CHARACTERS_DIR,
     "forest": BACKGROUNDS_DIR,
     "forest-interactive": BACKGROUNDS_DIR,
+    "village": BACKGROUNDS_DIR,
     "group": CHARACTERS_DIR,
     "stump": OBJECTS_DIR,
     "vines": OBJECTS_DIR,

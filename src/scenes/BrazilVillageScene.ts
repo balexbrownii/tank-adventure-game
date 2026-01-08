@@ -8,12 +8,11 @@ import { HotspotConfig } from '../entities/Hotspot';
 import { audioManager } from '../managers/AudioManager';
 import { responseGenerator } from '../services/ResponseGenerator';
 
-export class BrazilForestScene extends Phaser.Scene {
+export class BrazilVillageScene extends Phaser.Scene {
   // Characters
   private tank!: Phaser.GameObjects.Image;
   private pig!: Phaser.GameObjects.Image;
   private deer!: Phaser.GameObjects.Image;
-
 
   // Systems
   private hotspotManager!: HotspotManager;
@@ -22,7 +21,7 @@ export class BrazilForestScene extends Phaser.Scene {
   private inventoryPanel!: InventoryPanel;
 
   constructor() {
-    super({ key: 'BrazilForestScene' });
+    super({ key: 'BrazilVillageScene' });
   }
 
   create(): void {
@@ -30,14 +29,14 @@ export class BrazilForestScene extends Phaser.Scene {
     const height = this.cameras.main.height;
     const playableHeight = height - VERB_BAR_HEIGHT;
 
-    // Check if first visit BEFORE setting current room (which marks it visited)
-    const isFirstVisit = !gameState.hasVisitedRoom('brazil-forest');
+    // Check if first visit
+    const isFirstVisit = !gameState.hasVisitedRoom('brazil-village');
 
     // Set current room
-    gameState.setCurrentRoom('brazil-forest');
+    gameState.setCurrentRoom('brazil-village');
 
     // Background
-    const bg = this.add.image(width / 2, playableHeight / 2, 'brazil-forest');
+    const bg = this.add.image(width / 2, playableHeight / 2, 'brazil-village');
     bg.setDisplaySize(width, playableHeight);
 
     // Initialize systems
@@ -55,22 +54,22 @@ export class BrazilForestScene extends Phaser.Scene {
       }
     });
 
-    // Characters - scaled down to fit the scene
+    // Characters - positioned in the village clearing
     const characterScale = 0.30;
     const groundY = playableHeight - 60;
 
-    // Tank (main character, center)
-    this.tank = this.add.image(width / 2, groundY, 'tank');
+    // Tank (main character, center-right)
+    this.tank = this.add.image(width / 2 + 100, groundY, 'tank');
     this.tank.setScale(characterScale);
     this.tank.setOrigin(0.5, 1);
 
-    // Pig (left of Tank)
-    this.pig = this.add.image(width / 2 - 200, groundY, 'pig');
+    // Pig (right of Tank)
+    this.pig = this.add.image(width / 2 + 280, groundY, 'pig');
     this.pig.setScale(characterScale * 0.75);
     this.pig.setOrigin(0.5, 1);
 
-    // Mr. Snuggles the deer (right of Tank)
-    this.deer = this.add.image(width / 2 + 200, groundY, 'deer');
+    // Mr. Snuggles the deer (behind Tank)
+    this.deer = this.add.image(width / 2 + 180, groundY - 20, 'deer');
     this.deer.setScale(characterScale * 0.85);
     this.deer.setOrigin(0.5, 1);
 
@@ -88,28 +87,25 @@ export class BrazilForestScene extends Phaser.Scene {
 
     // Handle clicks on the game area
     this.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
-      // Only handle clicks in the playable area (not verb bar)
       if (pointer.y > playableHeight) return;
-
       this.handleInteraction(pointer);
     });
 
-    // Scene title (temporary - can be removed later)
-    this.add.text(width / 2, 15, 'Brazilian Rainforest', {
+    // Scene title
+    this.add.text(width / 2, 15, 'Indigenous Village', {
       font: 'bold 28px serif',
       color: '#ffffff',
       stroke: '#000000',
       strokeThickness: 4,
     }).setOrigin(0.5, 0);
 
-    // Debug mode toggle (press D)
+    // Keyboard shortcuts
     this.input.keyboard?.on('keydown-D', () => {
       const currentDebug = this.hotspotManager['debugMode'];
       this.hotspotManager.setDebugMode(!currentDebug);
       this.messageBox.show(currentDebug ? 'Debug mode OFF' : 'Debug mode ON', 1500);
     });
 
-    // Music toggle (press M)
     this.input.keyboard?.on('keydown-M', async () => {
       await audioManager.toggleAmbient();
       this.messageBox.show(
@@ -118,18 +114,10 @@ export class BrazilForestScene extends Phaser.Scene {
       );
     });
 
-    // Start ambient music on first click (requires user interaction for Web Audio)
-    this.input.once('pointerdown', async () => {
-      if (!audioManager.getIsPlaying()) {
-        await audioManager.startAmbient();
-      }
-    });
-
-    // Dynamic responses toggle (press H for Haiku)
     this.input.keyboard?.on('keydown-H', () => {
       responseGenerator.setEnabled(!responseGenerator.isEnabled());
       this.messageBox.show(
-        responseGenerator.isEnabled() ? 'Dynamic responses ON (Haiku)' : 'Dynamic responses OFF (static)',
+        responseGenerator.isEnabled() ? 'Dynamic responses ON' : 'Dynamic responses OFF',
         1500
       );
     });
@@ -138,7 +126,7 @@ export class BrazilForestScene extends Phaser.Scene {
     if (isFirstVisit) {
       this.time.delayedCall(500, () => {
         this.messageBox.show(
-          "Tank finds herself in a lush Brazilian rainforest. Her companions Pig and Mr. Snuggles look around nervously.",
+          "Tank and her companions arrive at a peaceful indigenous village. A friendly trader waves them over to her table of goods.",
           5000
         );
       });
@@ -158,19 +146,11 @@ export class BrazilForestScene extends Phaser.Scene {
         actions: [
           {
             verb: 'LOOK',
-            response: "That's Pig, your loyal companion. He's wearing his favorite cowboy hat.",
+            response: "Pig is eyeing the trader's wares with great interest.",
           },
           {
             verb: 'TALK',
-            response: '"Howdy partner! Sure is humid in this here jungle. We should find a way through them vines yonder."',
-          },
-          {
-            verb: 'USE',
-            response: "You can't use Pig like that!",
-          },
-          {
-            verb: 'TAKE',
-            response: "Pig is your friend, not an item!",
+            response: '"These folks seem mighty friendly! Maybe we can trade somethin\' with \'em."',
           },
         ],
       },
@@ -185,162 +165,150 @@ export class BrazilForestScene extends Phaser.Scene {
         actions: [
           {
             verb: 'LOOK',
-            response: "Mr. Snuggles looks at you with his big, goofy eyes. His antlers are a bit crooked.",
+            response: "Mr. Snuggles is sniffing the air curiously. The village smells like wood smoke and cooking food.",
           },
           {
             verb: 'TALK',
-            response: 'Mr. Snuggles tilts his head and makes a friendly snorting sound. He seems happy!',
-          },
-          {
-            verb: 'USE',
-            response: "Mr. Snuggles doesn't understand what you want him to do.",
-          },
-          {
-            verb: 'TAKE',
-            response: "Mr. Snuggles is too big to carry, and he's your friend!",
+            response: 'Mr. Snuggles makes a happy snorting sound. He seems comfortable here.',
           },
         ],
       },
-      // Jungle vines (blocking path) - RIGHT SIDE of scene
+      // The Trader NPC
       {
-        id: 'vines',
-        name: 'thick vines',
-        x: 1050,
-        y: playableHeight / 2,
-        width: 200,
-        height: 350,
-        actions: [
-          {
-            verb: 'LOOK',
-            response: "Thick jungle vines block the path ahead. They're too tough to push through.",
-          },
-          {
-            verb: 'USE',
-            response: "You hack through the vines with the machete! The path ahead is now clear.",
-            requiresItem: 'machete',
-            onExecute: () => {
-              gameState.setFlag('vines_cut', true);
-              this.hotspotManager.setEnabled('vines', false);
-            },
-          },
-          {
-            verb: 'USE',
-            response: "You need something sharp to cut through these vines.",
-          },
-          {
-            verb: 'PUSH',
-            response: "The vines are too thick and tangled. You can't push through them.",
-          },
-          {
-            verb: 'PULL',
-            response: "You tug at the vines, but they won't budge.",
-          },
-          {
-            verb: 'TAKE',
-            response: "The vines are rooted deep into the ground.",
-          },
-        ],
-      },
-      // Exotic flower - LEFT SIDE of scene
-      {
-        id: 'flower',
-        name: 'exotic flower',
-        x: 200,
+        id: 'trader',
+        name: 'Village Trader',
+        x: 280,
         y: playableHeight / 2 + 50,
         width: 150,
-        height: 200,
+        height: 250,
         actions: [
           {
             verb: 'LOOK',
-            response: "A beautiful exotic flower with bright red petals. It smells amazing!",
+            response: "A friendly indigenous woman stands behind a table covered with handmade tools and crafts. She smiles warmly at you.",
           },
           {
-            verb: 'TAKE',
-            response: "You pick the exotic flower. It might be useful later!",
-            onExecute: () => {
-              gameState.addItem({
-                id: 'flower',
-                name: 'Exotic Flower',
-                description: 'A beautiful red flower from the Brazilian rainforest.',
-                icon: 'flower',
-              });
-              this.hotspotManager.setEnabled('flower', false);
-            },
-            enabled: () => !gameState.hasItem('flower'),
+            verb: 'TALK',
+            response: '"Welcome, travelers! I trade fine tools for beautiful things from the jungle. Do you have anything special to trade?"',
+            enabled: () => !gameState.getFlag('traded_flower'),
+          },
+          {
+            verb: 'TALK',
+            response: '"Thank you again for the beautiful flower! Safe travels, friends."',
+            enabled: () => gameState.getFlag('traded_flower'),
           },
           {
             verb: 'USE',
-            response: "You sniff the flower. It smells wonderful!",
+            response: '"Ah, what a magnificent flower! I will trade you this strong rope for it. It will serve you well on your journey!"',
+            requiresItem: 'flower',
+            onExecute: () => {
+              // Remove flower from inventory
+              gameState.removeItem('flower');
+              // Add rope to inventory
+              gameState.addItem({
+                id: 'rope',
+                name: 'Strong Rope',
+                description: 'A sturdy braided rope, perfect for climbing or tying things.',
+                icon: 'rope',
+              });
+              // Mark trade as complete
+              gameState.setFlag('traded_flower', true);
+            },
+            enabled: () => !gameState.getFlag('traded_flower'),
+          },
+          {
+            verb: 'USE',
+            response: '"I have nothing else to trade right now, but thank you for visiting!"',
+            enabled: () => gameState.getFlag('traded_flower'),
           },
         ],
       },
-      // Old tree stump - CENTER-RIGHT FOREGROUND of scene
+      // Trading Table
       {
-        id: 'stump',
-        name: 'tree stump',
-        x: 750,
-        y: playableHeight - 150,
-        width: 180,
-        height: 180,
+        id: 'trading-table',
+        name: 'trading table',
+        x: 200,
+        y: playableHeight / 2 + 120,
+        width: 200,
+        height: 100,
         actions: [
           {
             verb: 'LOOK',
-            response: "An old tree stump. There seems to be something shiny stuck in it...",
-            enabled: () => !gameState.hasItem('machete'),
-          },
-          {
-            verb: 'LOOK',
-            response: "Just an old tree stump now.",
-            enabled: () => gameState.hasItem('machete'),
+            response: "The table displays stone axes, woven baskets, colorful beads, wooden bowls, and coils of strong rope. Everything looks handmade with great skill.",
           },
           {
             verb: 'TAKE',
-            response: "You pull out an old machete from the stump! This could be useful.",
-            onExecute: () => {
-              gameState.addItem({
-                id: 'machete',
-                name: 'Machete',
-                description: 'A rusty but sharp machete.',
-                icon: 'machete',
-              });
-            },
-            enabled: () => !gameState.hasItem('machete'),
+            response: "You can't just take things! You should talk to the trader about trading.",
           },
           {
             verb: 'USE',
-            response: "It's just a stump.",
+            response: "You should talk to the trader if you want to make a trade.",
           },
         ],
       },
-      // Path to village (exit) - same area as vines, becomes accessible after cutting
+      // Fire pit
       {
-        id: 'path-village',
-        name: 'path to village',
-        x: 1050,
-        y: playableHeight / 2 + 100,
-        width: 180,
-        height: 200,
+        id: 'fire-pit',
+        name: 'fire pit',
+        x: 640,
+        y: playableHeight / 2 + 30,
+        width: 150,
+        height: 120,
         actions: [
           {
             verb: 'LOOK',
-            response: "A narrow path leads through the jungle. You can see smoke from a village in the distance.",
-            enabled: () => gameState.getFlag('vines_cut'),
-          },
-          {
-            verb: 'LOOK',
-            response: "Thick vines block the path. You'll need to clear them first.",
-            enabled: () => !gameState.getFlag('vines_cut'),
+            response: "A crackling fire warms the village center. Something delicious-smelling is cooking in a clay pot nearby.",
           },
           {
             verb: 'USE',
-            response: "You head down the path toward the village...",
+            response: "The fire is too hot to touch directly. Best to admire it from a safe distance.",
+          },
+          {
+            verb: 'TAKE',
+            response: "You can't exactly put a fire in your pocket.",
+          },
+        ],
+      },
+      // Huts
+      {
+        id: 'huts',
+        name: 'village huts',
+        x: 640,
+        y: playableHeight / 2 - 100,
+        width: 400,
+        height: 150,
+        actions: [
+          {
+            verb: 'LOOK',
+            response: "Thatched-roof huts made of wood and palm leaves. Colorful woven blankets hang in the doorways. This is clearly someone's home.",
+          },
+          {
+            verb: 'USE',
+            response: "It would be rude to enter someone's home uninvited.",
+          },
+        ],
+      },
+      // Path back to forest
+      {
+        id: 'path-forest',
+        name: 'jungle path',
+        x: 1100,
+        y: playableHeight / 2 + 50,
+        width: 150,
+        height: 300,
+        actions: [
+          {
+            verb: 'LOOK',
+            response: "A path leads back through the jungle to where you came from.",
+          },
+          {
+            verb: 'USE',
+            response: "You head back into the jungle...",
             onExecute: () => {
               this.cameras.main.fadeOut(500, 0, 0, 0);
               this.time.delayedCall(500, () => {
-                this.scene.start('BrazilVillageScene');
+                this.scene.start('BrazilForestScene');
               });
             },
-            enabled: () => gameState.getFlag('vines_cut'),
           },
         ],
       },
@@ -355,11 +323,9 @@ export class BrazilForestScene extends Phaser.Scene {
     const heldItemId = this.inventoryPanel.getSelectedItemId();
 
     if (hotspot) {
-      // Interact with hotspot, passing the held item
       const response = await this.hotspotManager.interact(verb, heldItemId ?? undefined);
       if (response) {
         this.messageBox.show(response);
-        // Clear item selection after successful use (if item was consumed)
         if (heldItemId && !gameState.hasItem(heldItemId)) {
           this.inventoryPanel.clearSelection();
         }
@@ -368,14 +334,12 @@ export class BrazilForestScene extends Phaser.Scene {
       // Click on empty space - move Tank there
       const targetX = Phaser.Math.Clamp(pointer.x, 50, this.cameras.main.width - 50);
 
-      // Flip sprite based on direction
       if (targetX < this.tank.x) {
         this.tank.setFlipX(true);
       } else {
         this.tank.setFlipX(false);
       }
 
-      // Move Tank
       this.tweens.add({
         targets: this.tank,
         x: targetX,
@@ -386,7 +350,7 @@ export class BrazilForestScene extends Phaser.Scene {
   }
 
   update(): void {
-    // Update character depth sorting (characters lower on screen appear in front)
+    // Update character depth sorting
     const characters = [this.tank, this.pig, this.deer];
     characters.sort((a, b) => a.y - b.y);
     characters.forEach((char, index) => {
