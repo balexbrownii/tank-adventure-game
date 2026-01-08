@@ -12,6 +12,11 @@ export class BrazilForestScene extends Phaser.Scene {
   private pig!: Phaser.GameObjects.Image;
   private deer!: Phaser.GameObjects.Image;
 
+  // Interactive objects
+  private stumpSprite!: Phaser.GameObjects.Image;
+  private vinesSprite!: Phaser.GameObjects.Image;
+  private flowerSprite!: Phaser.GameObjects.Image;
+
   // Systems
   private hotspotManager!: HotspotManager;
   private verbBar!: VerbBar;
@@ -51,6 +56,26 @@ export class BrazilForestScene extends Phaser.Scene {
         this.verbBar.clearHeldItem();
       }
     });
+
+    // Interactive object sprites (placed before characters so they appear behind)
+    const objectScale = 0.25;
+
+    // Flower (left side)
+    this.flowerSprite = this.add.image(180, playableHeight / 2 - 30, 'flower-object');
+    this.flowerSprite.setScale(objectScale * 0.6);
+    this.flowerSprite.setOrigin(0.5, 0.5);
+    this.flowerSprite.setVisible(!gameState.hasItem('flower')); // Hide if already picked
+
+    // Tree stump with machete (right-center)
+    this.stumpSprite = this.add.image(850, playableHeight - 90, 'stump-sprite');
+    this.stumpSprite.setScale(objectScale);
+    this.stumpSprite.setOrigin(0.5, 1);
+
+    // Vines blocking path (far right)
+    this.vinesSprite = this.add.image(1100, playableHeight / 2 + 50, 'vines-sprite');
+    this.vinesSprite.setScale(objectScale * 1.2);
+    this.vinesSprite.setOrigin(0.5, 0.5);
+    this.vinesSprite.setVisible(!gameState.getFlag('vines_cut')); // Hide if already cut
 
     // Characters - scaled down to fit the scene
     const characterScale = 0.30;
@@ -193,6 +218,7 @@ export class BrazilForestScene extends Phaser.Scene {
             onExecute: () => {
               gameState.setFlag('vines_cut', true);
               this.hotspotManager.setEnabled('vines', false);
+              this.vinesSprite.setVisible(false);
             },
           },
           {
@@ -237,6 +263,7 @@ export class BrazilForestScene extends Phaser.Scene {
                 icon: 'flower',
               });
               this.hotspotManager.setEnabled('flower', false);
+              this.flowerSprite.setVisible(false);
             },
             enabled: () => !gameState.hasItem('flower'),
           },

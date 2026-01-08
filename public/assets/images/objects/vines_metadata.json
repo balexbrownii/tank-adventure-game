@@ -1,0 +1,35 @@
+{
+  "uuid": "074736e0972dd550a36c8fb811ccbb0b",
+  "prompt": "Video game object sprite of thick jungle vines blocking a path. Dense tangled mass of green tropical vines hanging down and across, forming a natural barrier. Some vines have large leaves, others are woody and thick. Clearly too dense to push through without cutting. The vines span across like a curtain blocking passage. Isolated object on transparent or simple background. Style: Hand-painted 1990s Sierra adventure game art. Rich greens, detailed foliage texture, game obstacle sprite.",
+  "slots": [
+    {
+      "index": 0,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/074736e0972dd550a36c8fb811ccbb0b/0_Video_game_object_sprite_of_thick_jungle_vines_blocking_a_pathu002e_Dense_tangle.webp",
+      "charged": true,
+      "error_message": null
+    },
+    {
+      "index": 1,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/074736e0972dd550a36c8fb811ccbb0b/1_Video_game_object_sprite_of_thick_jungle_vines_blocking_a_pathu002e_Dense_tangle.webp",
+      "charged": true,
+      "error_message": null
+    },
+    {
+      "index": 2,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/074736e0972dd550a36c8fb811ccbb0b/2_Video_game_object_sprite_of_thick_jungle_vines_blocking_a_pathu002e_Dense_tangle.webp",
+      "charged": true,
+      "error_message": null
+    },
+    {
+      "index": 3,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/074736e0972dd550a36c8fb811ccbb0b/3_Video_game_object_sprite_of_thick_jungle_vines_blocking_a_pathu002e_Dense_tangle.webp",
+      "charged": true,
+      "error_message": null
+    }
+  ],
+  "generated_at": "2026-01-07 20:12:50"
+}

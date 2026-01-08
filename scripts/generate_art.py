@@ -33,6 +33,7 @@ PROJECT_ROOT = Path(__file__).parent.parent
 IMAGES_DIR = PROJECT_ROOT / "public" / "assets" / "images"
 CHARACTERS_DIR = IMAGES_DIR / "characters"
 BACKGROUNDS_DIR = IMAGES_DIR / "backgrounds"
+OBJECTS_DIR = IMAGES_DIR / "objects"
 
 # Character prompts (King's Quest V/Monkey Island 2 style)
 PROMPTS = {
@@ -44,7 +45,14 @@ PROMPTS = {
 
     "forest": """Video game background scene of a lush Brazilian rainforest. Dense jungle with towering trees, thick canopy filtering golden afternoon sunlight. Tropical flowers, giant ferns, and hanging vines. A small dirt clearing with a path leading deeper into the jungle. Colorful parrots in the trees, butterflies floating in sunbeams. Rich emerald greens, golden light rays, humid atmospheric depth. Style: 1990s Sierra adventure game background art like King's Quest V or VI. Hand-painted look, detailed foliage, atmospheric perspective. Widescreen game scene composition with clear walkable foreground area.""",
 
-    "group": """Three adventure game characters standing together as a team: Tank (athletic muscular woman in red martial arts gi with black belt, confident heroic pose, dark ponytail), a pink pig wearing cowboy hat and red bandana standing on hind legs with charming smirk, and Mr. Snuggles the deer with small antlers and gentle kind eyes. They stand together in a forest clearing as companions ready for adventure. Warm golden sunlight filtering through trees behind them. Style: Hand-painted 1990s adventure game art like King's Quest or Monkey Island. Character group shot, rich colors, heroic and charming feeling."""
+    "group": """Three adventure game characters standing together as a team: Tank (athletic muscular woman in red martial arts gi with black belt, confident heroic pose, dark ponytail), a pink pig wearing cowboy hat and red bandana standing on hind legs with charming smirk, and Mr. Snuggles the deer with small antlers and gentle kind eyes. They stand together in a forest clearing as companions ready for adventure. Warm golden sunlight filtering through trees behind them. Style: Hand-painted 1990s adventure game art like King's Quest or Monkey Island. Character group shot, rich colors, heroic and charming feeling.""",
+
+    # Interactive object sprites
+    "stump": """Video game object sprite of an old tree stump with a rusty machete stuck in it. Weathered moss-covered tree stump in a jungle setting. An old rusty machete blade is wedged into the top of the stump, handle sticking up invitingly. The stump is about waist-height, wide and solid. Tropical plants and ferns around the base. Object is clearly interactive and important. Isolated object on transparent or simple background. Style: Hand-painted 1990s Sierra adventure game art like King's Quest V. Detailed painterly texture, warm jungle lighting, game asset sprite.""",
+
+    "vines": """Video game object sprite of thick jungle vines blocking a path. Dense tangled mass of green tropical vines hanging down and across, forming a natural barrier. Some vines have large leaves, others are woody and thick. Clearly too dense to push through without cutting. The vines span across like a curtain blocking passage. Isolated object on transparent or simple background. Style: Hand-painted 1990s Sierra adventure game art. Rich greens, detailed foliage texture, game obstacle sprite.""",
+
+    "flower-sprite": """Video game object sprite of a beautiful exotic tropical flower. Single striking red flower with large vibrant petals, bright yellow center with visible stamens. Long green stem with a few leaves. The flower is eye-catching and clearly pickable. Rainforest orchid or heliconia style. Isolated object on transparent or simple background. Style: Hand-painted 1990s Sierra adventure game art like King's Quest. Vivid saturated colors, detailed botanical illustration style, collectible game item sprite."""
 }
 
 # Map asset types to output directories
@@ -54,6 +62,9 @@ OUTPUT_DIRS = {
     "deer": CHARACTERS_DIR,
     "forest": BACKGROUNDS_DIR,
     "group": CHARACTERS_DIR,
+    "stump": OBJECTS_DIR,
+    "vines": OBJECTS_DIR,
+    "flower-sprite": OBJECTS_DIR,
 }
 
 
@@ -61,6 +72,7 @@ def ensure_directories():
     """Create output directories if they don't exist."""
     CHARACTERS_DIR.mkdir(parents=True, exist_ok=True)
     BACKGROUNDS_DIR.mkdir(parents=True, exist_ok=True)
+    OBJECTS_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def create_generation(prompt: str) -> str:

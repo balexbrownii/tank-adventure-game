@@ -1,0 +1,35 @@
+{
+  "uuid": "b7de77bfb1b9a9c670736a4686579c0f",
+  "prompt": "Video game object sprite of an old tree stump with a rusty machete stuck in it. Weathered moss-covered tree stump in a jungle setting. An old rusty machete blade is wedged into the top of the stump, handle sticking up invitingly. The stump is about waist-height, wide and solid. Tropical plants and ferns around the base. Object is clearly interactive and important. Isolated object on transparent or simple background. Style: Hand-painted 1990s Sierra adventure game art like King's Quest V. Detailed painterly texture, warm jungle lighting, game asset sprite.",
+  "slots": [
+    {
+      "index": 0,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/b7de77bfb1b9a9c670736a4686579c0f/0_Video_game_object_sprite_of_an_old_tree_stump_with_a_rusty_machete_stuck_in_itu0.webp",
+      "charged": true,
+      "error_message": null
+    },
+    {
+      "index": 1,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/b7de77bfb1b9a9c670736a4686579c0f/1_Video_game_object_sprite_of_an_old_tree_stump_with_a_rusty_machete_stuck_in_itu0.webp",
+      "charged": true,
+      "error_message": null
+    },
+    {
+      "index": 2,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/b7de77bfb1b9a9c670736a4686579c0f/2_Video_game_object_sprite_of_an_old_tree_stump_with_a_rusty_machete_stuck_in_itu0.webp",
+      "charged": true,
+      "error_message": null
+    },
+    {
+      "index": 3,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/b7de77bfb1b9a9c670736a4686579c0f/3_Video_game_object_sprite_of_an_old_tree_stump_with_a_rusty_machete_stuck_in_itu0.webp",
+      "charged": true,
+      "error_message": null
+    }
+  ],
+  "generated_at": "2026-01-07 20:12:13"
+}

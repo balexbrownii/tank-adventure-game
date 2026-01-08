@@ -41,6 +41,11 @@ export class PreloadScene extends Phaser.Scene {
 
     // Backgrounds
     this.load.image('brazil-forest', 'assets/images/backgrounds/forest.png');
+
+    // Interactive objects
+    this.load.image('stump-sprite', 'assets/images/objects/stump.png');
+    this.load.image('vines-sprite', 'assets/images/objects/vines.png');
+    this.load.image('flower-object', 'assets/images/objects/flower-sprite.png');
   }
 
   create(): void {
