@@ -28,9 +28,6 @@ const VERB_BUTTON_PADDING = 12;
 export class VerbBar extends Phaser.GameObjects.Container {
   private selectedVerb: InteractionVerb = 'LOOK';
   private verbButtons: Map<InteractionVerb, Phaser.GameObjects.Container> = new Map();
-  private statusText: Phaser.GameObjects.Text;
-  private currentTarget: string = '';
-  private currentItem: string = '';
   private background: Phaser.GameObjects.Rectangle;
 
   // Callbacks
@@ -64,14 +61,6 @@ export class VerbBar extends Phaser.GameObjects.Container {
       this.verbButtons.set(verbConfig.verb, button);
       this.add(button);
     });
-
-    // Status text (shows current action like "Use key on door")
-    this.statusText = scene.add.text(gameWidth / 2, 10, '', {
-      font: '18px monospace',
-      color: '#ffffff',
-    });
-    this.statusText.setOrigin(0.5, 0);
-    this.add(this.statusText);
 
     // Keyboard shortcuts
     scene.input.keyboard?.on('keydown', (event: KeyboardEvent) => {
@@ -139,7 +128,6 @@ export class VerbBar extends Phaser.GameObjects.Container {
   selectVerb(verb: InteractionVerb): void {
     this.selectedVerb = verb;
     this.updateButtonHighlights();
-    this.updateStatusText();
     this.onVerbSelect.forEach(cb => cb(verb));
   }
 
@@ -151,27 +139,24 @@ export class VerbBar extends Phaser.GameObjects.Container {
   }
 
   /**
-   * Set the current target (hotspot being hovered)
+   * Set the current target (hotspot being hovered) - kept for API compatibility
    */
-  setTarget(targetName: string): void {
-    this.currentTarget = targetName;
-    this.updateStatusText();
+  setTarget(_targetName: string): void {
+    // No longer displaying status text
   }
 
   /**
-   * Set the current held item
+   * Set the current held item - kept for API compatibility
    */
-  setHeldItem(itemName: string): void {
-    this.currentItem = itemName;
-    this.updateStatusText();
+  setHeldItem(_itemName: string): void {
+    // No longer displaying status text
   }
 
   /**
-   * Clear the held item
+   * Clear the held item - kept for API compatibility
    */
   clearHeldItem(): void {
-    this.currentItem = '';
-    this.updateStatusText();
+    // No longer displaying status text
   }
 
   private updateButtonHighlights(): void {
@@ -185,24 +170,6 @@ export class VerbBar extends Phaser.GameObjects.Container {
         bg.setStrokeStyle(2, 0x4a4a6a);
       }
     }
-  }
-
-  private updateStatusText(): void {
-    const verbConfig = VERBS.find(v => v.verb === this.selectedVerb);
-    const verbLabel = verbConfig?.label ?? this.selectedVerb;
-
-    let status = verbLabel;
-
-    if (this.currentItem) {
-      status = `${verbLabel} ${this.currentItem}`;
-      if (this.currentTarget) {
-        status += ` on ${this.currentTarget}`;
-      }
-    } else if (this.currentTarget) {
-      status = `${verbLabel} ${this.currentTarget}`;
-    }
-
-    this.statusText.setText(status);
   }
 
   /**
