@@ -1,0 +1,35 @@
+{
+  "uuid": "af467166645e108a74f3fdd89bdefc56",
+  "prompt": "Video game background scene of a Brazilian rainforest clearing with interactive elements.\n\n    LEFT SIDE: A striking bright red exotic flower on a tall stem, clearly visible and pickable, growing among ferns.\n\n    CENTER-RIGHT FOREGROUND: An old weathered tree stump with a rusty machete blade stuck in the top, handle pointing up. The stump is mossy and about waist-height.\n\n    RIGHT SIDE: Thick tangled jungle vines hanging down like a curtain, blocking a narrow dirt path that leads deeper into the jungle. The vines are dense and clearly impassable without cutting.\n\n    The clearing has a dirt floor with tropical plants. Golden afternoon sunlight filters through the canopy. Dense jungle trees in the background.\n\n    Style: Hand-painted 1990s Sierra adventure game background like King's Quest V or Monkey Island 2. Rich saturated colors, detailed painterly look, atmospheric perspective. Widescreen game scene, 16:9 aspect ratio composition. The three interactive elements (flower, stump with machete, vines) should be clearly visible and distinct from the background.",
+  "slots": [
+    {
+      "index": 0,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/af467166645e108a74f3fdd89bdefc56/0_Video_game_background_scene_of_a_Brazilian_rainforest_clearing_with_interactive_.webp",
+      "charged": true,
+      "error_message": null
+    },
+    {
+      "index": 1,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/af467166645e108a74f3fdd89bdefc56/1_Video_game_background_scene_of_a_Brazilian_rainforest_clearing_with_interactive_.webp",
+      "charged": true,
+      "error_message": null
+    },
+    {
+      "index": 2,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/af467166645e108a74f3fdd89bdefc56/2_Video_game_background_scene_of_a_Brazilian_rainforest_clearing_with_interactive_.webp",
+      "charged": true,
+      "error_message": null
+    },
+    {
+      "index": 3,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/af467166645e108a74f3fdd89bdefc56/3_Video_game_background_scene_of_a_Brazilian_rainforest_clearing_with_interactive_.webp",
+      "charged": true,
+      "error_message": null
+    }
+  ],
+  "generated_at": "2026-01-07 20:18:08"
+}

@@ -45,6 +45,18 @@ PROMPTS = {
 
     "forest": """Video game background scene of a lush Brazilian rainforest. Dense jungle with towering trees, thick canopy filtering golden afternoon sunlight. Tropical flowers, giant ferns, and hanging vines. A small dirt clearing with a path leading deeper into the jungle. Colorful parrots in the trees, butterflies floating in sunbeams. Rich emerald greens, golden light rays, humid atmospheric depth. Style: 1990s Sierra adventure game background art like King's Quest V or VI. Hand-painted look, detailed foliage, atmospheric perspective. Widescreen game scene composition with clear walkable foreground area.""",
 
+    "forest-interactive": """Video game background scene of a Brazilian rainforest clearing with interactive elements.
+
+    LEFT SIDE: A striking bright red exotic flower on a tall stem, clearly visible and pickable, growing among ferns.
+
+    CENTER-RIGHT FOREGROUND: An old weathered tree stump with a rusty machete blade stuck in the top, handle pointing up. The stump is mossy and about waist-height.
+
+    RIGHT SIDE: Thick tangled jungle vines hanging down like a curtain, blocking a narrow dirt path that leads deeper into the jungle. The vines are dense and clearly impassable without cutting.
+
+    The clearing has a dirt floor with tropical plants. Golden afternoon sunlight filters through the canopy. Dense jungle trees in the background.
+
+    Style: Hand-painted 1990s Sierra adventure game background like King's Quest V or Monkey Island 2. Rich saturated colors, detailed painterly look, atmospheric perspective. Widescreen game scene, 16:9 aspect ratio composition. The three interactive elements (flower, stump with machete, vines) should be clearly visible and distinct from the background.""",
+
     "group": """Three adventure game characters standing together as a team: Tank (athletic muscular woman in red martial arts gi with black belt, confident heroic pose, dark ponytail), a pink pig wearing cowboy hat and red bandana standing on hind legs with charming smirk, and Mr. Snuggles the deer with small antlers and gentle kind eyes. They stand together in a forest clearing as companions ready for adventure. Warm golden sunlight filtering through trees behind them. Style: Hand-painted 1990s adventure game art like King's Quest or Monkey Island. Character group shot, rich colors, heroic and charming feeling.""",
 
     # Interactive object sprites
@@ -61,6 +73,7 @@ OUTPUT_DIRS = {
     "pig": CHARACTERS_DIR,
     "deer": CHARACTERS_DIR,
     "forest": BACKGROUNDS_DIR,
+    "forest-interactive": BACKGROUNDS_DIR,
     "group": CHARACTERS_DIR,
     "stump": OBJECTS_DIR,
     "vines": OBJECTS_DIR,
