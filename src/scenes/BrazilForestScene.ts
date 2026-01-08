@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { HotspotManager } from '../managers/HotspotManager';
 import { VerbBar, VERB_BAR_HEIGHT } from '../ui/VerbBar';
 import { MessageBox } from '../ui/MessageBox';
+import { InventoryPanel } from '../ui/InventoryPanel';
 import { gameState } from '../managers/GameStateManager';
 import { HotspotConfig } from '../entities/Hotspot';
 
@@ -15,6 +16,7 @@ export class BrazilForestScene extends Phaser.Scene {
   private hotspotManager!: HotspotManager;
   private verbBar!: VerbBar;
   private messageBox!: MessageBox;
+  private inventoryPanel!: InventoryPanel;
 
   constructor() {
     super({ key: 'BrazilForestScene' });
@@ -24,6 +26,9 @@ export class BrazilForestScene extends Phaser.Scene {
     const width = this.cameras.main.width;
     const height = this.cameras.main.height;
     const playableHeight = height - VERB_BAR_HEIGHT;
+
+    // Check if first visit BEFORE setting current room (which marks it visited)
+    const isFirstVisit = !gameState.hasVisitedRoom('brazil-forest');
 
     // Set current room
     gameState.setCurrentRoom('brazil-forest');
@@ -36,10 +41,20 @@ export class BrazilForestScene extends Phaser.Scene {
     this.hotspotManager = new HotspotManager(this);
     this.verbBar = new VerbBar(this);
     this.messageBox = new MessageBox(this);
+    this.inventoryPanel = new InventoryPanel(this, height - VERB_BAR_HEIGHT);
+
+    // Wire up inventory selection to verb bar
+    this.inventoryPanel.onSelect((item) => {
+      if (item) {
+        this.verbBar.setHeldItem(item.name);
+      } else {
+        this.verbBar.clearHeldItem();
+      }
+    });
 
     // Characters - scaled down to fit the scene
-    const characterScale = 0.18;
-    const groundY = playableHeight - 40;
+    const characterScale = 0.30;
+    const groundY = playableHeight - 60;
 
     // Tank (main character, center)
     this.tank = this.add.image(width / 2, groundY, 'tank');
@@ -47,12 +62,12 @@ export class BrazilForestScene extends Phaser.Scene {
     this.tank.setOrigin(0.5, 1);
 
     // Pig (left of Tank)
-    this.pig = this.add.image(width / 2 - 120, groundY, 'pig');
+    this.pig = this.add.image(width / 2 - 200, groundY, 'pig');
     this.pig.setScale(characterScale * 0.75);
     this.pig.setOrigin(0.5, 1);
 
     // Mr. Snuggles the deer (right of Tank)
-    this.deer = this.add.image(width / 2 + 120, groundY, 'deer');
+    this.deer = this.add.image(width / 2 + 200, groundY, 'deer');
     this.deer.setScale(characterScale * 0.85);
     this.deer.setOrigin(0.5, 1);
 
@@ -77,11 +92,11 @@ export class BrazilForestScene extends Phaser.Scene {
     });
 
     // Scene title (temporary - can be removed later)
-    this.add.text(width / 2, 10, 'Brazilian Rainforest', {
-      font: 'bold 18px serif',
+    this.add.text(width / 2, 15, 'Brazilian Rainforest', {
+      font: 'bold 28px serif',
       color: '#ffffff',
       stroke: '#000000',
-      strokeThickness: 3,
+      strokeThickness: 4,
     }).setOrigin(0.5, 0);
 
     // Debug mode toggle (press D)
@@ -92,7 +107,7 @@ export class BrazilForestScene extends Phaser.Scene {
     });
 
     // Show intro message if first visit
-    if (!gameState.hasVisitedRoom('brazil-forest')) {
+    if (isFirstVisit) {
       this.time.delayedCall(500, () => {
         this.messageBox.show(
           "Tank finds herself in a lush Brazilian rainforest. Her companions Pig and Mr. Snuggles look around nervously.",
@@ -109,9 +124,9 @@ export class BrazilForestScene extends Phaser.Scene {
         id: 'pig',
         name: 'Pig',
         x: this.pig.x,
-        y: this.pig.y - 50,
-        width: 80,
-        height: 120,
+        y: this.pig.y - 80,
+        width: 130,
+        height: 190,
         actions: [
           {
             verb: 'LOOK',
@@ -136,9 +151,9 @@ export class BrazilForestScene extends Phaser.Scene {
         id: 'deer',
         name: 'Mr. Snuggles',
         x: this.deer.x,
-        y: this.deer.y - 40,
-        width: 80,
-        height: 100,
+        y: this.deer.y - 70,
+        width: 130,
+        height: 160,
         actions: [
           {
             verb: 'LOOK',
@@ -162,10 +177,10 @@ export class BrazilForestScene extends Phaser.Scene {
       {
         id: 'vines',
         name: 'thick vines',
-        x: 580,
-        y: playableHeight / 2 + 30,
-        width: 100,
-        height: 150,
+        x: 1100,
+        y: playableHeight / 2 + 50,
+        width: 160,
+        height: 240,
         actions: [
           {
             verb: 'LOOK',
@@ -199,10 +214,10 @@ export class BrazilForestScene extends Phaser.Scene {
       {
         id: 'flower',
         name: 'exotic flower',
-        x: 100,
-        y: playableHeight / 2 - 20,
-        width: 60,
-        height: 60,
+        x: 180,
+        y: playableHeight / 2 - 30,
+        width: 100,
+        height: 100,
         actions: [
           {
             verb: 'LOOK',
@@ -232,10 +247,10 @@ export class BrazilForestScene extends Phaser.Scene {
       {
         id: 'stump',
         name: 'tree stump',
-        x: 450,
-        y: playableHeight - 60,
-        width: 80,
-        height: 50,
+        x: 850,
+        y: playableHeight - 90,
+        width: 130,
+        height: 80,
         actions: [
           {
             verb: 'LOOK',
@@ -270,10 +285,10 @@ export class BrazilForestScene extends Phaser.Scene {
       {
         id: 'path-village',
         name: 'path to village',
-        x: 600,
-        y: playableHeight / 2 + 80,
-        width: 60,
-        height: 80,
+        x: 1150,
+        y: playableHeight / 2 + 130,
+        width: 100,
+        height: 130,
         actions: [
           {
             verb: 'LOOK',
@@ -305,12 +320,17 @@ export class BrazilForestScene extends Phaser.Scene {
   private async handleInteraction(pointer: Phaser.Input.Pointer): Promise<void> {
     const hotspot = this.hotspotManager.getHovered();
     const verb = this.verbBar.getSelectedVerb();
+    const heldItemId = this.inventoryPanel.getSelectedItemId();
 
     if (hotspot) {
-      // Interact with hotspot
-      const response = await this.hotspotManager.interact(verb);
+      // Interact with hotspot, passing the held item
+      const response = await this.hotspotManager.interact(verb, heldItemId ?? undefined);
       if (response) {
         this.messageBox.show(response);
+        // Clear item selection after successful use (if item was consumed)
+        if (heldItemId && !gameState.hasItem(heldItemId)) {
+          this.inventoryPanel.clearSelection();
+        }
       }
     } else {
       // Click on empty space - move Tank there

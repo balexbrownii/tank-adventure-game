@@ -11,23 +11,23 @@ export class TitleScene extends Phaser.Scene {
 
     // Title text (placeholder until we have title art)
     const title = this.add.text(width / 2, height / 3, "Tank's Great Adventure", {
-      font: 'bold 32px serif',
+      font: 'bold 64px serif',
       color: '#ffd700',
       stroke: '#8b4513',
-      strokeThickness: 4,
+      strokeThickness: 6,
     });
     title.setOrigin(0.5);
 
     // Subtitle
-    const subtitle = this.add.text(width / 2, height / 3 + 50, 'A story by Alexander Brown', {
-      font: '16px serif',
+    const subtitle = this.add.text(width / 2, height / 3 + 80, 'A story by Alexander Brown', {
+      font: '24px serif',
       color: '#ffffff',
     });
     subtitle.setOrigin(0.5);
 
     // Start prompt
     const startText = this.add.text(width / 2, height * 0.7, 'Click to Start', {
-      font: '20px monospace',
+      font: '28px monospace',
       color: '#ffffff',
     });
     startText.setOrigin(0.5);

@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
-const MESSAGE_BOX_PADDING = 16;
-const MESSAGE_BOX_HEIGHT = 60;
+const MESSAGE_BOX_PADDING = 20;
+const MESSAGE_BOX_HEIGHT = 80;
 
 /**
  * MessageBox - Displays interaction responses and game messages
@@ -39,7 +39,7 @@ export class MessageBox extends Phaser.GameObjects.Container {
       MESSAGE_BOX_HEIGHT / 2,
       '',
       {
-        font: '16px serif',
+        font: '22px serif',
         color: '#ffffff',
         wordWrap: { width: gameWidth - MESSAGE_BOX_PADDING * 4 },
       }

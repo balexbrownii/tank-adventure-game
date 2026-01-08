@@ -16,10 +16,10 @@ const VERBS: VerbConfig[] = [
   { verb: 'PULL', label: 'Pull', hotkey: '6' },
 ];
 
-const VERB_BAR_HEIGHT = 60;
-const VERB_BUTTON_WIDTH = 90;
-const VERB_BUTTON_HEIGHT = 40;
-const VERB_BUTTON_PADDING = 8;
+const VERB_BAR_HEIGHT = 80;
+const VERB_BUTTON_WIDTH = 120;
+const VERB_BUTTON_HEIGHT = 50;
+const VERB_BUTTON_PADDING = 12;
 
 /**
  * VerbBar - Monkey Island style verb interface
@@ -66,8 +66,8 @@ export class VerbBar extends Phaser.GameObjects.Container {
     });
 
     // Status text (shows current action like "Use key on door")
-    this.statusText = scene.add.text(gameWidth / 2, 8, '', {
-      font: '14px monospace',
+    this.statusText = scene.add.text(gameWidth / 2, 10, '', {
+      font: '18px monospace',
       color: '#ffffff',
     });
     this.statusText.setOrigin(0.5, 0);
@@ -101,7 +101,7 @@ export class VerbBar extends Phaser.GameObjects.Container {
 
     // Button text
     const text = this.scene.add.text(0, 0, `${config.hotkey}. ${config.label}`, {
-      font: '12px monospace',
+      font: '16px monospace',
       color: '#ffffff',
     });
     text.setOrigin(0.5, 0.5);
