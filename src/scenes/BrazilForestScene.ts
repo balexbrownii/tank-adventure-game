@@ -14,6 +14,9 @@ export class BrazilForestScene extends Phaser.Scene {
   private pig!: Phaser.GameObjects.Image;
   private deer!: Phaser.GameObjects.Image;
 
+  // Interactive sprites
+  private macheteSprite!: Phaser.GameObjects.Image;
+
   // Systems
   private hotspotManager!: HotspotManager;
   private verbBar!: VerbBar;
@@ -72,6 +75,13 @@ export class BrazilForestScene extends Phaser.Scene {
     this.deer = this.add.image(width / 2 + 200, groundY, 'deer');
     this.deer.setScale(characterScale * 0.85);
     this.deer.setOrigin(0.5, 1);
+
+    // Machete in stump - only visible if player hasn't taken it yet
+    this.macheteSprite = this.add.image(655, playableHeight - 175, 'machete-in-stump');
+    this.macheteSprite.setScale(0.08);
+    this.macheteSprite.setOrigin(0.5, 1);
+    this.macheteSprite.setDepth(5);
+    this.macheteSprite.setVisible(!gameState.hasItem('machete'));
 
     // Register hotspots
     this.registerHotspots(playableHeight);
@@ -302,6 +312,8 @@ export class BrazilForestScene extends Phaser.Scene {
                 description: 'A rusty but sharp machete.',
                 icon: 'machete',
               });
+              // Hide the machete sprite
+              this.macheteSprite.setVisible(false);
             },
             enabled: () => !gameState.hasItem('machete'),
           },
