@@ -15,6 +15,7 @@ export class BrazilForestScene extends Phaser.Scene {
 
   // Interactive sprites
   private macheteSprite!: Phaser.GameObjects.Image;
+  private emptyStumpSprite!: Phaser.GameObjects.Image;
 
   // Systems
   private hotspotManager!: HotspotManager;
@@ -88,6 +89,13 @@ export class BrazilForestScene extends Phaser.Scene {
     this.macheteSprite.setOrigin(0.5, 1);
     this.macheteSprite.setDepth(5);
     this.macheteSprite.setVisible(!gameState.hasItem('machete'));
+
+    // Empty stump - covers the background machete after player takes it
+    this.emptyStumpSprite = this.add.image(750, height - 130, 'empty-stump');
+    this.emptyStumpSprite.setScale(0.25);
+    this.emptyStumpSprite.setOrigin(0.5, 1);
+    this.emptyStumpSprite.setDepth(4);
+    this.emptyStumpSprite.setVisible(gameState.hasItem('machete'));
 
     // Register hotspots
     this.registerHotspots(height);
@@ -317,14 +325,16 @@ export class BrazilForestScene extends Phaser.Scene {
                 description: 'A rusty but sharp machete.',
                 icon: 'machete',
               });
-              // Hide the machete sprite
+              // Hide the machete sprite and show empty stump to cover background
               this.macheteSprite.setVisible(false);
+              this.emptyStumpSprite.setVisible(true);
             },
             enabled: () => !gameState.hasItem('machete'),
           },
           {
             verb: 'USE',
-            response: "It's just a stump.",
+            response: "It's just an old stump now.",
+            enabled: () => gameState.hasItem('machete'),
           },
         ],
       },
