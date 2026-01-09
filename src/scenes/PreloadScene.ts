@@ -34,8 +34,8 @@ export class PreloadScene extends Phaser.Scene {
     });
 
     // Load game assets
-    // Characters (tank.png is the full-size 1024x1024 sprite, loaded as 'tarzan')
-    this.load.image('tarzan', 'assets/images/characters/tank.png');
+    // Characters
+    this.load.image('tarzan', 'assets/images/characters/tarzan.png');
     this.load.image('pig', 'assets/images/characters/pig.png');
     this.load.image('deer', 'assets/images/characters/deer.png');
 

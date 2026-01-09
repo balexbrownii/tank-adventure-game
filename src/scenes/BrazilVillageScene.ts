@@ -71,22 +71,24 @@ export class BrazilVillageScene extends Phaser.Scene {
     this.inventoryPanel = new InventoryPanel(this, height);
 
     // Characters - positioned in the village clearing
-    const characterScale = 0.30;
+    // Pig/deer are 1024x1024, tarzan is 64x128 - need different scales
+    const companionScale = 0.30;
+    const tarzanScale = 2.2; // 128px * 2.2 = ~280px to match companions
     const groundY = height - 60;
 
     // Tarzan (main character, center-right)
     this.tarzan = this.add.image(width / 2 + 100, groundY, 'tarzan');
-    this.tarzan.setScale(characterScale);
+    this.tarzan.setScale(tarzanScale);
     this.tarzan.setOrigin(0.5, 1);
 
     // Pig (right of Tarzan)
     this.pig = this.add.image(width / 2 + 280, groundY, 'pig');
-    this.pig.setScale(characterScale * 0.75);
+    this.pig.setScale(companionScale * 0.75);
     this.pig.setOrigin(0.5, 1);
 
     // Mr. Snuggles the deer (behind Tarzan)
     this.deer = this.add.image(width / 2 + 180, groundY - 20, 'deer');
-    this.deer.setScale(characterScale * 0.85);
+    this.deer.setScale(companionScale * 0.85);
     this.deer.setOrigin(0.5, 1);
 
     // Subscribe to inventory selection to show equipped item in hand
