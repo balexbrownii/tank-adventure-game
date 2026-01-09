@@ -37,6 +37,8 @@ OBJECTS_DIR = IMAGES_DIR / "objects"
 
 # Character prompts (King's Quest V/Monkey Island 2 style)
 PROMPTS = {
+    "tarzan": """Video game character art of Tarzan, a heroic jungle man. Athletic muscular man in his late 20s with wild untamed dark hair and confident determined expression. He wears simple jungle attire - a loincloth or tattered shorts, bare chest showing defined muscles, bare feet. Tanned skin from living in the jungle. Standing in a confident heroic pose, ready for adventure. Full body view, dynamic pose showing strength and agility. Style: Hand-painted 1990s adventure game art like King's Quest V, Monkey Island 2. Rich saturated colors, detailed painterly brushwork, warm dramatic lighting. Professional video game character illustration, high detail, expressive.""",
+
     "tank": """Video game character art of Tank, a heroic female martial artist. Athletic muscular woman in her late 20s with confident determined expression. She wears a weathered red sleeveless martial arts gi top with black belt, dark cargo pants, wrapped forearms, practical combat boots. Dark hair pulled back in a ponytail. Strong arms showing defined muscles. Standing in a confident martial arts ready stance with fists raised. Full body view, dynamic pose showing she's ready for action. Style: Hand-painted 1990s adventure game art like King's Quest V, Monkey Island 2. Rich saturated colors, detailed painterly brushwork, warm dramatic lighting. Professional video game character illustration, high detail, expressive.""",
 
     "pig": """Video game character art of a cartoon pig sidekick wearing cowboy gear. Pink pig standing semi-upright on hind legs. Wearing a worn brown leather cowboy hat tilted rakishly, red bandana around neck, small leather vest. Front hooves on hips in confident pose. Friendly expressive face with a knowing smirk and warm eyes. He's a loyal companion with personality and Western charm. Full body character design. Style: Hand-painted 1990s adventure game art like King's Quest, Monkey Island. Warm colors, detailed but charming cartoon style, personality-filled character design.""",
@@ -85,6 +87,7 @@ PROMPTS = {
 
 # Map asset types to output directories
 OUTPUT_DIRS = {
+    "tarzan": CHARACTERS_DIR,
     "tank": CHARACTERS_DIR,
     "pig": CHARACTERS_DIR,
     "deer": CHARACTERS_DIR,

@@ -1,0 +1,35 @@
+{
+  "uuid": "fd3515c4aedc4546f26e4b420197879b",
+  "prompt": "Video game character art of Tarzan, a heroic jungle man. Athletic muscular man in his late 20s with wild untamed dark hair and confident determined expression. He wears simple jungle attire - a loincloth or tattered shorts, bare chest showing defined muscles, bare feet. Tanned skin from living in the jungle. Standing in a confident heroic pose, ready for adventure. Full body view, dynamic pose showing strength and agility. Style: Hand-painted 1990s adventure game art like King's Quest V, Monkey Island 2. Rich saturated colors, detailed painterly brushwork, warm dramatic lighting. Professional video game character illustration, high detail, expressive.",
+  "slots": [
+    {
+      "index": 0,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/fd3515c4aedc4546f26e4b420197879b/0_Video_game_character_art_of_Tarzanu002c_a_heroic_jungle_manu002e_Athletic_muscul.webp",
+      "charged": true,
+      "error_message": null
+    },
+    {
+      "index": 1,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/fd3515c4aedc4546f26e4b420197879b/1_Video_game_character_art_of_Tarzanu002c_a_heroic_jungle_manu002e_Athletic_muscul.webp",
+      "charged": true,
+      "error_message": null
+    },
+    {
+      "index": 2,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/fd3515c4aedc4546f26e4b420197879b/2_Video_game_character_art_of_Tarzanu002c_a_heroic_jungle_manu002e_Athletic_muscul.webp",
+      "charged": true,
+      "error_message": null
+    },
+    {
+      "index": 3,
+      "status": "success",
+      "url": "https://s.maginary.ai/results/fd3515c4aedc4546f26e4b420197879b/3_Video_game_character_art_of_Tarzanu002c_a_heroic_jungle_manu002e_Athletic_muscul.webp",
+      "charged": true,
+      "error_message": null
+    }
+  ],
+  "generated_at": "2026-01-08 23:47:26"
+}
