@@ -1,0 +1,99 @@
+# Tank Adventure Game - Claude Progress Log
+
+## Project Overview
+Point-and-click adventure game in Phaser 3 + TypeScript
+Character: Tarzan (renamed from Tank)
+Deployed to: Vercel
+
+---
+
+=== SESSION 2026-01-08 (Initial Harness Setup) ===
+
+ORIENTATION:
+- Created feature_list.json with 7 features based on user's handwritten requirements
+- Features split into Phase 1 (core) and Phase 2 (village enhancements)
+
+WORK COMPLETED:
+- F001: Tank -> Tarzan rename (COMPLETED - awaiting user approval of feature list)
+  - Copied tarzan sprite from Godot project
+  - Updated index.html, TitleScene, PreloadScene
+  - Updated BrazilForestScene, BrazilVillageScene
+  - All Tank references renamed to Tarzan
+  - Build passes
+
+BLOCKERS:
+- Need user approval on feature list before continuing
+
+NEXT STEPS:
+- Get feature list approval
+- F002: Remove verb bar - auto-interact on click
+
+---
+
+=== SESSION 2026-01-08 (Harness Complete) ===
+
+ORIENTATION:
+- Continued from prior session with feature list approved
+
+WORK COMPLETED:
+- F001: Tank → Tarzan rename (DONE)
+  - Copied tarzan sprite, updated all references
+- F002: Remove verb bar - auto-interact on click (DONE)
+  - Removed VerbBar, full-height game area
+  - Left-click = USE/TAKE/TALK, Right-click = LOOK
+- F003: WASD keyboard movement (DONE)
+  - Added WASD keys at 200px/s, boundary clamping
+- F004: Show equipped item in character hand (DONE)
+  - heldItemSprite follows Tarzan, flips with direction
+- F005: Animated fire in village (DONE)
+  - Particle emitter with orange/yellow tints, ambient glow
+- F006: Animated trader NPC (DONE)
+  - Placeholder shapes, idle sway, arm gestures, proximity dialogue
+- F007: Flower → Bow trade mechanic (DONE)
+  - Bow icon in PreloadScene, trader gives bow&arrows for flower
+
+TEST RESULTS:
+- All builds pass (npm run build succeeds)
+- 7/7 features marked passes: true
+
+GIT COMMITS:
+- (Pending) Full harness implementation
+
+BLOCKERS:
+- None
+
+NEXT STEPS:
+- Deploy to Vercel
+- Test in browser
+
+---
+
+=== SESSION 2026-01-08 (BMAD Review Fixes) ===
+
+ORIENTATION:
+- Ran BMAD review agents (@review-code, @validate-complete)
+- Identified 8 issues across code quality, documentation, and dead code
+
+WORK COMPLETED:
+- Deleted unused VerbBar.ts (was never imported after F002 changes)
+- Updated localStorage keys from `tank_adventure_` to `tarzan_adventure_` in GameStateManager
+- Added getDebugMode() getter to HotspotManager (replaced bracket notation access)
+- Updated both scenes to use new getter instead of `this.hotspotManager['debugMode']`
+- Fixed stale comment in InventoryPanel.ts ("verb bar area" → accurate description)
+- Added explicit traderApproached reset in BrazilVillageScene.create() with comment
+- Updated README.md: Tank → Tarzan, added Controls section
+- Updated docs/story.md: Tank → Tarzan throughout
+- Updated package.json: name=tarzan-adventure-game, version=0.2.0, description updated
+
+TEST RESULTS:
+- Build passes (npm run build succeeds)
+- 19 modules transformed, no TypeScript errors
+
+BLOCKERS:
+- None
+
+NEXT STEPS:
+- Git commit these fixes
+- Deploy to Vercel
+
+---

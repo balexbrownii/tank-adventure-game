@@ -189,6 +189,13 @@ export class HotspotManager {
   }
 
   /**
+   * Get current debug mode state
+   */
+  getDebugMode(): boolean {
+    return this.debugMode;
+  }
+
+  /**
    * Clean up when scene shuts down
    */
   destroy(): void {

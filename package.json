@@ -1,7 +1,7 @@
 {
-  "name": "tank-adventure-game",
-  "version": "0.1.0",
-  "description": "Tank's Great Adventure - A 1990s style adventure game built with Phaser 3",
+  "name": "tarzan-adventure-game",
+  "version": "0.2.0",
+  "description": "Tarzan's Great Adventure - A 1990s style adventure game built with Phaser 3",
   "main": "src/main.ts",
   "scripts": {
     "dev": "vite",

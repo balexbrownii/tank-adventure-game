@@ -1,16 +1,16 @@
-# Tank's Great Adventure - Story Bible
+# Tarzan's Great Adventure - Story Bible
 
 ## Overview
 
-Tank is a super-strong but hilariously "not smart" female martial artist who travels from Brazil to Canada with two companions: a talking pig with a Western/cowboy accent, and a deer named Mr. Snuggles.
+Tarzan is a super-strong but hilariously "not smart" jungle man who travels from Brazil to Canada with two companions: a talking pig with a Western/cowboy accent, and a deer named Mr. Snuggles.
 
 ## The Core Concept
 
-Tank's "dumbness" is actually a superpower:
-- She's immune to poison because she doesn't know it's poisonous
-- She gets power-ups from destroying cars because she thinks they're monsters
-- She can walk through dangerous situations unharmed due to blissful ignorance
-- Her simple worldview often leads to surprisingly effective solutions
+Tarzan's "dumbness" is actually a superpower:
+- He's immune to poison because he doesn't know it's poisonous
+- He gets power-ups from destroying cars because he thinks they're monsters
+- He can walk through dangerous situations unharmed due to blissful ignorance
+- His simple worldview often leads to surprisingly effective solutions
 
 ## Journey Locations
 
@@ -29,37 +29,36 @@ Tank's "dumbness" is actually a superpower:
 - **German Soldiers Encounter** - Mysterious encounter with historical elements
 - **Wolf Chase** - Escape sequence through wilderness
 - **Space Explosion** - Unexpected cosmic event
-- **Car-Throwing** - Tank mistakes cars for monsters, gains power-ups
+- **Car-Throwing** - Tarzan mistakes cars for monsters, gains power-ups
 - **Airport Sneaking** - Stealth/comedy sequence
 
 ---
 
 ## Characters
 
-### Tank (Main Character)
+### Tarzan (Main Character)
 
 **Appearance:**
-- Athletic, muscular woman in late 20s
+- Athletic, muscular man in late 20s
 - Confident, determined expression
-- Weathered red sleeveless martial arts gi top with black belt
-- Dark cargo pants
+- Simple jungle attire (loincloth or shorts)
+- Bare feet or simple sandals
 - Wrapped forearms
-- Practical combat boots
-- Dark hair in ponytail
+- Dark hair, wild and untamed
 - Strong arms with defined muscles
 
 **Personality:**
 - Super strong physically
-- Extremely simple-minded (but this is her power)
+- Extremely simple-minded (but this is his power)
 - Confident and fearless
-- Kind-hearted despite her intimidating strength
+- Kind-hearted despite his intimidating strength
 - Takes everything literally
-- Never doubts herself
+- Never doubts himself
 
 **Abilities:**
 - Incredible strength (can throw cars)
-- Martial arts expertise
-- Immunity to things she doesn't understand are dangerous
+- Jungle survival expertise
+- Immunity to things he doesn't understand are dangerous
 - Power-ups from destroying "monsters" (cars, machines)
 
 ---
@@ -85,8 +84,8 @@ Tank's "dumbness" is actually a superpower:
 
 **Role in Story:**
 - Provides commentary and humor
-- Translates Tank's actions to others
-- Occasionally has useful skills Tank lacks
+- Translates Tarzan's actions to others
+- Occasionally has useful skills Tarzan lacks
 - Comic relief through exasperation
 
 ---
@@ -151,7 +150,7 @@ Tank's "dumbness" is actually a superpower:
 
 ### Interaction Style
 - Point and click adventure
-- Click to move Tank
+- Click to move Tarzan
 - Interact with objects and characters
 - Inventory system
 - Dialog trees

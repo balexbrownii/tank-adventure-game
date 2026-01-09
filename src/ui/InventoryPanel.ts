@@ -7,8 +7,8 @@ const INVENTORY_MARGIN = 6;
 const MAX_VISIBLE_SLOTS = 6;
 
 /**
- * InventoryPanel - Compact inventory display in the verb bar area
- * Positioned at bottom-right, within the UI zone
+ * InventoryPanel - Compact inventory display at bottom-right of game area
+ * Shows collected items that can be selected for use with hotspots
  */
 export class InventoryPanel extends Phaser.GameObjects.Container {
   private background: Phaser.GameObjects.Rectangle;

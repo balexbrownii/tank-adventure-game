@@ -10,7 +10,7 @@ export class TitleScene extends Phaser.Scene {
     const height = this.cameras.main.height;
 
     // Title text (placeholder until we have title art)
-    const title = this.add.text(width / 2, height / 3, "Tank's Great Adventure", {
+    const title = this.add.text(width / 2, height / 3, "Tarzan's Great Adventure", {
       font: 'bold 64px serif',
       color: '#ffd700',
       stroke: '#8b4513',

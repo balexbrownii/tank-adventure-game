@@ -203,11 +203,11 @@ class GameStateManager {
       timestamp: Date.now(),
     };
 
-    localStorage.setItem(`tank_adventure_${slot}`, JSON.stringify(saveData));
+    localStorage.setItem(`tarzan_adventure_${slot}`, JSON.stringify(saveData));
   }
 
   load(slot: string = 'autosave'): boolean {
-    const data = localStorage.getItem(`tank_adventure_${slot}`);
+    const data = localStorage.getItem(`tarzan_adventure_${slot}`);
     if (!data) {
       return false;
     }
@@ -231,11 +231,11 @@ class GameStateManager {
   }
 
   hasSave(slot: string = 'autosave'): boolean {
-    return localStorage.getItem(`tank_adventure_${slot}`) !== null;
+    return localStorage.getItem(`tarzan_adventure_${slot}`) !== null;
   }
 
   deleteSave(slot: string): void {
-    localStorage.removeItem(`tank_adventure_${slot}`);
+    localStorage.removeItem(`tarzan_adventure_${slot}`);
   }
 
   // ===== RESET =====

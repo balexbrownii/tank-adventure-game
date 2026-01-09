@@ -35,7 +35,7 @@ export class PreloadScene extends Phaser.Scene {
 
     // Load game assets
     // Characters
-    this.load.image('tank', 'assets/images/characters/tank.png');
+    this.load.image('tarzan', 'assets/images/characters/tarzan.png');
     this.load.image('pig', 'assets/images/characters/pig.png');
     this.load.image('deer', 'assets/images/characters/deer.png');
 
@@ -112,5 +112,38 @@ export class PreloadScene extends Phaser.Scene {
     ropeGraphics.lineBetween(38, 18, 44, 10);
     ropeGraphics.generateTexture('rope', iconSize, iconSize);
     ropeGraphics.destroy();
+
+    // Bow icon - curved bow with string
+    const bowGraphics = this.add.graphics();
+    // Bow body (curved wood)
+    bowGraphics.lineStyle(4, 0x8B4513);
+    bowGraphics.beginPath();
+    bowGraphics.arc(24, 24, 18, Math.PI * 0.7, Math.PI * 1.3, false);
+    bowGraphics.strokePath();
+    // Bowstring
+    bowGraphics.lineStyle(2, 0xFFFFFF);
+    bowGraphics.lineBetween(10, 12, 10, 36);
+    // Arrow
+    bowGraphics.lineStyle(3, 0x8B4513);
+    bowGraphics.lineBetween(14, 24, 42, 24);
+    // Arrowhead
+    bowGraphics.fillStyle(0x808080);
+    bowGraphics.beginPath();
+    bowGraphics.moveTo(42, 24);
+    bowGraphics.lineTo(36, 20);
+    bowGraphics.lineTo(36, 28);
+    bowGraphics.closePath();
+    bowGraphics.fillPath();
+    // Fletching
+    bowGraphics.fillStyle(0xFF4444);
+    bowGraphics.beginPath();
+    bowGraphics.moveTo(14, 24);
+    bowGraphics.lineTo(18, 20);
+    bowGraphics.lineTo(20, 24);
+    bowGraphics.lineTo(18, 28);
+    bowGraphics.closePath();
+    bowGraphics.fillPath();
+    bowGraphics.generateTexture('bow', iconSize, iconSize);
+    bowGraphics.destroy();
   }
 }

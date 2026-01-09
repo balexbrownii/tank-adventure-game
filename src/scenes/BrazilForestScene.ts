@@ -1,16 +1,15 @@
 import Phaser from 'phaser';
 import { HotspotManager } from '../managers/HotspotManager';
-import { VerbBar, VERB_BAR_HEIGHT } from '../ui/VerbBar';
 import { MessageBox } from '../ui/MessageBox';
 import { InventoryPanel } from '../ui/InventoryPanel';
 import { gameState } from '../managers/GameStateManager';
-import { HotspotConfig } from '../entities/Hotspot';
+import { HotspotConfig, InteractionVerb } from '../entities/Hotspot';
 import { audioManager } from '../managers/AudioManager';
 import { responseGenerator } from '../services/ResponseGenerator';
 
 export class BrazilForestScene extends Phaser.Scene {
   // Characters
-  private tank!: Phaser.GameObjects.Image;
+  private tarzan!: Phaser.GameObjects.Image;
   private pig!: Phaser.GameObjects.Image;
   private deer!: Phaser.GameObjects.Image;
 
@@ -19,9 +18,20 @@ export class BrazilForestScene extends Phaser.Scene {
 
   // Systems
   private hotspotManager!: HotspotManager;
-  private verbBar!: VerbBar;
   private messageBox!: MessageBox;
   private inventoryPanel!: InventoryPanel;
+
+  // Movement
+  private cursors!: {
+    W: Phaser.Input.Keyboard.Key;
+    A: Phaser.Input.Keyboard.Key;
+    S: Phaser.Input.Keyboard.Key;
+    D: Phaser.Input.Keyboard.Key;
+  };
+  private moveSpeed: number = 200;
+
+  // Equipped item display
+  private heldItemSprite: Phaser.GameObjects.Sprite | null = null;
 
   constructor() {
     super({ key: 'BrazilForestScene' });
@@ -30,7 +40,6 @@ export class BrazilForestScene extends Phaser.Scene {
   create(): void {
     const width = this.cameras.main.width;
     const height = this.cameras.main.height;
-    const playableHeight = height - VERB_BAR_HEIGHT;
 
     // Check if first visit BEFORE setting current room (which marks it visited)
     const isFirstVisit = !gameState.hasVisitedRoom('brazil-forest');
@@ -38,68 +47,52 @@ export class BrazilForestScene extends Phaser.Scene {
     // Set current room
     gameState.setCurrentRoom('brazil-forest');
 
-    // Background
-    const bg = this.add.image(width / 2, playableHeight / 2, 'brazil-forest');
-    bg.setDisplaySize(width, playableHeight);
+    // Background - full height now (no verb bar)
+    const bg = this.add.image(width / 2, height / 2, 'brazil-forest');
+    bg.setDisplaySize(width, height);
 
     // Initialize systems
     this.hotspotManager = new HotspotManager(this);
-    this.verbBar = new VerbBar(this);
     this.messageBox = new MessageBox(this);
-    this.inventoryPanel = new InventoryPanel(this, height - VERB_BAR_HEIGHT);
-
-    // Wire up inventory selection to verb bar
-    this.inventoryPanel.onSelect((item) => {
-      if (item) {
-        this.verbBar.setHeldItem(item.name);
-      } else {
-        this.verbBar.clearHeldItem();
-      }
-    });
+    this.inventoryPanel = new InventoryPanel(this, height);
 
     // Characters - scaled down to fit the scene
     const characterScale = 0.30;
-    const groundY = playableHeight - 60;
+    const groundY = height - 60;
 
-    // Tank (main character, center)
-    this.tank = this.add.image(width / 2, groundY, 'tank');
-    this.tank.setScale(characterScale);
-    this.tank.setOrigin(0.5, 1);
+    // Tarzan (main character, center)
+    this.tarzan = this.add.image(width / 2, groundY, 'tarzan');
+    this.tarzan.setScale(characterScale);
+    this.tarzan.setOrigin(0.5, 1);
 
-    // Pig (left of Tank)
+    // Pig (left of Tarzan)
     this.pig = this.add.image(width / 2 - 200, groundY, 'pig');
     this.pig.setScale(characterScale * 0.75);
     this.pig.setOrigin(0.5, 1);
 
-    // Mr. Snuggles the deer (right of Tank)
+    // Mr. Snuggles the deer (right of Tarzan)
     this.deer = this.add.image(width / 2 + 200, groundY, 'deer');
     this.deer.setScale(characterScale * 0.85);
     this.deer.setOrigin(0.5, 1);
 
+    // Subscribe to inventory selection to show equipped item in hand
+    this.inventoryPanel.onSelect((item) => {
+      this.updateHeldItem(item?.icon ?? null);
+    });
+
     // Machete in stump - only visible if player hasn't taken it yet
-    this.macheteSprite = this.add.image(655, playableHeight - 175, 'machete-in-stump');
+    this.macheteSprite = this.add.image(655, height - 175, 'machete-in-stump');
     this.macheteSprite.setScale(0.08);
     this.macheteSprite.setOrigin(0.5, 1);
     this.macheteSprite.setDepth(5);
     this.macheteSprite.setVisible(!gameState.hasItem('machete'));
 
     // Register hotspots
-    this.registerHotspots(playableHeight);
-
-    // Hook up hotspot hover to verb bar
-    this.hotspotManager.onHover((hotspot) => {
-      if (hotspot) {
-        this.verbBar.setTarget(hotspot.hotspotName);
-      } else {
-        this.verbBar.setTarget('');
-      }
-    });
+    this.registerHotspots(height);
 
     // Handle clicks on the game area
+    // Left-click = primary action (USE/TAKE), Right-click = LOOK
     this.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
-      // Only handle clicks in the playable area (not verb bar)
-      if (pointer.y > playableHeight) return;
-
       this.handleInteraction(pointer);
     });
 
@@ -111,9 +104,19 @@ export class BrazilForestScene extends Phaser.Scene {
       strokeThickness: 4,
     }).setOrigin(0.5, 0);
 
-    // Debug mode toggle (press D)
-    this.input.keyboard?.on('keydown-D', () => {
-      const currentDebug = this.hotspotManager['debugMode'];
+    // WASD movement keys
+    if (this.input.keyboard) {
+      this.cursors = {
+        W: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W),
+        A: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
+        S: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S),
+        D: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D),
+      };
+    }
+
+    // Debug mode toggle (press `)
+    this.input.keyboard?.on('keydown-BACKTICK', () => {
+      const currentDebug = this.hotspotManager.getDebugMode();
       this.hotspotManager.setDebugMode(!currentDebug);
       this.messageBox.show(currentDebug ? 'Debug mode OFF' : 'Debug mode ON', 1500);
     });
@@ -147,14 +150,14 @@ export class BrazilForestScene extends Phaser.Scene {
     if (isFirstVisit) {
       this.time.delayedCall(500, () => {
         this.messageBox.show(
-          "Tank finds herself in a lush Brazilian rainforest. Her companions Pig and Mr. Snuggles look around nervously.",
+          "Tarzan finds himself in a lush Brazilian rainforest. His companions Pig and Mr. Snuggles look around nervously.",
           5000
         );
       });
     }
   }
 
-  private registerHotspots(playableHeight: number): void {
+  private registerHotspots(sceneHeight: number): void {
     const hotspots: HotspotConfig[] = [
       // Pig companion
       {
@@ -215,7 +218,7 @@ export class BrazilForestScene extends Phaser.Scene {
         id: 'vines',
         name: 'thick vines',
         x: 1050,
-        y: playableHeight / 2,
+        y: sceneHeight / 2,
         width: 200,
         height: 350,
         actions: [
@@ -255,7 +258,7 @@ export class BrazilForestScene extends Phaser.Scene {
         id: 'flower',
         name: 'exotic flower',
         x: 200,
-        y: playableHeight / 2 + 50,
+        y: sceneHeight / 2 + 50,
         width: 150,
         height: 200,
         actions: [
@@ -288,7 +291,7 @@ export class BrazilForestScene extends Phaser.Scene {
         id: 'stump',
         name: 'tree stump',
         x: 750,
-        y: playableHeight - 150,
+        y: sceneHeight - 150,
         width: 180,
         height: 180,
         actions: [
@@ -328,7 +331,7 @@ export class BrazilForestScene extends Phaser.Scene {
         id: 'path-village',
         name: 'path to village',
         x: 1050,
-        y: playableHeight / 2 + 100,
+        y: sceneHeight / 2 + 100,
         width: 180,
         height: 200,
         actions: [
@@ -362,8 +365,24 @@ export class BrazilForestScene extends Phaser.Scene {
 
   private async handleInteraction(pointer: Phaser.Input.Pointer): Promise<void> {
     const hotspot = this.hotspotManager.getHovered();
-    const verb = this.verbBar.getSelectedVerb();
     const heldItemId = this.inventoryPanel.getSelectedItemId();
+
+    // Determine verb based on click type
+    // Right-click (button 2) = LOOK, Left-click (button 0) = USE/TAKE/TALK
+    let verb: InteractionVerb = 'USE';
+    if (pointer.button === 2) {
+      verb = 'LOOK';
+    } else if (hotspot) {
+      // Smart verb selection for left-click: prioritize USE, then TAKE, then TALK
+      const availableVerbs = hotspot.getAvailableVerbs(heldItemId ?? undefined);
+      if (availableVerbs.includes('USE')) {
+        verb = 'USE';
+      } else if (availableVerbs.includes('TAKE')) {
+        verb = 'TAKE';
+      } else if (availableVerbs.includes('TALK')) {
+        verb = 'TALK';
+      }
+    }
 
     if (hotspot) {
       // Interact with hotspot, passing the held item
@@ -375,30 +394,95 @@ export class BrazilForestScene extends Phaser.Scene {
           this.inventoryPanel.clearSelection();
         }
       }
-    } else {
-      // Click on empty space - move Tank there
+    } else if (pointer.button === 0) {
+      // Left-click on empty space - move Tarzan there
       const targetX = Phaser.Math.Clamp(pointer.x, 50, this.cameras.main.width - 50);
 
       // Flip sprite based on direction
-      if (targetX < this.tank.x) {
-        this.tank.setFlipX(true);
+      if (targetX < this.tarzan.x) {
+        this.tarzan.setFlipX(true);
       } else {
-        this.tank.setFlipX(false);
+        this.tarzan.setFlipX(false);
       }
 
-      // Move Tank
+      // Move Tarzan
       this.tweens.add({
-        targets: this.tank,
+        targets: this.tarzan,
         x: targetX,
-        duration: Math.abs(targetX - this.tank.x) * 3,
+        duration: Math.abs(targetX - this.tarzan.x) * 3,
         ease: 'Linear',
       });
     }
   }
 
-  update(): void {
+  /**
+   * Update the held item sprite based on selected inventory item
+   */
+  private updateHeldItem(iconKey: string | null): void {
+    // Remove existing held item sprite
+    if (this.heldItemSprite) {
+      this.heldItemSprite.destroy();
+      this.heldItemSprite = null;
+    }
+
+    // Create new sprite if item selected
+    if (iconKey && this.textures.exists(iconKey)) {
+      this.heldItemSprite = this.add.sprite(0, 0, iconKey);
+      this.heldItemSprite.setScale(0.5);
+      this.heldItemSprite.setDepth(150); // Above characters
+    }
+  }
+
+  /**
+   * Update held item position to follow Tarzan's hand
+   */
+  private updateHeldItemPosition(): void {
+    if (this.heldItemSprite && this.tarzan) {
+      // Position item near Tarzan's hand (offset based on facing direction)
+      const handOffsetX = this.tarzan.flipX ? -25 : 25;
+      const handOffsetY = -40;
+      this.heldItemSprite.setPosition(
+        this.tarzan.x + handOffsetX,
+        this.tarzan.y + handOffsetY
+      );
+      // Flip item to match character direction
+      this.heldItemSprite.setFlipX(this.tarzan.flipX);
+    }
+  }
+
+  update(_time: number, delta: number): void {
+    // WASD movement
+    if (this.cursors) {
+      const speed = this.moveSpeed * (delta / 1000);
+
+      if (this.cursors.A.isDown) {
+        this.tarzan.x -= speed;
+        this.tarzan.setFlipX(true);
+      } else if (this.cursors.D.isDown) {
+        this.tarzan.x += speed;
+        this.tarzan.setFlipX(false);
+      }
+
+      if (this.cursors.W.isDown) {
+        this.tarzan.y -= speed;
+      } else if (this.cursors.S.isDown) {
+        this.tarzan.y += speed;
+      }
+
+      // Clamp to scene boundaries
+      const minX = 50;
+      const maxX = this.cameras.main.width - 50;
+      const minY = 200; // Upper boundary
+      const maxY = this.cameras.main.height - 60; // Ground level
+      this.tarzan.x = Phaser.Math.Clamp(this.tarzan.x, minX, maxX);
+      this.tarzan.y = Phaser.Math.Clamp(this.tarzan.y, minY, maxY);
+    }
+
+    // Update held item position
+    this.updateHeldItemPosition();
+
     // Update character depth sorting (characters lower on screen appear in front)
-    const characters = [this.tank, this.pig, this.deer];
+    const characters = [this.tarzan, this.pig, this.deer];
     characters.sort((a, b) => a.y - b.y);
     characters.forEach((char, index) => {
       char.setDepth(100 + index);

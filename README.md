@@ -1,12 +1,12 @@
-# Tank's Great Adventure
+# Tarzan's Great Adventure
 
 A 1990s-style adventure game built with Phaser 3, based on a story by Alexander Brown.
 
 ## The Story
 
-Tank is a super-strong but hilariously "not smart" female martial artist who travels from Brazil to Canada with two companions: a talking pig with a Western/cowboy accent, and a deer named Mr. Snuggles.
+Tarzan is a super-strong but hilariously "not smart" jungle man who travels from Brazil to Canada with two companions: a talking pig with a Western/cowboy accent, and a deer named Mr. Snuggles.
 
-Tank's "dumbness" is actually a superpower - she's immune to poison because she doesn't know it's poisonous, she gets power-ups from destroying cars because she thinks they're monsters, etc.
+Tarzan's "dumbness" is actually a superpower - he's immune to poison because he doesn't know it's poisonous, he gets power-ups from destroying cars because he thinks they're monsters, etc.
 
 **Journey**: Brazil -> Caribbean -> Puerto Rico -> Florida -> Texas -> Wyoming -> Idaho -> Montana -> Canada
 
@@ -20,6 +20,15 @@ Hand-painted 1990s Sierra/LucasArts adventure game aesthetic - like King's Quest
 - **Language**: TypeScript
 - **Build Tool**: Vite
 - **Art Generation**: Maginary API
+
+## Controls
+
+- **Left-click**: Primary action (USE/TAKE/TALK) on hotspots, or click to move
+- **Right-click**: LOOK at hotspots
+- **WASD**: Move character directly
+- **M**: Toggle ambient music
+- **H**: Toggle dynamic responses (Claude Haiku)
+- **`**: Toggle debug mode (shows hotspot boundaries)
 
 ## Setup
 
@@ -46,7 +55,7 @@ export MAGINARY_API_KEY='your-key-here'
 python scripts/generate_art.py --all
 
 # Generate specific asset
-python scripts/generate_art.py --type tank
+python scripts/generate_art.py --type tarzan
 python scripts/generate_art.py --type pig
 python scripts/generate_art.py --type deer
 python scripts/generate_art.py --type forest
@@ -63,7 +72,8 @@ tank-adventure-game/
 │       ├── BootScene.ts     # Initial loading
 │       ├── PreloadScene.ts  # Asset loading
 │       ├── TitleScene.ts    # Title screen
-│       └── BrazilForestScene.ts  # First playable scene
+│       ├── BrazilForestScene.ts  # First playable scene
+│       └── BrazilVillageScene.ts # Village with trader
 ├── assets/
 │   ├── images/
 │   │   ├── characters/      # Character sprites
@@ -78,7 +88,7 @@ tank-adventure-game/
 
 ## Characters
 
-- **Tank**: Athletic martial artist in red gi. Strong, confident, hilariously oblivious.
+- **Tarzan**: Athletic jungle man in simple clothes. Strong, confident, hilariously oblivious.
 - **Western Pig**: Pink pig in cowboy hat. Loyal companion with charm and wisdom.
 - **Mr. Snuggles**: Gentle deer with kind eyes. Sweet and trusting forest friend.
 

@@ -1,0 +1,144 @@
+{
+  "project": "Tank's Great Adventure (Tarzan Edition)",
+  "description": "Point-and-click adventure game in Phaser 3 + TypeScript",
+  "features": [
+    {
+      "id": "F001",
+      "name": "Tank → Tarzan character rename",
+      "phase": 1,
+      "passes": true,
+      "dependencies": [],
+      "steps": [
+        "Rename Tank to Tarzan in all code references",
+        "Update character sprite to Tarzan (jungle man)",
+        "Update dialogue and story text",
+        "Update README and documentation"
+      ],
+      "tests": [
+        "Character displays as Tarzan",
+        "All text references say Tarzan",
+        "No Tank references remain"
+      ],
+      "completion_notes": "Copied tarzan sprite from Godot project, updated index.html, TitleScene, PreloadScene, BrazilForestScene, BrazilVillageScene. All Tank references renamed to Tarzan."
+    },
+    {
+      "id": "F002",
+      "name": "Remove verb bar - auto-interact on click",
+      "phase": 1,
+      "passes": true,
+      "completion_notes": "Removed VerbBar UI, full-height game area, left-click=USE/TAKE/TALK, right-click=LOOK",
+      "dependencies": [],
+      "steps": [
+        "Remove VerbBar UI component",
+        "Implement smart auto-interact logic (LOOK on right-click, USE/TAKE on left-click)",
+        "Update HotspotManager to use default actions",
+        "Reclaim screen space from verb bar"
+      ],
+      "tests": [
+        "Left-click on hotspot triggers primary action",
+        "Right-click shows LOOK description",
+        "No verb bar visible",
+        "Full screen height for gameplay"
+      ]
+    },
+    {
+      "id": "F003",
+      "name": "WASD keyboard movement",
+      "phase": 1,
+      "passes": true,
+      "completion_notes": "Added WASD keys, velocity-based movement at 200px/s, boundary clamping, sprite flipping",
+      "dependencies": [],
+      "steps": [
+        "Add keyboard input handling for WASD",
+        "Implement character velocity-based movement",
+        "Add idle/walk animation states",
+        "Handle collision with scene boundaries"
+      ],
+      "tests": [
+        "W moves character up",
+        "A moves character left (flips sprite)",
+        "S moves character down",
+        "D moves character right",
+        "Character stops at boundaries"
+      ]
+    },
+    {
+      "id": "F004",
+      "name": "Show equipped item in character hand",
+      "phase": 1,
+      "passes": true,
+      "completion_notes": "Added heldItemSprite that follows Tarzan, updates on inventory selection, flips with character direction",
+      "dependencies": ["F001"],
+      "steps": [
+        "Create hand position offset for character sprite",
+        "Render selected inventory item at hand position",
+        "Scale and position item appropriately",
+        "Clear item visual when deselected"
+      ],
+      "tests": [
+        "Selecting item shows it in Tarzan's hand",
+        "Item follows character movement",
+        "Deselecting item removes visual",
+        "Item scales correctly"
+      ]
+    },
+    {
+      "id": "F005",
+      "name": "Animated fire in village",
+      "phase": 2,
+      "passes": true,
+      "completion_notes": "Added particle emitter with yellow/orange tints, ADD blend mode, and animated glow effect",
+      "dependencies": [],
+      "steps": [
+        "Create fire sprite sheet or particle effect",
+        "Add fire animation to BrazilVillageScene",
+        "Implement flickering/dancing animation",
+        "Add ambient glow effect"
+      ],
+      "tests": [
+        "Fire animates continuously",
+        "Animation looks natural",
+        "No performance issues"
+      ]
+    },
+    {
+      "id": "F006",
+      "name": "Animated trader NPC",
+      "phase": 2,
+      "passes": true,
+      "completion_notes": "Created placeholder trader with shapes, idle sway animation, arm gestures, proximity dialogue trigger",
+      "dependencies": ["F005"],
+      "steps": [
+        "Create trader character sprite",
+        "Add idle animation (shifting, gesturing)",
+        "Implement approach detection",
+        "Trigger trade dialogue when player approaches"
+      ],
+      "tests": [
+        "Trader has idle animation",
+        "Trader reacts when player approaches",
+        "Trade dialogue triggers automatically"
+      ]
+    },
+    {
+      "id": "F007",
+      "name": "Flower → Bow trade mechanic",
+      "phase": 2,
+      "passes": true,
+      "completion_notes": "Changed trader to give bow&arrows instead of rope, added bow icon to PreloadScene",
+      "dependencies": ["F006", "F002"],
+      "steps": [
+        "Add trade interaction to trader hotspot",
+        "Check if player has flower from forest scene",
+        "Remove flower, add bow and arrows to inventory",
+        "Show trade completion dialogue"
+      ],
+      "tests": [
+        "Trade only available if player has flower",
+        "Flower removed after trade",
+        "Bow and arrows added to inventory",
+        "Trader dialogue confirms trade"
+      ]
+    }
+  ]
+}
