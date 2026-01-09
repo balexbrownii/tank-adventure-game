@@ -39,8 +39,8 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image('pig', 'assets/images/characters/pig.png');
     this.load.image('deer', 'assets/images/characters/deer.png');
 
-    // Backgrounds
-    this.load.image('brazil-forest', 'assets/images/backgrounds/forest-interactive.png');
+    // Backgrounds (forest.png is clean without painted machete)
+    this.load.image('brazil-forest', 'assets/images/backgrounds/forest.png');
     this.load.image('brazil-village', 'assets/images/backgrounds/village.png');
 
     // Interactive sprites
