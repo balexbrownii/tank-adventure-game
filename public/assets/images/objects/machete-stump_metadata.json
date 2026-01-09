@@ -1,35 +1,35 @@
 {
-  "uuid": "f1231fdddd9a9c5869efb80e6074394b",
+  "uuid": "275b8b4d7ae636923d54b850e1ed8a67",
   "prompt": "Video game sprite of a rusty machete blade stuck vertically in wood. The machete has a weathered brown wooden handle pointing straight up and a rusty gray metal blade wedged into a mossy tree stump. The handle is worn but sturdy, clearly meant to be grabbed. Just the machete and small portion of stump top visible - this is a close-up sprite to overlay on a background. Jungle adventure game item. Transparent background. Style: Hand-painted 1990s Sierra adventure game art like King's Quest V. Muted earth tones, rusty metal, worn wood texture. Game collectible sprite.",
   "slots": [
     {
       "index": 0,
       "status": "success",
-      "url": "https://s.maginary.ai/results/f1231fdddd9a9c5869efb80e6074394b/0_Video_game_sprite_of_a_rusty_machete_blade_stuck_vertically_in_woodu002e_The_mac.webp",
+      "url": "https://s.maginary.ai/results/275b8b4d7ae636923d54b850e1ed8a67/0_Video_game_sprite_of_a_rusty_machete_blade_stuck_vertically_in_woodu002e_The_mac.webp",
       "charged": true,
       "error_message": null
     },
     {
       "index": 1,
       "status": "success",
-      "url": "https://s.maginary.ai/results/f1231fdddd9a9c5869efb80e6074394b/1_Video_game_sprite_of_a_rusty_machete_blade_stuck_vertically_in_woodu002e_The_mac.webp",
+      "url": "https://s.maginary.ai/results/275b8b4d7ae636923d54b850e1ed8a67/1_Video_game_sprite_of_a_rusty_machete_blade_stuck_vertically_in_woodu002e_The_mac.webp",
       "charged": true,
       "error_message": null
     },
     {
       "index": 2,
       "status": "success",
-      "url": "https://s.maginary.ai/results/f1231fdddd9a9c5869efb80e6074394b/2_Video_game_sprite_of_a_rusty_machete_blade_stuck_vertically_in_woodu002e_The_mac.webp",
+      "url": "https://s.maginary.ai/results/275b8b4d7ae636923d54b850e1ed8a67/2_Video_game_sprite_of_a_rusty_machete_blade_stuck_vertically_in_woodu002e_The_mac.webp",
       "charged": true,
       "error_message": null
     },
     {
       "index": 3,
       "status": "success",
-      "url": "https://s.maginary.ai/results/f1231fdddd9a9c5869efb80e6074394b/3_Video_game_sprite_of_a_rusty_machete_blade_stuck_vertically_in_woodu002e_The_mac.webp",
+      "url": "https://s.maginary.ai/results/275b8b4d7ae636923d54b850e1ed8a67/3_Video_game_sprite_of_a_rusty_machete_blade_stuck_vertically_in_woodu002e_The_mac.webp",
       "charged": true,
       "error_message": null
     }
   ],
-  "generated_at": "2026-01-07 20:50:09"
+  "generated_at": "2026-01-09 00:10:31"
 }
