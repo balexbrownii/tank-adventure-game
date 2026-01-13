@@ -34,10 +34,19 @@ export class PreloadScene extends Phaser.Scene {
     });
 
     // Load game assets
-    // Characters
-    this.load.image('tarzan', 'assets/images/characters/tarzan.png');
-    this.load.image('pig', 'assets/images/characters/pig.png');
-    this.load.image('deer', 'assets/images/characters/deer.png');
+    // Character sprite sheets (animated pixel art)
+    this.load.spritesheet('tarzan', 'assets/images/characters/sprites/tarzan_walk.png', {
+      frameWidth: 64,
+      frameHeight: 64,
+    });
+    this.load.spritesheet('pig', 'assets/images/characters/sprites/pig_walk.png', {
+      frameWidth: 64,
+      frameHeight: 64,
+    });
+    this.load.spritesheet('deer', 'assets/images/characters/sprites/mr_snuggles_walk.png', {
+      frameWidth: 64,
+      frameHeight: 64,
+    });
 
     // Backgrounds (forest.png is clean without painted machete)
     this.load.image('brazil-forest', 'assets/images/backgrounds/forest.png');
@@ -51,7 +60,54 @@ export class PreloadScene extends Phaser.Scene {
     // Generate inventory item icons programmatically
     this.createItemIcons();
 
+    // Create character animations
+    this.createCharacterAnimations();
+
     this.scene.start('TitleScene');
+  }
+
+  private createCharacterAnimations(): void {
+    // Tarzan animations
+    this.anims.create({
+      key: 'tarzan-idle',
+      frames: [{ key: 'tarzan', frame: 0 }],
+      frameRate: 1,
+      repeat: 0,
+    });
+    this.anims.create({
+      key: 'tarzan-walk',
+      frames: this.anims.generateFrameNumbers('tarzan', { start: 0, end: 3 }),
+      frameRate: 8,
+      repeat: -1,
+    });
+
+    // Pig animations
+    this.anims.create({
+      key: 'pig-idle',
+      frames: [{ key: 'pig', frame: 0 }],
+      frameRate: 1,
+      repeat: 0,
+    });
+    this.anims.create({
+      key: 'pig-walk',
+      frames: this.anims.generateFrameNumbers('pig', { start: 0, end: 3 }),
+      frameRate: 8,
+      repeat: -1,
+    });
+
+    // Deer (Mr. Snuggles) animations
+    this.anims.create({
+      key: 'deer-idle',
+      frames: [{ key: 'deer', frame: 0 }],
+      frameRate: 1,
+      repeat: 0,
+    });
+    this.anims.create({
+      key: 'deer-walk',
+      frames: this.anims.generateFrameNumbers('deer', { start: 0, end: 3 }),
+      frameRate: 8,
+      repeat: -1,
+    });
   }
 
   private createItemIcons(): void {

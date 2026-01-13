@@ -8,10 +8,11 @@ import { audioManager } from '../managers/AudioManager';
 import { responseGenerator } from '../services/ResponseGenerator';
 
 export class BrazilForestScene extends Phaser.Scene {
-  // Characters
-  private tarzan!: Phaser.GameObjects.Image;
-  private pig!: Phaser.GameObjects.Image;
-  private deer!: Phaser.GameObjects.Image;
+  // Characters (animated sprites)
+  private tarzan!: Phaser.GameObjects.Sprite;
+  private pig!: Phaser.GameObjects.Sprite;
+  private deer!: Phaser.GameObjects.Sprite;
+  private isMoving: boolean = false;
 
   // Interactive sprites
   private macheteSprite!: Phaser.GameObjects.Image;
@@ -56,24 +57,27 @@ export class BrazilForestScene extends Phaser.Scene {
     this.messageBox = new MessageBox(this);
     this.inventoryPanel = new InventoryPanel(this, height);
 
-    // Characters - all 1024x1024, scaled down to fit the scene
-    const characterScale = 0.30;
+    // Characters - pixel art sprites, scaled up for visibility
+    const characterScale = 3.0;  // 64px * 3 = 192px tall
     const groundY = height - 60;
 
     // Tarzan (main character, center)
-    this.tarzan = this.add.image(width / 2, groundY, 'tarzan');
+    this.tarzan = this.add.sprite(width / 2, groundY, 'tarzan');
     this.tarzan.setScale(characterScale);
     this.tarzan.setOrigin(0.5, 1);
+    this.tarzan.play('tarzan-idle');
 
     // Pig (left of Tarzan)
-    this.pig = this.add.image(width / 2 - 200, groundY, 'pig');
+    this.pig = this.add.sprite(width / 2 - 200, groundY, 'pig');
     this.pig.setScale(characterScale * 0.75);
     this.pig.setOrigin(0.5, 1);
+    this.pig.play('pig-idle');
 
     // Mr. Snuggles the deer (right of Tarzan)
-    this.deer = this.add.image(width / 2 + 200, groundY, 'deer');
+    this.deer = this.add.sprite(width / 2 + 200, groundY, 'deer');
     this.deer.setScale(characterScale * 0.85);
     this.deer.setOrigin(0.5, 1);
+    this.deer.play('deer-idle');
 
     // Subscribe to inventory selection to show equipped item in hand
     this.inventoryPanel.onSelect((item) => {
@@ -454,21 +458,36 @@ export class BrazilForestScene extends Phaser.Scene {
 
   update(_time: number, delta: number): void {
     // WASD movement
+    let moving = false;
+
     if (this.cursors) {
       const speed = this.moveSpeed * (delta / 1000);
 
       if (this.cursors.A.isDown) {
         this.tarzan.x -= speed;
         this.tarzan.setFlipX(true);
+        moving = true;
       } else if (this.cursors.D.isDown) {
         this.tarzan.x += speed;
         this.tarzan.setFlipX(false);
+        moving = true;
       }
 
       if (this.cursors.W.isDown) {
         this.tarzan.y -= speed;
+        moving = true;
       } else if (this.cursors.S.isDown) {
         this.tarzan.y += speed;
+        moving = true;
+      }
+
+      // Play walk animation when moving, idle when stopped
+      if (moving && !this.isMoving) {
+        this.tarzan.play('tarzan-walk');
+        this.isMoving = true;
+      } else if (!moving && this.isMoving) {
+        this.tarzan.play('tarzan-idle');
+        this.isMoving = false;
       }
 
       // Clamp to scene boundaries
