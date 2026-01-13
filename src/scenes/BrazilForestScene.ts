@@ -81,11 +81,11 @@ export class BrazilForestScene extends Phaser.Scene {
     });
 
     // Machete in stump - only visible if player hasn't taken it yet
-    // Note: Background also has machete painted in, but we can't easily remove it
-    this.macheteSprite = this.add.image(655, height - 175, 'machete-in-stump');
-    this.macheteSprite.setScale(0.08);
+    // Positioned in the right-center foreground area near where the stump hotspot is
+    this.macheteSprite = this.add.image(750, height - 80, 'machete-in-stump');
+    this.macheteSprite.setScale(0.18);  // Visible size relative to characters at 0.30
     this.macheteSprite.setOrigin(0.5, 1);
-    this.macheteSprite.setDepth(5);
+    this.macheteSprite.setDepth(90);  // In front of background, behind characters
     this.macheteSprite.setVisible(!gameState.hasItem('machete'));
 
     // Register hotspots
