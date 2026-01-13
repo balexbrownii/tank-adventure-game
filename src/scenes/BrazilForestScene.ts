@@ -16,6 +16,7 @@ export class BrazilForestScene extends Phaser.Scene {
 
   // Interactive sprites
   private macheteSprite!: Phaser.GameObjects.Image;
+  private stumpSprite!: Phaser.GameObjects.Image;
 
   // Systems
   private hotspotManager!: HotspotManager;
@@ -83,6 +84,13 @@ export class BrazilForestScene extends Phaser.Scene {
     this.inventoryPanel.onSelect((item) => {
       this.updateHeldItem(item?.icon ?? null);
     });
+
+    // Plain stump - visible after machete is taken
+    this.stumpSprite = this.add.image(750, height - 80, 'stump');
+    this.stumpSprite.setScale(0.18);
+    this.stumpSprite.setOrigin(0.5, 1);
+    this.stumpSprite.setDepth(89);  // Behind machete sprite
+    this.stumpSprite.setVisible(gameState.hasItem('machete'));
 
     // Machete in stump - only visible if player hasn't taken it yet
     // Positioned in the right-center foreground area near where the stump hotspot is
@@ -320,8 +328,9 @@ export class BrazilForestScene extends Phaser.Scene {
                 description: 'A rusty but sharp machete.',
                 icon: 'machete',
               });
-              // Hide the machete sprite overlay
+              // Hide the machete-in-stump sprite, show plain stump
               this.macheteSprite.setVisible(false);
+              this.stumpSprite.setVisible(true);
             },
             enabled: () => !gameState.hasItem('machete'),
           },
@@ -379,12 +388,18 @@ export class BrazilForestScene extends Phaser.Scene {
     if (pointer.button === 2) {
       verb = 'LOOK';
     } else if (hotspot) {
-      // Smart verb selection for left-click: prioritize USE, then TAKE, then TALK
+      // Smart verb selection for left-click
+      // Priority: TAKE (if available and no item held), USE (if item held), TALK
       const availableVerbs = hotspot.getAvailableVerbs(heldItemId ?? undefined);
-      if (availableVerbs.includes('USE')) {
+      if (heldItemId && availableVerbs.includes('USE')) {
+        // If holding an item, try to USE it
         verb = 'USE';
       } else if (availableVerbs.includes('TAKE')) {
+        // Otherwise try to TAKE
         verb = 'TAKE';
+      } else if (availableVerbs.includes('USE')) {
+        // Fallback to USE without item
+        verb = 'USE';
       } else if (availableVerbs.includes('TALK')) {
         verb = 'TALK';
       }

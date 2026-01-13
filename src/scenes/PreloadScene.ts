@@ -54,6 +54,7 @@ export class PreloadScene extends Phaser.Scene {
 
     // Interactive sprites
     this.load.image('machete-in-stump', 'assets/images/objects/machete-stump.png');
+    this.load.image('stump', 'assets/images/objects/stump.png');
   }
 
   create(): void {
