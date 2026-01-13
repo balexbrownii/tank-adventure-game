@@ -17,6 +17,8 @@ export class BrazilForestScene extends Phaser.Scene {
   // Interactive sprites
   private macheteSprite!: Phaser.GameObjects.Image;
   private stumpSprite!: Phaser.GameObjects.Image;
+  private vinesSprite!: Phaser.GameObjects.Image;
+  private flowerSprite!: Phaser.GameObjects.Image;
 
   // Systems
   private hotspotManager!: HotspotManager;
@@ -99,6 +101,22 @@ export class BrazilForestScene extends Phaser.Scene {
     this.macheteSprite.setOrigin(0.5, 1);
     this.macheteSprite.setDepth(90);  // In front of background, behind characters
     this.macheteSprite.setVisible(!gameState.hasItem('machete'));
+
+    // Thick vines blocking the path - RIGHT SIDE of scene
+    // Visible until cut with machete
+    this.vinesSprite = this.add.image(1050, height / 2 + 50, 'vines');
+    this.vinesSprite.setScale(0.35);
+    this.vinesSprite.setOrigin(0.5, 0.5);
+    this.vinesSprite.setDepth(85);
+    this.vinesSprite.setVisible(!gameState.getFlag('vines_cut'));
+
+    // Exotic flower - LEFT SIDE of scene
+    // Visible until picked up
+    this.flowerSprite = this.add.image(200, height / 2 + 100, 'flower');
+    this.flowerSprite.setScale(0.15);
+    this.flowerSprite.setOrigin(0.5, 1);
+    this.flowerSprite.setDepth(85);
+    this.flowerSprite.setVisible(!gameState.hasItem('flower'));
 
     // Register hotspots
     this.registerHotspots(height);
@@ -246,6 +264,8 @@ export class BrazilForestScene extends Phaser.Scene {
             onExecute: () => {
               gameState.setFlag('vines_cut', true);
               this.hotspotManager.setEnabled('vines', false);
+              // Hide the vines sprite to show the path is now clear
+              this.vinesSprite.setVisible(false);
             },
           },
           {
@@ -290,6 +310,8 @@ export class BrazilForestScene extends Phaser.Scene {
                 icon: 'flower',
               });
               this.hotspotManager.setEnabled('flower', false);
+              // Hide the flower sprite when picked
+              this.flowerSprite.setVisible(false);
             },
             enabled: () => !gameState.hasItem('flower'),
           },
