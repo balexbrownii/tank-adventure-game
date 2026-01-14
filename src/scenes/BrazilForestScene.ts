@@ -73,13 +73,13 @@ export class BrazilForestScene extends Phaser.Scene {
     this.hero.setOrigin(0.5, 1);
     this.hero.play('hero-idle');
 
-    // Dog companion (left of hero) - was "Pig"
+    // Western Pig companion (left of hero) - cowboy pig with attitude
     this.pig = this.add.sprite(width / 2 - 150, groundY, 'pig');
     this.pig.setScale(characterScale * 0.8);
     this.pig.setOrigin(0.5, 1);
     this.pig.play('pig-idle');
 
-    // Ram companion (right of hero) - was "Mr. Snuggles"
+    // Mr. Snuggles - deer/elk companion (right of hero)
     this.deer = this.add.sprite(width / 2 + 150, groundY, 'deer');
     this.deer.setScale(characterScale * 0.9);
     this.deer.setOrigin(0.5, 1);
