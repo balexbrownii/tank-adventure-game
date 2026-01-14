@@ -48,6 +48,16 @@ export class PreloadScene extends Phaser.Scene {
       frameHeight: 32,
     });
 
+    // Companion sprites (OPP2017 pack - 32x32 frames)
+    this.load.spritesheet('pig', 'assets/images/characters/sprites/pig_walk.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet('deer', 'assets/images/characters/sprites/mr_snuggles_walk.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+
     // Backgrounds (pixel art style)
     this.load.image('title-screen', 'assets/images/backgrounds/title-screen.png');
     this.load.image('brazil-forest', 'assets/images/backgrounds/forest.png');
@@ -91,6 +101,20 @@ export class PreloadScene extends Phaser.Scene {
       key: 'hero-jump',
       frames: this.anims.generateFrameNumbers('hero-jump', { start: 0, end: 3 }),
       frameRate: 8,
+      repeat: 0,
+    });
+
+    // Companion animations (OPP2017 pack - static poses)
+    this.anims.create({
+      key: 'pig-idle',
+      frames: [{ key: 'pig', frame: 0 }],
+      frameRate: 1,
+      repeat: 0,
+    });
+    this.anims.create({
+      key: 'deer-idle',
+      frames: [{ key: 'deer', frame: 0 }],
+      frameRate: 1,
       repeat: 0,
     });
   }

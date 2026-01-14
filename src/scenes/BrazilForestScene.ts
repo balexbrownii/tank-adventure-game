@@ -8,8 +8,10 @@ import { audioManager } from '../managers/AudioManager';
 import { responseGenerator } from '../services/ResponseGenerator';
 
 export class BrazilForestScene extends Phaser.Scene {
-  // Hero character (animated sprite)
+  // Characters (animated sprites)
   private hero!: Phaser.GameObjects.Sprite;
+  private pig!: Phaser.GameObjects.Sprite;
+  private deer!: Phaser.GameObjects.Sprite;
   private isMoving: boolean = false;
 
   // Interactive sprites
@@ -61,7 +63,7 @@ export class BrazilForestScene extends Phaser.Scene {
     this.messageBox = new MessageBox(this);
     this.inventoryPanel = new InventoryPanel(this, height);
 
-    // Hero character - pixel art sprite, scaled up for visibility
+    // Characters - pixel art sprites, scaled up for visibility
     const characterScale = 4.0;  // 32px * 4 = 128px tall
     const groundY = height - 60;
 
@@ -71,41 +73,41 @@ export class BrazilForestScene extends Phaser.Scene {
     this.hero.setOrigin(0.5, 1);
     this.hero.play('hero-idle');
 
+    // Dog companion (left of hero) - was "Pig"
+    this.pig = this.add.sprite(width / 2 - 150, groundY, 'pig');
+    this.pig.setScale(characterScale * 0.8);
+    this.pig.setOrigin(0.5, 1);
+    this.pig.play('pig-idle');
+
+    // Ram companion (right of hero) - was "Mr. Snuggles"
+    this.deer = this.add.sprite(width / 2 + 150, groundY, 'deer');
+    this.deer.setScale(characterScale * 0.9);
+    this.deer.setOrigin(0.5, 1);
+    this.deer.play('deer-idle');
+
     // Subscribe to inventory selection to show equipped item in hand
     this.inventoryPanel.onSelect((item) => {
       this.updateHeldItem(item?.icon ?? null);
     });
 
-    // Plain stump - visible after machete is taken
+    // Plain stump - DISABLED (wrong art style - AI digital painting vs pixel art)
     this.stumpSprite = this.add.image(750, height - 80, 'stump');
-    this.stumpSprite.setScale(0.18);
-    this.stumpSprite.setOrigin(0.5, 1);
-    this.stumpSprite.setDepth(89);  // Behind machete sprite
-    this.stumpSprite.setVisible(gameState.hasItem('machete'));
+    this.stumpSprite.setVisible(false);
 
-    // Machete in stump - only visible if player hasn't taken it yet
-    // Positioned in the right-center foreground area near where the stump hotspot is
+    // TODO: Replace these garbage AI sprites with proper pixel art
+    // Disabled for now - objects have broken backgrounds
+
+    // Machete in stump - DISABLED (bad sprite)
     this.macheteSprite = this.add.image(750, height - 80, 'machete-in-stump');
-    this.macheteSprite.setScale(0.18);  // Visible size relative to characters at 0.30
-    this.macheteSprite.setOrigin(0.5, 1);
-    this.macheteSprite.setDepth(90);  // In front of background, behind characters
-    this.macheteSprite.setVisible(!gameState.hasItem('machete'));
+    this.macheteSprite.setVisible(false);
 
-    // Thick vines blocking the path - RIGHT SIDE of scene
-    // Visible until cut with machete
+    // Thick vines - DISABLED (bad sprite)
     this.vinesSprite = this.add.image(1050, height / 2 + 50, 'vines');
-    this.vinesSprite.setScale(0.35);
-    this.vinesSprite.setOrigin(0.5, 0.5);
-    this.vinesSprite.setDepth(85);
-    this.vinesSprite.setVisible(!gameState.getFlag('vines_cut'));
+    this.vinesSprite.setVisible(false);
 
-    // Exotic flower - LEFT SIDE of scene
-    // Visible until picked up
+    // Exotic flower - DISABLED (bad sprite)
     this.flowerSprite = this.add.image(200, height / 2 + 100, 'flower');
-    this.flowerSprite.setScale(0.15);
-    this.flowerSprite.setOrigin(0.5, 1);
-    this.flowerSprite.setDepth(85);
-    this.flowerSprite.setVisible(!gameState.hasItem('flower'));
+    this.flowerSprite.setVisible(false);
 
     // Register hotspots
     this.registerHotspots(height);
@@ -396,19 +398,14 @@ export class BrazilForestScene extends Phaser.Scene {
   /**
    * Update the held item sprite based on selected inventory item
    */
-  private updateHeldItem(iconKey: string | null): void {
-    // Remove existing held item sprite
+  private updateHeldItem(_iconKey: string | null): void {
+    // DISABLED: Held item sprites have white backgrounds and wrong scale
+    // TODO: Create proper pixel art item sprites
     if (this.heldItemSprite) {
       this.heldItemSprite.destroy();
       this.heldItemSprite = null;
     }
-
-    // Create new sprite if item selected
-    if (iconKey && this.textures.exists(iconKey)) {
-      this.heldItemSprite = this.add.sprite(0, 0, iconKey);
-      this.heldItemSprite.setScale(0.5);
-      this.heldItemSprite.setDepth(150); // Above characters
-    }
+    // Don't show held items until we have proper assets
   }
 
   /**
@@ -474,7 +471,11 @@ export class BrazilForestScene extends Phaser.Scene {
     // Update held item position
     this.updateHeldItemPosition();
 
-    // Update hero depth
-    this.hero.setDepth(100);
+    // Update character depth sorting
+    const characters = [this.hero, this.pig, this.deer];
+    characters.sort((a, b) => a.y - b.y);
+    characters.forEach((char, index) => {
+      char.setDepth(100 + index);
+    });
   }
 }
