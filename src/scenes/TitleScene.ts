@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { audioManager } from '../managers/AudioManager';
 
 export class TitleScene extends Phaser.Scene {
   constructor() {
@@ -8,6 +9,9 @@ export class TitleScene extends Phaser.Scene {
   create(): void {
     const width = this.cameras.main.width;
     const height = this.cameras.main.height;
+
+    // Play title screen music (falls back to ambient if not available)
+    audioManager.playMusic('title');
 
     // Dark jungle background gradient
     const bg = this.add.graphics();

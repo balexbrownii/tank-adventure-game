@@ -1,13 +1,28 @@
 /**
- * AudioManager - Handles game audio including procedural ambient sounds
- * Creates jungle ambience using Web Audio API
+ * AudioManager - Handles game audio including music tracks and procedural ambient sounds
+ * Supports scene-specific music and Web Audio API jungle ambience
  */
+
+// Music track definitions
+export const MUSIC_TRACKS = {
+  title: '/assets/audio/title-theme.mp3',
+  forest: '/assets/audio/forest-exploration.mp3',
+  village: '/assets/audio/village-scene.mp3',
+} as const;
+
+type TrackName = keyof typeof MUSIC_TRACKS;
 
 class AudioManagerClass {
   private audioContext: AudioContext | null = null;
   private masterGain: GainNode | null = null;
+  private musicGain: GainNode | null = null;
   private isPlaying: boolean = false;
   private nodes: AudioNode[] = [];
+
+  // Music playback
+  private currentMusic: HTMLAudioElement | null = null;
+  private currentTrack: TrackName | null = null;
+  private musicVolume: number = 0.5;
 
   // Ambient sound sources
   private rainNoise: AudioBufferSourceNode | null = null;
@@ -24,6 +39,114 @@ class AudioManagerClass {
     this.masterGain = this.audioContext.createGain();
     this.masterGain.gain.value = 0.3; // Default volume
     this.masterGain.connect(this.audioContext.destination);
+
+    this.musicGain = this.audioContext.createGain();
+    this.musicGain.gain.value = this.musicVolume;
+    this.musicGain.connect(this.audioContext.destination);
+  }
+
+  /**
+   * Play a music track for a scene
+   * @param track - The track name to play
+   * @param loop - Whether to loop the track (default: true)
+   * @param fadeIn - Fade in duration in seconds (default: 0.5)
+   */
+  async playMusic(track: TrackName, loop: boolean = true, fadeIn: number = 0.5): Promise<void> {
+    await this.init();
+
+    // If same track is already playing, do nothing
+    if (this.currentTrack === track && this.currentMusic && !this.currentMusic.paused) {
+      return;
+    }
+
+    // Stop current music with fade
+    if (this.currentMusic) {
+      await this.stopMusic(0.3);
+    }
+
+    const trackUrl = MUSIC_TRACKS[track];
+
+    // Create audio element and try to play
+    this.currentMusic = new Audio(trackUrl);
+    this.currentMusic.loop = loop;
+    this.currentMusic.volume = 0;
+    this.currentTrack = track;
+
+    // Start playback
+    try {
+      await this.currentMusic.play();
+
+      // Fade in
+      const startTime = performance.now();
+      const fadeInterval = setInterval(() => {
+        if (!this.currentMusic) {
+          clearInterval(fadeInterval);
+          return;
+        }
+        const elapsed = (performance.now() - startTime) / 1000;
+        if (elapsed >= fadeIn) {
+          this.currentMusic.volume = this.musicVolume;
+          clearInterval(fadeInterval);
+        } else {
+          this.currentMusic.volume = (elapsed / fadeIn) * this.musicVolume;
+        }
+      }, 16);
+    } catch (error) {
+      console.warn(`Failed to play music track ${track}:`, error);
+      this.currentMusic = null;
+      this.currentTrack = null;
+      await this.startAmbient();
+    }
+  }
+
+  /**
+   * Stop current music with optional fade out
+   * @param fadeOut - Fade out duration in seconds (default: 0.5)
+   */
+  async stopMusic(fadeOut: number = 0.5): Promise<void> {
+    if (!this.currentMusic) return;
+
+    const music = this.currentMusic;
+    const startVolume = music.volume;
+
+    return new Promise((resolve) => {
+      const startTime = performance.now();
+      const fadeInterval = setInterval(() => {
+        const elapsed = (performance.now() - startTime) / 1000;
+        if (elapsed >= fadeOut || !this.currentMusic) {
+          clearInterval(fadeInterval);
+          music.pause();
+          music.src = '';
+          if (this.currentMusic === music) {
+            this.currentMusic = null;
+            this.currentTrack = null;
+          }
+          resolve();
+        } else {
+          music.volume = startVolume * (1 - elapsed / fadeOut);
+        }
+      }, 16);
+    });
+  }
+
+  /**
+   * Set music volume (0-1)
+   */
+  setMusicVolume(volume: number): void {
+    this.musicVolume = Math.max(0, Math.min(1, volume));
+    if (this.currentMusic) {
+      this.currentMusic.volume = this.musicVolume;
+    }
+    if (this.musicGain) {
+      this.musicGain.gain.value = this.musicVolume;
+    }
+  }
+
+  /**
+   * Get current track name
+   */
+  getCurrentTrack(): TrackName | null {
+    return this.currentTrack;
   }
 
   /**

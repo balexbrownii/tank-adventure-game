@@ -34,8 +34,8 @@ export class BrazilVillageScene extends Phaser.Scene {
   // Fire effect
   private fireEmitter: Phaser.GameObjects.Particles.ParticleEmitter | null = null;
 
-  // Trader NPC
-  private trader: Phaser.GameObjects.Container | null = null;
+  // Animated trader sprite
+  private traderSprite!: Phaser.GameObjects.Sprite;
   // Tracks if player approached trader this visit (resets each scene entry)
   private traderApproached: boolean = false;
 
@@ -58,13 +58,33 @@ export class BrazilVillageScene extends Phaser.Scene {
 
     // Background - full height now (no verb bar)
     const bg = this.add.image(width / 2, height / 2, 'brazil-village');
+
+    // Play village scene music (falls back to ambient if not available)
+    audioManager.playMusic('village');
     bg.setDisplaySize(width, height);
 
     // Create fire particle effect
     this.createFireEffect(640, height / 2 + 60);
 
-    // Create animated trader NPC
-    this.createTrader(280, height / 2 + 100);
+    // Create animated trader sprite
+    const traderScale = 3.0;
+    const traderX = 280;
+    const traderY = height - 60;
+    this.traderSprite = this.add.sprite(traderX, traderY, 'trader');
+    this.traderSprite.setScale(traderScale);
+    this.traderSprite.setOrigin(0.5, 1);
+    this.traderSprite.play('trader-idle');
+    this.traderSprite.setDepth(75);
+
+    // Add subtle idle animation
+    this.tweens.add({
+      targets: this.traderSprite,
+      x: traderX + 5,
+      duration: 2000,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut',
+    });
 
     // Initialize systems
     this.hotspotManager = new HotspotManager(this);
@@ -392,77 +412,14 @@ export class BrazilVillageScene extends Phaser.Scene {
   }
 
   /**
-   * Create animated trader NPC
-   */
-  private createTrader(x: number, y: number): void {
-    this.trader = this.add.container(x, y);
-
-    // Create trader body using simple shapes (placeholder - could be replaced with sprite)
-    // Body (dress/robe)
-    const body = this.add.ellipse(0, 0, 40, 60, 0x8B4513);
-    body.setOrigin(0.5, 1);
-
-    // Head
-    const head = this.add.circle(0, -65, 15, 0xD2691E);
-
-    // Arms (will animate)
-    const leftArm = this.add.rectangle(-25, -35, 8, 30, 0xD2691E);
-    leftArm.setOrigin(0.5, 0);
-    const rightArm = this.add.rectangle(25, -35, 8, 30, 0xD2691E);
-    rightArm.setOrigin(0.5, 0);
-
-    // Add name label
-    const label = this.add.text(0, -90, 'Trader', {
-      font: 'bold 12px serif',
-      color: '#ffffff',
-      stroke: '#000000',
-      strokeThickness: 2,
-    });
-    label.setOrigin(0.5, 0.5);
-
-    this.trader.add([body, head, leftArm, rightArm, label]);
-    this.trader.setDepth(80);
-
-    // Idle animation - subtle swaying
-    this.tweens.add({
-      targets: this.trader,
-      x: x - 3,
-      duration: 2000,
-      yoyo: true,
-      repeat: -1,
-      ease: 'Sine.easeInOut',
-    });
-
-    // Arm gesture animation
-    this.tweens.add({
-      targets: rightArm,
-      angle: -15,
-      duration: 1500,
-      yoyo: true,
-      repeat: -1,
-      ease: 'Sine.easeInOut',
-      delay: 500,
-    });
-
-    this.tweens.add({
-      targets: leftArm,
-      angle: 10,
-      duration: 1800,
-      yoyo: true,
-      repeat: -1,
-      ease: 'Sine.easeInOut',
-    });
-  }
-
-  /**
    * Check if player is near the trader and trigger dialogue
    */
   private checkTraderProximity(): void {
-    if (!this.trader || this.traderApproached) return;
+    if (this.traderApproached || !this.traderSprite) return;
 
     const distance = Phaser.Math.Distance.Between(
       this.tarzan.x, this.tarzan.y,
-      this.trader.x, this.trader.y
+      this.traderSprite.x, this.traderSprite.y
     );
 
     if (distance < 150) {

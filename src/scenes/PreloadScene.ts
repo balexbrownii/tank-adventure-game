@@ -47,6 +47,10 @@ export class PreloadScene extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 64,
     });
+    this.load.spritesheet('trader', 'assets/images/characters/sprites/trader_walk.png', {
+      frameWidth: 64,
+      frameHeight: 64,
+    });
 
     // Backgrounds (forest.png is clean without painted machete)
     this.load.image('brazil-forest', 'assets/images/backgrounds/forest.png');
@@ -109,6 +113,20 @@ export class PreloadScene extends Phaser.Scene {
       key: 'deer-walk',
       frames: this.anims.generateFrameNumbers('deer', { start: 0, end: 3 }),
       frameRate: 8,
+      repeat: -1,
+    });
+
+    // Trader animations
+    this.anims.create({
+      key: 'trader-idle',
+      frames: [{ key: 'trader', frame: 0 }],
+      frameRate: 1,
+      repeat: 0,
+    });
+    this.anims.create({
+      key: 'trader-walk',
+      frames: this.anims.generateFrameNumbers('trader', { start: 0, end: 3 }),
+      frameRate: 6,
       repeat: -1,
     });
   }

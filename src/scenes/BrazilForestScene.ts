@@ -55,6 +55,9 @@ export class BrazilForestScene extends Phaser.Scene {
     const bg = this.add.image(width / 2, height / 2, 'brazil-forest');
     bg.setDisplaySize(width, height);
 
+    // Play forest exploration music (falls back to ambient if not available)
+    audioManager.playMusic('forest');
+
     // Initialize systems
     this.hotspotManager = new HotspotManager(this);
     this.messageBox = new MessageBox(this);

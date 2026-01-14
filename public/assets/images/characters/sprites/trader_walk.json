@@ -1,0 +1,25 @@
+{
+  "name": "trader",
+  "frameWidth": 64,
+  "frameHeight": 64,
+  "frameCount": 4,
+  "animations": {
+    "idle": {
+      "frames": [
+        0
+      ],
+      "frameRate": 1,
+      "repeat": 0
+    },
+    "walk": {
+      "frames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "frameRate": 6,
+      "repeat": -1
+    }
+  }
+}
