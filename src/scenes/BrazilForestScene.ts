@@ -90,24 +90,35 @@ export class BrazilForestScene extends Phaser.Scene {
       this.updateHeldItem(item?.icon ?? null);
     });
 
-    // Plain stump - DISABLED (wrong art style - AI digital painting vs pixel art)
-    this.stumpSprite = this.add.image(750, height - 80, 'stump');
-    this.stumpSprite.setVisible(false);
+    // Plain stump - visible after machete is taken
+    this.stumpSprite = this.add.image(750, height - 100, 'stump');
+    this.stumpSprite.setScale(3);  // Match machete-stump scale
+    this.stumpSprite.setOrigin(0.5, 1);
+    this.stumpSprite.setDepth(89);
+    this.stumpSprite.setVisible(gameState.hasItem('machete'));
 
-    // TODO: Replace these garbage AI sprites with proper pixel art
-    // Disabled for now - objects have broken backgrounds
+    // Interactive objects (OPP2017 pixel art)
 
-    // Machete in stump - DISABLED (bad sprite)
-    this.macheteSprite = this.add.image(750, height - 80, 'machete-in-stump');
-    this.macheteSprite.setVisible(false);
+    // Machete in stump - visible if player hasn't taken it
+    this.macheteSprite = this.add.image(750, height - 100, 'machete-in-stump');
+    this.macheteSprite.setScale(3);  // 64x48 * 3 = 192x144
+    this.macheteSprite.setOrigin(0.5, 1);
+    this.macheteSprite.setDepth(90);
+    this.macheteSprite.setVisible(!gameState.hasItem('machete'));
 
-    // Thick vines - DISABLED (bad sprite)
-    this.vinesSprite = this.add.image(1050, height / 2 + 50, 'vines');
-    this.vinesSprite.setVisible(false);
+    // Thick vines blocking path - RIGHT SIDE
+    this.vinesSprite = this.add.image(1100, height / 2 + 100, 'vines');
+    this.vinesSprite.setScale(2.5);  // 150x250 * 2.5 = 375x625
+    this.vinesSprite.setOrigin(0.5, 0.5);
+    this.vinesSprite.setDepth(85);
+    this.vinesSprite.setVisible(!gameState.getFlag('vines_cut'));
 
-    // Exotic flower - DISABLED (bad sprite)
-    this.flowerSprite = this.add.image(200, height / 2 + 100, 'flower');
-    this.flowerSprite.setVisible(false);
+    // Exotic flower - LEFT SIDE
+    this.flowerSprite = this.add.image(200, height - 120, 'flower');
+    this.flowerSprite.setScale(3);  // 48x64 * 3 = 144x192
+    this.flowerSprite.setOrigin(0.5, 1);
+    this.flowerSprite.setDepth(85);
+    this.flowerSprite.setVisible(!gameState.hasItem('flower'));
 
     // Register hotspots
     this.registerHotspots(height);
@@ -185,10 +196,10 @@ export class BrazilForestScene extends Phaser.Scene {
       {
         id: 'vines',
         name: 'thick vines',
-        x: 1050,
-        y: sceneHeight / 2,
-        width: 200,
-        height: 350,
+        x: 1100,
+        y: sceneHeight / 2 + 100,
+        width: 300,
+        height: 400,
         actions: [
           {
             verb: 'LOOK',
@@ -196,7 +207,7 @@ export class BrazilForestScene extends Phaser.Scene {
           },
           {
             verb: 'USE',
-            response: "You hack through the vines with the machete! The path ahead is now clear.",
+            response: "*THWACK* *THWACK* You hack through the thick vines with your machete! After a few powerful swings, the tangled vegetation falls away. The path ahead is now clear.",
             requiresItem: 'machete',
             onExecute: () => {
               gameState.setFlag('vines_cut', true);
@@ -304,7 +315,7 @@ export class BrazilForestScene extends Phaser.Scene {
       {
         id: 'path-village',
         name: 'path to village',
-        x: 1050,
+        x: 1100,
         y: sceneHeight / 2 + 100,
         width: 180,
         height: 200,
@@ -398,14 +409,19 @@ export class BrazilForestScene extends Phaser.Scene {
   /**
    * Update the held item sprite based on selected inventory item
    */
-  private updateHeldItem(_iconKey: string | null): void {
-    // DISABLED: Held item sprites have white backgrounds and wrong scale
-    // TODO: Create proper pixel art item sprites
+  private updateHeldItem(iconKey: string | null): void {
+    // Remove existing held item sprite
     if (this.heldItemSprite) {
       this.heldItemSprite.destroy();
       this.heldItemSprite = null;
     }
-    // Don't show held items until we have proper assets
+
+    // Create new sprite if item selected (icons are 32x32 pixel art)
+    if (iconKey && this.textures.exists(iconKey)) {
+      this.heldItemSprite = this.add.sprite(0, 0, iconKey);
+      this.heldItemSprite.setScale(2);  // 32x32 * 2 = 64px
+      this.heldItemSprite.setDepth(150);
+    }
   }
 
   /**
