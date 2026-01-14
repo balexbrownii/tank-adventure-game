@@ -62,12 +62,15 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image('stump', 'assets/images/objects/stump.png');
     this.load.image('vines', 'assets/images/objects/vines.png');
     this.load.image('flower', 'assets/images/objects/flower-sprite.png');
+
+    // Inventory icons (hi-bit pixel art)
+    this.load.image('machete', 'assets/images/icons/icon-machete.png');
+    this.load.image('flower-icon', 'assets/images/icons/icon-flower.png');
+    this.load.image('rope', 'assets/images/icons/icon-rope.png');
+    this.load.image('bow', 'assets/images/icons/icon-bow.png');
   }
 
   create(): void {
-    // Generate inventory item icons programmatically
-    this.createItemIcons();
-
     // Create character animations
     this.createCharacterAnimations();
 
@@ -132,96 +135,4 @@ export class PreloadScene extends Phaser.Scene {
     });
   }
 
-  private createItemIcons(): void {
-    const iconSize = 48;
-
-    // Machete icon - silver blade with brown handle
-    const macheteGraphics = this.add.graphics();
-    macheteGraphics.fillStyle(0x8B4513); // Brown handle
-    macheteGraphics.fillRect(4, 30, 12, 16);
-    macheteGraphics.fillStyle(0xC0C0C0); // Silver blade
-    macheteGraphics.beginPath();
-    macheteGraphics.moveTo(8, 30);
-    macheteGraphics.lineTo(4, 8);
-    macheteGraphics.lineTo(20, 4);
-    macheteGraphics.lineTo(40, 8);
-    macheteGraphics.lineTo(44, 14);
-    macheteGraphics.lineTo(14, 30);
-    macheteGraphics.closePath();
-    macheteGraphics.fillPath();
-    macheteGraphics.lineStyle(2, 0x888888);
-    macheteGraphics.strokePath();
-    macheteGraphics.generateTexture('machete', iconSize, iconSize);
-    macheteGraphics.destroy();
-
-    // Flower icon - red petals with yellow center and green stem
-    const flowerGraphics = this.add.graphics();
-    // Stem
-    flowerGraphics.fillStyle(0x228B22);
-    flowerGraphics.fillRect(21, 28, 6, 18);
-    // Petals
-    flowerGraphics.fillStyle(0xFF4444);
-    flowerGraphics.fillCircle(24, 12, 8);
-    flowerGraphics.fillCircle(14, 18, 8);
-    flowerGraphics.fillCircle(34, 18, 8);
-    flowerGraphics.fillCircle(18, 28, 8);
-    flowerGraphics.fillCircle(30, 28, 8);
-    // Center
-    flowerGraphics.fillStyle(0xFFD700);
-    flowerGraphics.fillCircle(24, 20, 6);
-    flowerGraphics.generateTexture('flower', iconSize, iconSize);
-    flowerGraphics.destroy();
-
-    // Rope icon - coiled brown rope
-    const ropeGraphics = this.add.graphics();
-    ropeGraphics.lineStyle(6, 0xD2691E); // Chocolate brown
-    // Draw coiled rope
-    ropeGraphics.beginPath();
-    ropeGraphics.arc(24, 24, 16, 0, Math.PI * 1.7);
-    ropeGraphics.strokePath();
-    ropeGraphics.beginPath();
-    ropeGraphics.arc(24, 24, 10, Math.PI * 0.3, Math.PI * 2);
-    ropeGraphics.strokePath();
-    ropeGraphics.beginPath();
-    ropeGraphics.arc(24, 24, 4, Math.PI * 0.8, Math.PI * 2.3);
-    ropeGraphics.strokePath();
-    // Rope end
-    ropeGraphics.lineStyle(4, 0xD2691E);
-    ropeGraphics.lineBetween(38, 18, 44, 10);
-    ropeGraphics.generateTexture('rope', iconSize, iconSize);
-    ropeGraphics.destroy();
-
-    // Bow icon - curved bow with string
-    const bowGraphics = this.add.graphics();
-    // Bow body (curved wood)
-    bowGraphics.lineStyle(4, 0x8B4513);
-    bowGraphics.beginPath();
-    bowGraphics.arc(24, 24, 18, Math.PI * 0.7, Math.PI * 1.3, false);
-    bowGraphics.strokePath();
-    // Bowstring
-    bowGraphics.lineStyle(2, 0xFFFFFF);
-    bowGraphics.lineBetween(10, 12, 10, 36);
-    // Arrow
-    bowGraphics.lineStyle(3, 0x8B4513);
-    bowGraphics.lineBetween(14, 24, 42, 24);
-    // Arrowhead
-    bowGraphics.fillStyle(0x808080);
-    bowGraphics.beginPath();
-    bowGraphics.moveTo(42, 24);
-    bowGraphics.lineTo(36, 20);
-    bowGraphics.lineTo(36, 28);
-    bowGraphics.closePath();
-    bowGraphics.fillPath();
-    // Fletching
-    bowGraphics.fillStyle(0xFF4444);
-    bowGraphics.beginPath();
-    bowGraphics.moveTo(14, 24);
-    bowGraphics.lineTo(18, 20);
-    bowGraphics.lineTo(20, 24);
-    bowGraphics.lineTo(18, 28);
-    bowGraphics.closePath();
-    bowGraphics.fillPath();
-    bowGraphics.generateTexture('bow', iconSize, iconSize);
-    bowGraphics.destroy();
-  }
 }

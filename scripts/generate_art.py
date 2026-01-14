@@ -72,6 +72,15 @@ PROMPTS = {
 
     "machete-stump": """Hi-bit pixel art sprite of rusty machete stuck in tree stump. Weathered wooden handle pointing up, rusty metal blade wedged in mossy stump top. Interactive game item. Style: Modern hi-bit pixel art, refined pixels, muted earth tones, detailed texture. Transparent background.""",
 
+    # Inventory icons - hi-bit style
+    "icon-machete": """Hi-bit pixel art inventory icon of a jungle machete. Silver blade with brown wooden handle. Adventure game item icon, clean design for UI inventory slot. Style: Modern hi-bit pixel art, refined pixels, metallic sheen on blade, worn wood handle texture. Transparent background. Square icon format.""",
+
+    "icon-flower": """Hi-bit pixel art inventory icon of an exotic red tropical flower. Vibrant red petals with yellow center, short green stem. Adventure game collectible item icon for UI inventory. Style: Modern hi-bit pixel art, refined pixels, vivid saturated colors. Transparent background. Square icon format.""",
+
+    "icon-rope": """Hi-bit pixel art inventory icon of a coiled rope. Brown hemp or vine rope coiled in neat loops. Adventure game item icon for UI inventory slot. Style: Modern hi-bit pixel art, refined pixels, natural fiber texture, warm brown tones. Transparent background. Square icon format.""",
+
+    "icon-bow": """Hi-bit pixel art inventory icon of a wooden bow with arrow. Curved wooden bow with taut string, single arrow nocked and ready. Adventure game weapon icon for UI inventory. Style: Modern hi-bit pixel art, refined pixels, wood grain texture, feathered arrow fletching. Transparent background. Square icon format.""",
+
     "village": """Hi-bit pixel art scene of small indigenous Brazilian village in jungle clearing.
 
     Several thatched-roof huts of wood and palm leaves in semi-circle. Central fire pit with rising smoke and warm glow. Colorful woven blankets and pottery near huts. Tropical plants and palms framing scene.
@@ -88,6 +97,8 @@ PROMPTS = {
 }
 
 # Map asset types to output directories
+ICONS_DIR = IMAGES_DIR / "icons"
+
 OUTPUT_DIRS = {
     "title-screen": BACKGROUNDS_DIR,
     "tarzan": CHARACTERS_DIR,
@@ -102,6 +113,10 @@ OUTPUT_DIRS = {
     "vines": OBJECTS_DIR,
     "flower-sprite": OBJECTS_DIR,
     "machete-stump": OBJECTS_DIR,
+    "icon-machete": ICONS_DIR,
+    "icon-flower": ICONS_DIR,
+    "icon-rope": ICONS_DIR,
+    "icon-bow": ICONS_DIR,
 }
 
 
@@ -110,6 +125,7 @@ def ensure_directories():
     CHARACTERS_DIR.mkdir(parents=True, exist_ok=True)
     BACKGROUNDS_DIR.mkdir(parents=True, exist_ok=True)
     OBJECTS_DIR.mkdir(parents=True, exist_ok=True)
+    ICONS_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def create_generation(prompt: str) -> str:
