@@ -35,58 +35,61 @@ CHARACTERS_DIR = IMAGES_DIR / "characters"
 BACKGROUNDS_DIR = IMAGES_DIR / "backgrounds"
 OBJECTS_DIR = IMAGES_DIR / "objects"
 
-# Character prompts (King's Quest V/Monkey Island 2 style)
+# Hi-bit pixel art prompts (Killer Rabbit Media style)
 PROMPTS = {
-    "tarzan": """Video game character sprite of Tarzan, a heroic jungle man. Athletic muscular man in his late 20s with wild untamed dark hair and confident determined expression. He wears simple jungle attire - a loincloth or tattered shorts, bare chest showing defined muscles, bare feet. Tanned skin from living in the jungle. Standing in a confident heroic pose, ready for adventure. Full body view, dynamic pose showing strength and agility. Style: Smooth polished Disney-style cartoon art, clean lines, soft shading and highlights, vibrant saturated colors. Similar to Disney's Tarzan movie or modern mobile game character art. Professional video game character sprite, high quality render, clean cartoon style with no rough edges or sketchy lines. Isolated character on plain solid color background for easy extraction.""",
+    "title-screen": """Hi-bit pixel art title screen for a jungle adventure game. Epic cinematic composition showing a dramatic Brazilian rainforest at sunset. Silhouette of a heroic Tarzan-like figure standing on a cliff or tree branch overlooking the vast jungle canopy. Golden orange sunset sky with rich color gradients using detailed dithering. Deep jungle stretching to the horizon with atmospheric depth and haze. Moody, cinematic lighting with god rays filtering through clouds. Style: Modern hi-bit pixel art like Killer Rabbit Media or Superbrothers. NOT retro 8-bit - this is professional illustration-quality pixel art with visible but refined pixels, smooth dithered gradients, atmospheric lighting, cinematic mood. Rich color palette, detailed shading. 16:9 widescreen composition.""",
 
-    "tank": """Video game character art of Tank, a heroic female martial artist. Athletic muscular woman in her late 20s with confident determined expression. She wears a weathered red sleeveless martial arts gi top with black belt, dark cargo pants, wrapped forearms, practical combat boots. Dark hair pulled back in a ponytail. Strong arms showing defined muscles. Standing in a confident martial arts ready stance with fists raised. Full body view, dynamic pose showing she's ready for action. Style: Hand-painted 1990s adventure game art like King's Quest V, Monkey Island 2. Rich saturated colors, detailed painterly brushwork, warm dramatic lighting. Professional video game character illustration, high detail, expressive.""",
+    "tarzan": """Hi-bit pixel art character sprite of Tarzan, a heroic jungle man. Athletic muscular man with wild dark hair, confident pose. Simple jungle attire - loincloth, bare chest, bare feet. Tanned skin. Standing heroic pose ready for adventure. Full body view. Style: Modern hi-bit pixel art with visible but refined pixels. Rich colors, detailed shading with dithering, NOT retro 8-bit. Professional quality like modern indie games. Isolated on transparent background.""",
 
-    "pig": """Video game character art of a cartoon pig sidekick wearing cowboy gear. Pink pig standing semi-upright on hind legs. Wearing a worn brown leather cowboy hat tilted rakishly, red bandana around neck, small leather vest. Front hooves on hips in confident pose. Friendly expressive face with a knowing smirk and warm eyes. He's a loyal companion with personality and Western charm. Full body character design. Style: Hand-painted 1990s adventure game art like King's Quest, Monkey Island. Warm colors, detailed but charming cartoon style, personality-filled character design.""",
+    "tank": """Hi-bit pixel art character of Tank, heroic female martial artist. Athletic woman in red martial arts gi with black belt, dark cargo pants, ponytail. Confident fighting stance. Full body view. Style: Modern hi-bit pixel art, visible refined pixels, rich shading, professional quality. Transparent background.""",
 
-    "deer": """Video game character art of Mr. Snuggles, a friendly deer companion. Young white-tailed deer with gentle kind eyes and sweet trusting expression. Small velvet antlers, soft brown fur with white spots on back. Standing in relaxed pose, head slightly tilted as if listening. Looks approachable and loyal, like a gentle forest friend. Cuddly and friendly appearance matching his name. Full body view in forest lighting. Style: Hand-painted 1990s Sierra adventure game art like King's Quest. Naturalistic but expressive, warm forest lighting, detailed fur texture.""",
+    "pig": """Hi-bit pixel art character of a cartoon pig sidekick in cowboy gear. Pink pig standing on hind legs, brown cowboy hat, red bandana, leather vest. Friendly smirk, charming personality. Full body. Style: Modern hi-bit pixel art with detailed shading, refined pixels, warm colors. Transparent background.""",
 
-    "forest": """Video game background scene of a lush Brazilian rainforest. Dense jungle with towering trees, thick canopy filtering golden afternoon sunlight. Tropical flowers, giant ferns, and hanging vines. A small dirt clearing with a path leading deeper into the jungle. Colorful parrots in the trees, butterflies floating in sunbeams. Rich emerald greens, golden light rays, humid atmospheric depth. Style: 1990s Sierra adventure game background art like King's Quest V or VI. Hand-painted look, detailed foliage, atmospheric perspective. Widescreen game scene composition with clear walkable foreground area.""",
+    "deer": """Hi-bit pixel art character of Mr. Snuggles, a friendly deer companion. Young deer with gentle eyes, small antlers, brown fur with white spots. Relaxed friendly pose. Full body. Style: Modern hi-bit pixel art, refined pixels, warm natural lighting, detailed fur texture. Transparent background.""",
 
-    "forest-interactive": """Video game background scene of a Brazilian rainforest clearing with interactive elements.
+    "forest": """Hi-bit pixel art scene of a lush Brazilian rainforest. Dense jungle with towering trees, thick canopy filtering golden afternoon sunlight through gaps. Tropical flowers, giant ferns, hanging vines. Small dirt clearing with path leading deeper into jungle. Rich emerald greens, golden light rays piercing through, humid atmospheric depth with layered fog. Style: Modern hi-bit pixel art like Killer Rabbit Media. NOT retro 8-bit - professional illustration-quality pixel art with visible refined pixels, smooth dithered color gradients, atmospheric lighting, cinematic depth. Rich saturated colors, moody jungle atmosphere. 16:9 widescreen game background.""",
 
-    LEFT SIDE: A striking bright red exotic flower on a tall stem, clearly visible and pickable, growing among ferns.
+    "forest-interactive": """Hi-bit pixel art scene of Brazilian rainforest clearing with interactive game elements.
 
-    CENTER-RIGHT FOREGROUND: An old weathered tree stump, mossy and about waist-height. The stump is EMPTY - no machete or tools in it, just an old cut tree stump with moss and wood grain visible on top.
+    LEFT SIDE: Striking bright red exotic flower on tall stem, clearly visible and pickable among ferns.
 
-    RIGHT SIDE: Thick tangled jungle vines hanging down like a curtain, blocking a narrow dirt path that leads deeper into the jungle. The vines are dense and clearly impassable without cutting.
+    CENTER-RIGHT FOREGROUND: Old weathered tree stump, mossy, waist-height. Stump is EMPTY - no machete, just old cut stump with moss and wood grain.
 
-    The clearing has a dirt floor with tropical plants. Golden afternoon sunlight filters through the canopy. Dense jungle trees in the background.
+    RIGHT SIDE: Thick tangled jungle vines hanging like curtain, blocking narrow path. Dense and impassable without cutting.
 
-    Style: Hand-painted 1990s Sierra adventure game background like King's Quest V or Monkey Island 2. Rich saturated colors, detailed painterly look, atmospheric perspective. Widescreen game scene, 16:9 aspect ratio composition. The interactive elements (flower, empty stump, vines) should be clearly visible and distinct from the background.""",
+    Dirt floor clearing with tropical plants. Golden afternoon sunlight through canopy. Dense jungle background.
 
-    "group": """Three adventure game characters standing together as a team: Tank (athletic muscular woman in red martial arts gi with black belt, confident heroic pose, dark ponytail), a pink pig wearing cowboy hat and red bandana standing on hind legs with charming smirk, and Mr. Snuggles the deer with small antlers and gentle kind eyes. They stand together in a forest clearing as companions ready for adventure. Warm golden sunlight filtering through trees behind them. Style: Hand-painted 1990s adventure game art like King's Quest or Monkey Island. Character group shot, rich colors, heroic and charming feeling.""",
+    Style: Modern hi-bit pixel art like Killer Rabbit Media. Professional illustration-quality with visible refined pixels, dithered gradients, atmospheric lighting. Interactive elements clearly visible and distinct. 16:9 widescreen composition.""",
 
-    # Interactive object sprites
-    "stump": """Video game object sprite of an old tree stump with a rusty machete stuck in it. Weathered moss-covered tree stump in a jungle setting. An old rusty machete blade is wedged into the top of the stump, handle sticking up invitingly. The stump is about waist-height, wide and solid. Tropical plants and ferns around the base. Object is clearly interactive and important. Isolated object on transparent or simple background. Style: Hand-painted 1990s Sierra adventure game art like King's Quest V. Detailed painterly texture, warm jungle lighting, game asset sprite.""",
+    "group": """Hi-bit pixel art group shot of adventure team: Tarzan (athletic jungle man), pink pig in cowboy gear, and Mr. Snuggles the deer. Standing together in forest clearing as companions. Warm golden sunlight filtering through trees. Style: Modern hi-bit pixel art, refined pixels, rich colors, heroic composition.""",
 
-    "vines": """Video game object sprite of thick jungle vines blocking a path. Dense tangled mass of green tropical vines hanging down and across, forming a natural barrier. Some vines have large leaves, others are woody and thick. Clearly too dense to push through without cutting. The vines span across like a curtain blocking passage. Isolated object on transparent or simple background. Style: Hand-painted 1990s Sierra adventure game art. Rich greens, detailed foliage texture, game obstacle sprite.""",
+    # Interactive object sprites - hi-bit style
+    "stump": """Hi-bit pixel art sprite of old jungle tree stump. Weathered moss-covered stump, waist-height, solid wood. Tropical plants at base. Clearly interactive game object. Style: Modern hi-bit pixel art with refined pixels, detailed texture, warm jungle lighting. Transparent background. NOT retro 8-bit.""",
 
-    "flower-sprite": """Video game object sprite of a beautiful exotic tropical flower. Single striking red flower with large vibrant petals, bright yellow center with visible stamens. Long green stem with a few leaves. The flower is eye-catching and clearly pickable. Rainforest orchid or heliconia style. Isolated object on transparent or simple background. Style: Hand-painted 1990s Sierra adventure game art like King's Quest. Vivid saturated colors, detailed botanical illustration style, collectible game item sprite.""",
+    "vines": """Hi-bit pixel art sprite of thick jungle vines blocking path. Dense tangled green vines hanging down forming natural barrier. Large leaves, woody thick vines. Impassable obstacle. Style: Modern hi-bit pixel art, refined pixels, rich greens, detailed foliage texture. Transparent background.""",
 
-    "machete-stump": """Video game sprite of a rusty machete blade stuck vertically in wood. The machete has a weathered brown wooden handle pointing straight up and a rusty gray metal blade wedged into a mossy tree stump. The handle is worn but sturdy, clearly meant to be grabbed. Just the machete and small portion of stump top visible - this is a close-up sprite to overlay on a background. Jungle adventure game item. Transparent background. Style: Hand-painted 1990s Sierra adventure game art like King's Quest V. Muted earth tones, rusty metal, worn wood texture. Game collectible sprite.""",
+    "flower-sprite": """Hi-bit pixel art sprite of exotic tropical flower. Single striking red flower with vibrant petals, yellow center, green stem with leaves. Eye-catching collectible item. Style: Modern hi-bit pixel art, refined pixels, vivid saturated colors, detailed botanical style. Transparent background.""",
 
-    "village": """Video game background scene of a small indigenous Brazilian village in a jungle clearing.
+    "machete-stump": """Hi-bit pixel art sprite of rusty machete stuck in tree stump. Weathered wooden handle pointing up, rusty metal blade wedged in mossy stump top. Interactive game item. Style: Modern hi-bit pixel art, refined pixels, muted earth tones, detailed texture. Transparent background.""",
 
-    Several thatched-roof huts made of wood and palm leaves arranged in a semi-circle. A central fire pit with smoke rising. Colorful woven blankets and pottery visible near the huts. Tropical plants and palm trees frame the scene.
+    "village": """Hi-bit pixel art scene of small indigenous Brazilian village in jungle clearing.
 
-    LEFT SIDE: A trading post area with a wooden table displaying various tools - stone axes, wooden bowls, woven baskets, and beaded jewelry laid out for trade.
+    Several thatched-roof huts of wood and palm leaves in semi-circle. Central fire pit with rising smoke and warm glow. Colorful woven blankets and pottery near huts. Tropical plants and palms framing scene.
 
-    CENTER: The main village clearing with packed dirt ground. A friendly indigenous trader standing near the trading table, wearing traditional clothing with feathers and beads.
+    LEFT: Trading post with wooden table displaying tools - stone axes, bowls, baskets, beaded jewelry.
 
-    RIGHT SIDE: A path leading back into the jungle (the way the player came from).
+    CENTER: Village clearing with packed dirt. Friendly indigenous trader near table in traditional clothing with feathers.
 
-    Warm afternoon sunlight filtering through the canopy. Peaceful, welcoming atmosphere. Parrots and monkeys visible in the trees.
+    RIGHT: Path leading back into jungle.
 
-    Style: Hand-painted 1990s Sierra adventure game background like King's Quest V or Monkey Island 2. Rich saturated colors, detailed painterly look, atmospheric perspective. Widescreen 16:9 game scene composition with clear walkable foreground area."""
+    Warm afternoon light through canopy. Peaceful welcoming atmosphere. Fire casting warm orange glow.
+
+    Style: Modern hi-bit pixel art like Killer Rabbit Media. Professional illustration-quality with visible refined pixels, smooth dithered gradients, atmospheric warm lighting, cinematic mood. Rich saturated colors. 16:9 widescreen composition."""
 }
 
 # Map asset types to output directories
 OUTPUT_DIRS = {
+    "title-screen": BACKGROUNDS_DIR,
     "tarzan": CHARACTERS_DIR,
     "tank": CHARACTERS_DIR,
     "pig": CHARACTERS_DIR,

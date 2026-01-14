@@ -10,7 +10,7 @@ const config: Phaser.Types.Core.GameConfig = {
   width: 1280,
   height: 720,
   parent: 'game-container',
-  pixelArt: false, // Smooth scaling for painted art style
+  pixelArt: true, // Crisp nearest-neighbor scaling for pixel art
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,

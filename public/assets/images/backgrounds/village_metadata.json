@@ -1,35 +1,35 @@
 {
-  "uuid": "26fedf34220d4495ead343cae212bf9f",
-  "prompt": "Video game background scene of a small indigenous Brazilian village in a jungle clearing.\n\n    Several thatched-roof huts made of wood and palm leaves arranged in a semi-circle. A central fire pit with smoke rising. Colorful woven blankets and pottery visible near the huts. Tropical plants and palm trees frame the scene.\n\n    LEFT SIDE: A trading post area with a wooden table displaying various tools - stone axes, wooden bowls, woven baskets, and beaded jewelry laid out for trade.\n\n    CENTER: The main village clearing with packed dirt ground. A friendly indigenous trader standing near the trading table, wearing traditional clothing with feathers and beads.\n\n    RIGHT SIDE: A path leading back into the jungle (the way the player came from).\n\n    Warm afternoon sunlight filtering through the canopy. Peaceful, welcoming atmosphere. Parrots and monkeys visible in the trees.\n\n    Style: Hand-painted 1990s Sierra adventure game background like King's Quest V or Monkey Island 2. Rich saturated colors, detailed painterly look, atmospheric perspective. Widescreen 16:9 game scene composition with clear walkable foreground area.",
+  "uuid": "1514ad4dd949d41379902bebad6f28c9",
+  "prompt": "Hi-bit pixel art scene of small indigenous Brazilian village in jungle clearing.\n\n    Several thatched-roof huts of wood and palm leaves in semi-circle. Central fire pit with rising smoke and warm glow. Colorful woven blankets and pottery near huts. Tropical plants and palms framing scene.\n\n    LEFT: Trading post with wooden table displaying tools - stone axes, bowls, baskets, beaded jewelry.\n\n    CENTER: Village clearing with packed dirt. Friendly indigenous trader near table in traditional clothing with feathers.\n\n    RIGHT: Path leading back into jungle.\n\n    Warm afternoon light through canopy. Peaceful welcoming atmosphere. Fire casting warm orange glow.\n\n    Style: Modern hi-bit pixel art like Killer Rabbit Media. Professional illustration-quality with visible refined pixels, smooth dithered gradients, atmospheric warm lighting, cinematic mood. Rich saturated colors. 16:9 widescreen composition.",
   "slots": [
     {
       "index": 0,
       "status": "success",
-      "url": "https://s.maginary.ai/results/26fedf34220d4495ead343cae212bf9f/0_Video_game_background_scene_of_a_small_indigenous_Brazilian_village_in_a_jungle_.webp",
+      "url": "https://s.maginary.ai/results/1514ad4dd949d41379902bebad6f28c9/0_Hi-bit_pixel_art_scene_of_small_indigenous_Brazilian_village_in_jungle_clearingu.webp",
       "charged": true,
       "error_message": null
     },
     {
       "index": 1,
       "status": "success",
-      "url": "https://s.maginary.ai/results/26fedf34220d4495ead343cae212bf9f/1_Video_game_background_scene_of_a_small_indigenous_Brazilian_village_in_a_jungle_.webp",
+      "url": "https://s.maginary.ai/results/1514ad4dd949d41379902bebad6f28c9/1_Hi-bit_pixel_art_scene_of_small_indigenous_Brazilian_village_in_jungle_clearingu.webp",
       "charged": true,
       "error_message": null
     },
     {
       "index": 2,
       "status": "success",
-      "url": "https://s.maginary.ai/results/26fedf34220d4495ead343cae212bf9f/2_Video_game_background_scene_of_a_small_indigenous_Brazilian_village_in_a_jungle_.webp",
+      "url": "https://s.maginary.ai/results/1514ad4dd949d41379902bebad6f28c9/2_Hi-bit_pixel_art_scene_of_small_indigenous_Brazilian_village_in_jungle_clearingu.webp",
       "charged": true,
       "error_message": null
     },
     {
       "index": 3,
       "status": "success",
-      "url": "https://s.maginary.ai/results/26fedf34220d4495ead343cae212bf9f/3_Video_game_background_scene_of_a_small_indigenous_Brazilian_village_in_a_jungle_.webp",
+      "url": "https://s.maginary.ai/results/1514ad4dd949d41379902bebad6f28c9/3_Hi-bit_pixel_art_scene_of_small_indigenous_Brazilian_village_in_jungle_clearingu.webp",
       "charged": true,
       "error_message": null
     }
   ],
-  "generated_at": "2026-01-07 20:41:37"
+  "generated_at": "2026-01-13 23:08:34"
 }

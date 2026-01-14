@@ -1,35 +1,35 @@
 {
-  "uuid": "275b8b4d7ae636923d54b850e1ed8a67",
-  "prompt": "Video game sprite of a rusty machete blade stuck vertically in wood. The machete has a weathered brown wooden handle pointing straight up and a rusty gray metal blade wedged into a mossy tree stump. The handle is worn but sturdy, clearly meant to be grabbed. Just the machete and small portion of stump top visible - this is a close-up sprite to overlay on a background. Jungle adventure game item. Transparent background. Style: Hand-painted 1990s Sierra adventure game art like King's Quest V. Muted earth tones, rusty metal, worn wood texture. Game collectible sprite.",
+  "uuid": "06dd3edcd62948a26d16b6c98e83abdf",
+  "prompt": "Hi-bit pixel art sprite of rusty machete stuck in tree stump. Weathered wooden handle pointing up, rusty metal blade wedged in mossy stump top. Interactive game item. Style: Modern hi-bit pixel art, refined pixels, muted earth tones, detailed texture. Transparent background.",
   "slots": [
     {
       "index": 0,
       "status": "success",
-      "url": "https://s.maginary.ai/results/275b8b4d7ae636923d54b850e1ed8a67/0_Video_game_sprite_of_a_rusty_machete_blade_stuck_vertically_in_woodu002e_The_mac.webp",
+      "url": "https://s.maginary.ai/results/06dd3edcd62948a26d16b6c98e83abdf/0_Hi-bit_pixel_art_sprite_of_rusty_machete_stuck_in_tree_stumpu002e_Weathered_wood.webp",
       "charged": true,
       "error_message": null
     },
     {
       "index": 1,
       "status": "success",
-      "url": "https://s.maginary.ai/results/275b8b4d7ae636923d54b850e1ed8a67/1_Video_game_sprite_of_a_rusty_machete_blade_stuck_vertically_in_woodu002e_The_mac.webp",
+      "url": "https://s.maginary.ai/results/06dd3edcd62948a26d16b6c98e83abdf/1_Hi-bit_pixel_art_sprite_of_rusty_machete_stuck_in_tree_stumpu002e_Weathered_wood.webp",
       "charged": true,
       "error_message": null
     },
     {
       "index": 2,
       "status": "success",
-      "url": "https://s.maginary.ai/results/275b8b4d7ae636923d54b850e1ed8a67/2_Video_game_sprite_of_a_rusty_machete_blade_stuck_vertically_in_woodu002e_The_mac.webp",
+      "url": "https://s.maginary.ai/results/06dd3edcd62948a26d16b6c98e83abdf/2_Hi-bit_pixel_art_sprite_of_rusty_machete_stuck_in_tree_stumpu002e_Weathered_wood.webp",
       "charged": true,
       "error_message": null
     },
     {
       "index": 3,
       "status": "success",
-      "url": "https://s.maginary.ai/results/275b8b4d7ae636923d54b850e1ed8a67/3_Video_game_sprite_of_a_rusty_machete_blade_stuck_vertically_in_woodu002e_The_mac.webp",
+      "url": "https://s.maginary.ai/results/06dd3edcd62948a26d16b6c98e83abdf/3_Hi-bit_pixel_art_sprite_of_rusty_machete_stuck_in_tree_stumpu002e_Weathered_wood.webp",
       "charged": true,
       "error_message": null
     }
   ],
-  "generated_at": "2026-01-09 00:10:31"
+  "generated_at": "2026-01-13 23:10:52"
 }

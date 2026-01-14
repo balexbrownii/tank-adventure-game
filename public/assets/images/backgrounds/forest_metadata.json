@@ -1,35 +1,35 @@
 {
-  "uuid": "83eb96a03d93beb1f1b66e9e8f6a2e5b",
-  "prompt": "Video game background scene of a lush Brazilian rainforest. Dense jungle with towering trees, thick canopy filtering golden afternoon sunlight. Tropical flowers, giant ferns, and hanging vines. A small dirt clearing with a path leading deeper into the jungle. Colorful parrots in the trees, butterflies floating in sunbeams. Rich emerald greens, golden light rays, humid atmospheric depth. Style: 1990s Sierra adventure game background art like King's Quest V or VI. Hand-painted look, detailed foliage, atmospheric perspective. Widescreen game scene composition with clear walkable foreground area.",
+  "uuid": "8ab43b7f4911d05a738d749e961c8bcb",
+  "prompt": "Hi-bit pixel art scene of a lush Brazilian rainforest. Dense jungle with towering trees, thick canopy filtering golden afternoon sunlight through gaps. Tropical flowers, giant ferns, hanging vines. Small dirt clearing with path leading deeper into jungle. Rich emerald greens, golden light rays piercing through, humid atmospheric depth with layered fog. Style: Modern hi-bit pixel art like Killer Rabbit Media. NOT retro 8-bit - professional illustration-quality pixel art with visible refined pixels, smooth dithered color gradients, atmospheric lighting, cinematic depth. Rich saturated colors, moody jungle atmosphere. 16:9 widescreen game background.",
   "slots": [
     {
       "index": 0,
       "status": "success",
-      "url": "https://s.maginary.ai/results/83eb96a03d93beb1f1b66e9e8f6a2e5b/0_Video_game_background_scene_of_a_lush_Brazilian_rainforestu002e_Dense_jungle_wit.webp",
+      "url": "https://s.maginary.ai/results/8ab43b7f4911d05a738d749e961c8bcb/0_Hi-bit_pixel_art_scene_of_a_lush_Brazilian_rainforestu002e_Dense_jungle_with_tow.webp",
       "charged": true,
       "error_message": null
     },
     {
       "index": 1,
       "status": "success",
-      "url": "https://s.maginary.ai/results/83eb96a03d93beb1f1b66e9e8f6a2e5b/1_Video_game_background_scene_of_a_lush_Brazilian_rainforestu002e_Dense_jungle_wit.webp",
+      "url": "https://s.maginary.ai/results/8ab43b7f4911d05a738d749e961c8bcb/1_Hi-bit_pixel_art_scene_of_a_lush_Brazilian_rainforestu002e_Dense_jungle_with_tow.webp",
       "charged": true,
       "error_message": null
     },
     {
       "index": 2,
       "status": "success",
-      "url": "https://s.maginary.ai/results/83eb96a03d93beb1f1b66e9e8f6a2e5b/2_Video_game_background_scene_of_a_lush_Brazilian_rainforestu002e_Dense_jungle_wit.webp",
+      "url": "https://s.maginary.ai/results/8ab43b7f4911d05a738d749e961c8bcb/2_Hi-bit_pixel_art_scene_of_a_lush_Brazilian_rainforestu002e_Dense_jungle_with_tow.webp",
       "charged": true,
       "error_message": null
     },
     {
       "index": 3,
       "status": "success",
-      "url": "https://s.maginary.ai/results/83eb96a03d93beb1f1b66e9e8f6a2e5b/3_Video_game_background_scene_of_a_lush_Brazilian_rainforestu002e_Dense_jungle_wit.webp",
+      "url": "https://s.maginary.ai/results/8ab43b7f4911d05a738d749e961c8bcb/3_Hi-bit_pixel_art_scene_of_a_lush_Brazilian_rainforestu002e_Dense_jungle_with_tow.webp",
       "charged": true,
       "error_message": null
     }
   ],
-  "generated_at": "2026-01-07 19:20:56"
+  "generated_at": "2026-01-13 23:07:53"
 }
