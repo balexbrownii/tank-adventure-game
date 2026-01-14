@@ -34,22 +34,18 @@ export class PreloadScene extends Phaser.Scene {
     });
 
     // Load game assets
-    // Character sprite sheets (animated pixel art)
-    this.load.spritesheet('tarzan', 'assets/images/characters/sprites/tarzan_walk.png', {
-      frameWidth: 64,
-      frameHeight: 64,
+    // Hero character sprite sheets (Jesse Munguia Jungle Pack - 32x32 frames)
+    this.load.spritesheet('hero-idle', 'assets/images/characters/sprites/hero_idle.png', {
+      frameWidth: 32,
+      frameHeight: 32,
     });
-    this.load.spritesheet('pig', 'assets/images/characters/sprites/pig_walk.png', {
-      frameWidth: 64,
-      frameHeight: 64,
+    this.load.spritesheet('hero-run', 'assets/images/characters/sprites/hero_run.png', {
+      frameWidth: 32,
+      frameHeight: 32,
     });
-    this.load.spritesheet('deer', 'assets/images/characters/sprites/mr_snuggles_walk.png', {
-      frameWidth: 64,
-      frameHeight: 64,
-    });
-    this.load.spritesheet('trader', 'assets/images/characters/sprites/trader_walk.png', {
-      frameWidth: 64,
-      frameHeight: 64,
+    this.load.spritesheet('hero-jump', 'assets/images/characters/sprites/hero_jump.png', {
+      frameWidth: 32,
+      frameHeight: 32,
     });
 
     // Backgrounds (pixel art style)
@@ -78,60 +74,24 @@ export class PreloadScene extends Phaser.Scene {
   }
 
   private createCharacterAnimations(): void {
-    // Tarzan animations
+    // Hero animations (Jesse Munguia Jungle Pack)
     this.anims.create({
-      key: 'tarzan-idle',
-      frames: [{ key: 'tarzan', frame: 0 }],
-      frameRate: 1,
-      repeat: 0,
+      key: 'hero-idle',
+      frames: this.anims.generateFrameNumbers('hero-idle', { start: 0, end: 11 }),
+      frameRate: 10,
+      repeat: -1,
     });
     this.anims.create({
-      key: 'tarzan-walk',
-      frames: this.anims.generateFrameNumbers('tarzan', { start: 0, end: 3 }),
+      key: 'hero-run',
+      frames: this.anims.generateFrameNumbers('hero-run', { start: 0, end: 7 }),
+      frameRate: 12,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: 'hero-jump',
+      frames: this.anims.generateFrameNumbers('hero-jump', { start: 0, end: 3 }),
       frameRate: 8,
-      repeat: -1,
-    });
-
-    // Pig animations
-    this.anims.create({
-      key: 'pig-idle',
-      frames: [{ key: 'pig', frame: 0 }],
-      frameRate: 1,
       repeat: 0,
-    });
-    this.anims.create({
-      key: 'pig-walk',
-      frames: this.anims.generateFrameNumbers('pig', { start: 0, end: 3 }),
-      frameRate: 8,
-      repeat: -1,
-    });
-
-    // Deer (Mr. Snuggles) animations
-    this.anims.create({
-      key: 'deer-idle',
-      frames: [{ key: 'deer', frame: 0 }],
-      frameRate: 1,
-      repeat: 0,
-    });
-    this.anims.create({
-      key: 'deer-walk',
-      frames: this.anims.generateFrameNumbers('deer', { start: 0, end: 3 }),
-      frameRate: 8,
-      repeat: -1,
-    });
-
-    // Trader animations
-    this.anims.create({
-      key: 'trader-idle',
-      frames: [{ key: 'trader', frame: 0 }],
-      frameRate: 1,
-      repeat: 0,
-    });
-    this.anims.create({
-      key: 'trader-walk',
-      frames: this.anims.generateFrameNumbers('trader', { start: 0, end: 3 }),
-      frameRate: 6,
-      repeat: -1,
     });
   }
 

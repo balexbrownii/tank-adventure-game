@@ -8,10 +8,8 @@ import { audioManager } from '../managers/AudioManager';
 import { responseGenerator } from '../services/ResponseGenerator';
 
 export class BrazilForestScene extends Phaser.Scene {
-  // Characters (animated sprites)
-  private tarzan!: Phaser.GameObjects.Sprite;
-  private pig!: Phaser.GameObjects.Sprite;
-  private deer!: Phaser.GameObjects.Sprite;
+  // Hero character (animated sprite)
+  private hero!: Phaser.GameObjects.Sprite;
   private isMoving: boolean = false;
 
   // Interactive sprites
@@ -63,27 +61,15 @@ export class BrazilForestScene extends Phaser.Scene {
     this.messageBox = new MessageBox(this);
     this.inventoryPanel = new InventoryPanel(this, height);
 
-    // Characters - pixel art sprites, scaled up for visibility
-    const characterScale = 3.0;  // 64px * 3 = 192px tall
+    // Hero character - pixel art sprite, scaled up for visibility
+    const characterScale = 4.0;  // 32px * 4 = 128px tall
     const groundY = height - 60;
 
-    // Tarzan (main character, center)
-    this.tarzan = this.add.sprite(width / 2, groundY, 'tarzan');
-    this.tarzan.setScale(characterScale);
-    this.tarzan.setOrigin(0.5, 1);
-    this.tarzan.play('tarzan-idle');
-
-    // Pig (left of Tarzan)
-    this.pig = this.add.sprite(width / 2 - 200, groundY, 'pig');
-    this.pig.setScale(characterScale * 0.75);
-    this.pig.setOrigin(0.5, 1);
-    this.pig.play('pig-idle');
-
-    // Mr. Snuggles the deer (right of Tarzan)
-    this.deer = this.add.sprite(width / 2 + 200, groundY, 'deer');
-    this.deer.setScale(characterScale * 0.85);
-    this.deer.setOrigin(0.5, 1);
-    this.deer.play('deer-idle');
+    // Hero (main character, center)
+    this.hero = this.add.sprite(width / 2, groundY, 'hero-idle');
+    this.hero.setScale(characterScale);
+    this.hero.setOrigin(0.5, 1);
+    this.hero.play('hero-idle');
 
     // Subscribe to inventory selection to show equipped item in hand
     this.inventoryPanel.onSelect((item) => {
@@ -184,7 +170,7 @@ export class BrazilForestScene extends Phaser.Scene {
     if (isFirstVisit) {
       this.time.delayedCall(500, () => {
         this.messageBox.show(
-          "Tarzan finds himself in a lush Brazilian rainforest. His companions Pig and Mr. Snuggles look around nervously.",
+          "You find yourself in a dense jungle. The air is thick with humidity and the sounds of exotic birds.",
           5000
         );
       });
@@ -193,60 +179,6 @@ export class BrazilForestScene extends Phaser.Scene {
 
   private registerHotspots(sceneHeight: number): void {
     const hotspots: HotspotConfig[] = [
-      // Pig companion
-      {
-        id: 'pig',
-        name: 'Pig',
-        x: this.pig.x,
-        y: this.pig.y - 80,
-        width: 130,
-        height: 190,
-        actions: [
-          {
-            verb: 'LOOK',
-            response: "That's Pig, your loyal companion. He's wearing his favorite cowboy hat.",
-          },
-          {
-            verb: 'TALK',
-            response: '"Howdy partner! Sure is humid in this here jungle. We should find a way through them vines yonder."',
-          },
-          {
-            verb: 'USE',
-            response: "You can't use Pig like that!",
-          },
-          {
-            verb: 'TAKE',
-            response: "Pig is your friend, not an item!",
-          },
-        ],
-      },
-      // Mr. Snuggles companion
-      {
-        id: 'deer',
-        name: 'Mr. Snuggles',
-        x: this.deer.x,
-        y: this.deer.y - 70,
-        width: 130,
-        height: 160,
-        actions: [
-          {
-            verb: 'LOOK',
-            response: "Mr. Snuggles looks at you with his big, goofy eyes. His antlers are a bit crooked.",
-          },
-          {
-            verb: 'TALK',
-            response: 'Mr. Snuggles tilts his head and makes a friendly snorting sound. He seems happy!',
-          },
-          {
-            verb: 'USE',
-            response: "Mr. Snuggles doesn't understand what you want him to do.",
-          },
-          {
-            verb: 'TAKE',
-            response: "Mr. Snuggles is too big to carry, and he's your friend!",
-          },
-        ],
-      },
       // Jungle vines (blocking path) - RIGHT SIDE of scene
       {
         id: 'vines',
@@ -445,17 +377,17 @@ export class BrazilForestScene extends Phaser.Scene {
       const targetX = Phaser.Math.Clamp(pointer.x, 50, this.cameras.main.width - 50);
 
       // Flip sprite based on direction
-      if (targetX < this.tarzan.x) {
-        this.tarzan.setFlipX(true);
+      if (targetX < this.hero.x) {
+        this.hero.setFlipX(true);
       } else {
-        this.tarzan.setFlipX(false);
+        this.hero.setFlipX(false);
       }
 
       // Move Tarzan
       this.tweens.add({
-        targets: this.tarzan,
+        targets: this.hero,
         x: targetX,
-        duration: Math.abs(targetX - this.tarzan.x) * 3,
+        duration: Math.abs(targetX - this.hero.x) * 3,
         ease: 'Linear',
       });
     }
@@ -483,16 +415,16 @@ export class BrazilForestScene extends Phaser.Scene {
    * Update held item position to follow Tarzan's hand
    */
   private updateHeldItemPosition(): void {
-    if (this.heldItemSprite && this.tarzan) {
+    if (this.heldItemSprite && this.hero) {
       // Position item near Tarzan's hand (offset based on facing direction)
-      const handOffsetX = this.tarzan.flipX ? -25 : 25;
+      const handOffsetX = this.hero.flipX ? -25 : 25;
       const handOffsetY = -40;
       this.heldItemSprite.setPosition(
-        this.tarzan.x + handOffsetX,
-        this.tarzan.y + handOffsetY
+        this.hero.x + handOffsetX,
+        this.hero.y + handOffsetY
       );
       // Flip item to match character direction
-      this.heldItemSprite.setFlipX(this.tarzan.flipX);
+      this.heldItemSprite.setFlipX(this.hero.flipX);
     }
   }
 
@@ -504,29 +436,29 @@ export class BrazilForestScene extends Phaser.Scene {
       const speed = this.moveSpeed * (delta / 1000);
 
       if (this.cursors.A.isDown) {
-        this.tarzan.x -= speed;
-        this.tarzan.setFlipX(true);
+        this.hero.x -= speed;
+        this.hero.setFlipX(true);
         moving = true;
       } else if (this.cursors.D.isDown) {
-        this.tarzan.x += speed;
-        this.tarzan.setFlipX(false);
+        this.hero.x += speed;
+        this.hero.setFlipX(false);
         moving = true;
       }
 
       if (this.cursors.W.isDown) {
-        this.tarzan.y -= speed;
+        this.hero.y -= speed;
         moving = true;
       } else if (this.cursors.S.isDown) {
-        this.tarzan.y += speed;
+        this.hero.y += speed;
         moving = true;
       }
 
       // Play walk animation when moving, idle when stopped
       if (moving && !this.isMoving) {
-        this.tarzan.play('tarzan-walk');
+        this.hero.play('hero-run');
         this.isMoving = true;
       } else if (!moving && this.isMoving) {
-        this.tarzan.play('tarzan-idle');
+        this.hero.play('hero-idle');
         this.isMoving = false;
       }
 
@@ -535,18 +467,14 @@ export class BrazilForestScene extends Phaser.Scene {
       const maxX = this.cameras.main.width - 50;
       const minY = 200; // Upper boundary
       const maxY = this.cameras.main.height - 60; // Ground level
-      this.tarzan.x = Phaser.Math.Clamp(this.tarzan.x, minX, maxX);
-      this.tarzan.y = Phaser.Math.Clamp(this.tarzan.y, minY, maxY);
+      this.hero.x = Phaser.Math.Clamp(this.hero.x, minX, maxX);
+      this.hero.y = Phaser.Math.Clamp(this.hero.y, minY, maxY);
     }
 
     // Update held item position
     this.updateHeldItemPosition();
 
-    // Update character depth sorting (characters lower on screen appear in front)
-    const characters = [this.tarzan, this.pig, this.deer];
-    characters.sort((a, b) => a.y - b.y);
-    characters.forEach((char, index) => {
-      char.setDepth(100 + index);
-    });
+    // Update hero depth
+    this.hero.setDepth(100);
   }
 }
