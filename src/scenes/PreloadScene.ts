@@ -52,7 +52,8 @@ export class PreloadScene extends Phaser.Scene {
       frameHeight: 64,
     });
 
-    // Backgrounds (forest.png is clean without painted machete)
+    // Backgrounds (pixel art style)
+    this.load.image('title-screen', 'assets/images/backgrounds/title-screen.png');
     this.load.image('brazil-forest', 'assets/images/backgrounds/forest.png');
     this.load.image('brazil-village', 'assets/images/backgrounds/village.png');
 

@@ -5,7 +5,7 @@
 
 // Music track definitions
 export const MUSIC_TRACKS = {
-  title: '/assets/audio/title-theme.mp3',
+  title: '/assets/audio/title-theme-epic.mp3',
   forest: '/assets/audio/forest-exploration.mp3',
   village: '/assets/audio/village-scene.mp3',
 } as const;
