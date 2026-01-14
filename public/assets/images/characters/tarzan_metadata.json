@@ -1,35 +1,35 @@
 {
-  "uuid": "08790efd70b3e3e681bc9e6d3c7d2d83",
-  "prompt": "Video game character sprite of Tarzan, a heroic jungle man. Athletic muscular man in his late 20s with wild untamed dark hair and confident determined expression. He wears simple jungle attire - a loincloth or tattered shorts, bare chest showing defined muscles, bare feet. Tanned skin from living in the jungle. Standing in a confident heroic pose, ready for adventure. Full body view, dynamic pose showing strength and agility. Style: Smooth polished Disney-style cartoon art, clean lines, soft shading and highlights, vibrant saturated colors. Similar to Disney's Tarzan movie or modern mobile game character art. Professional video game character sprite, high quality render, clean cartoon style with no rough edges or sketchy lines. Isolated character on plain solid color background for easy extraction.",
+  "uuid": "21cd573438e49c425011523d35a3be33",
+  "prompt": "Hi-bit pixel art character sprite of Tarzan, a heroic jungle man. Athletic muscular man with wild dark hair, confident pose. Simple jungle attire - loincloth, bare chest, bare feet. Tanned skin. Standing heroic pose ready for adventure. Full body view. Style: Modern hi-bit pixel art with visible but refined pixels. Rich colors, detailed shading with dithering, NOT retro 8-bit. Professional quality like modern indie games. Isolated on transparent background.",
   "slots": [
     {
       "index": 0,
       "status": "success",
-      "url": "https://s.maginary.ai/results/08790efd70b3e3e681bc9e6d3c7d2d83/0_Video_game_character_sprite_of_Tarzanu002c_a_heroic_jungle_manu002e_Athletic_mus.webp",
+      "url": "https://s.maginary.ai/results/21cd573438e49c425011523d35a3be33/0_Hi-bit_pixel_art_character_sprite_of_Tarzanu002c_a_heroic_jungle_manu002e_Athlet.webp",
       "charged": true,
       "error_message": null
     },
     {
       "index": 1,
       "status": "success",
-      "url": "https://s.maginary.ai/results/08790efd70b3e3e681bc9e6d3c7d2d83/1_Video_game_character_sprite_of_Tarzanu002c_a_heroic_jungle_manu002e_Athletic_mus.webp",
+      "url": "https://s.maginary.ai/results/21cd573438e49c425011523d35a3be33/1_Hi-bit_pixel_art_character_sprite_of_Tarzanu002c_a_heroic_jungle_manu002e_Athlet.webp",
       "charged": true,
       "error_message": null
     },
     {
       "index": 2,
       "status": "success",
-      "url": "https://s.maginary.ai/results/08790efd70b3e3e681bc9e6d3c7d2d83/2_Video_game_character_sprite_of_Tarzanu002c_a_heroic_jungle_manu002e_Athletic_mus.webp",
+      "url": "https://s.maginary.ai/results/21cd573438e49c425011523d35a3be33/2_Hi-bit_pixel_art_character_sprite_of_Tarzanu002c_a_heroic_jungle_manu002e_Athlet.webp",
       "charged": true,
       "error_message": null
     },
     {
       "index": 3,
       "status": "success",
-      "url": "https://s.maginary.ai/results/08790efd70b3e3e681bc9e6d3c7d2d83/3_Video_game_character_sprite_of_Tarzanu002c_a_heroic_jungle_manu002e_Athletic_mus.webp",
+      "url": "https://s.maginary.ai/results/21cd573438e49c425011523d35a3be33/3_Hi-bit_pixel_art_character_sprite_of_Tarzanu002c_a_heroic_jungle_manu002e_Athlet.webp",
       "charged": true,
       "error_message": null
     }
   ],
-  "generated_at": "2026-01-09 09:21:46"
+  "generated_at": "2026-01-13 23:22:12"
 }

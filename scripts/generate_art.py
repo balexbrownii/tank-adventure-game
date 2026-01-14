@@ -47,6 +47,8 @@ PROMPTS = {
 
     "deer": """Hi-bit pixel art character of Mr. Snuggles, a friendly deer companion. Young deer with gentle eyes, small antlers, brown fur with white spots. Relaxed friendly pose. Full body. Style: Modern hi-bit pixel art, refined pixels, warm natural lighting, detailed fur texture. Transparent background.""",
 
+    "trader": """Hi-bit pixel art character of an indigenous Brazilian village trader. Friendly native man with traditional clothing, feathers in hair, beaded jewelry, warm welcoming expression. Standing pose ready to trade. Full body view. Style: Modern hi-bit pixel art like Metal Slug or Legend of Mana, refined pixels, rich colors, detailed clothing textures. Transparent background.""",
+
     "forest": """Hi-bit pixel art scene of a lush Brazilian rainforest. Dense jungle with towering trees, thick canopy filtering golden afternoon sunlight through gaps. Tropical flowers, giant ferns, hanging vines. Small dirt clearing with path leading deeper into jungle. Rich emerald greens, golden light rays piercing through, humid atmospheric depth with layered fog. Style: Modern hi-bit pixel art like Killer Rabbit Media. NOT retro 8-bit - professional illustration-quality pixel art with visible refined pixels, smooth dithered color gradients, atmospheric lighting, cinematic depth. Rich saturated colors, moody jungle atmosphere. 16:9 widescreen game background.""",
 
     "forest-interactive": """Hi-bit pixel art scene of Brazilian rainforest clearing with interactive game elements.
@@ -105,6 +107,7 @@ OUTPUT_DIRS = {
     "tank": CHARACTERS_DIR,
     "pig": CHARACTERS_DIR,
     "deer": CHARACTERS_DIR,
+    "trader": CHARACTERS_DIR,
     "forest": BACKGROUNDS_DIR,
     "forest-interactive": BACKGROUNDS_DIR,
     "village": BACKGROUNDS_DIR,
