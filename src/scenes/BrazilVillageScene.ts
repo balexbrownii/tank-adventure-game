@@ -9,7 +9,7 @@ import { responseGenerator } from '../services/ResponseGenerator';
 
 export class BrazilVillageScene extends Phaser.Scene {
   // Characters (animated sprites)
-  private tarzan!: Phaser.GameObjects.Sprite;
+  private hero!: Phaser.GameObjects.Sprite;
   private pig!: Phaser.GameObjects.Sprite;
   private deer!: Phaser.GameObjects.Sprite;
   private isMoving: boolean = false;
@@ -95,11 +95,11 @@ export class BrazilVillageScene extends Phaser.Scene {
     const characterScale = 3.0;  // 64px * 3 = 192px tall
     const groundY = height - 60;
 
-    // Tarzan (main character, center-right)
-    this.tarzan = this.add.sprite(width / 2 + 100, groundY, 'tarzan');
-    this.tarzan.setScale(characterScale);
-    this.tarzan.setOrigin(0.5, 1);
-    this.tarzan.play('tarzan-idle');
+    // Hero (main character, center-right)
+    this.hero = this.add.sprite(width / 2 + 100, groundY, 'hero-idle');
+    this.hero.setScale(characterScale);
+    this.hero.setOrigin(0.5, 1);
+    this.hero.play('hero-idle');
 
     // Pig (right of Tarzan)
     this.pig = this.add.sprite(width / 2 + 280, groundY, 'pig');
@@ -396,16 +396,16 @@ export class BrazilVillageScene extends Phaser.Scene {
       // Left-click on empty space - move Tarzan there
       const targetX = Phaser.Math.Clamp(pointer.x, 50, this.cameras.main.width - 50);
 
-      if (targetX < this.tarzan.x) {
-        this.tarzan.setFlipX(true);
+      if (targetX < this.hero.x) {
+        this.hero.setFlipX(true);
       } else {
-        this.tarzan.setFlipX(false);
+        this.hero.setFlipX(false);
       }
 
       this.tweens.add({
-        targets: this.tarzan,
+        targets: this.hero,
         x: targetX,
-        duration: Math.abs(targetX - this.tarzan.x) * 3,
+        duration: Math.abs(targetX - this.hero.x) * 3,
         ease: 'Linear',
       });
     }
@@ -418,7 +418,7 @@ export class BrazilVillageScene extends Phaser.Scene {
     if (this.traderApproached || !this.traderSprite) return;
 
     const distance = Phaser.Math.Distance.Between(
-      this.tarzan.x, this.tarzan.y,
+      this.hero.x, this.hero.y,
       this.traderSprite.x, this.traderSprite.y
     );
 
@@ -493,16 +493,16 @@ export class BrazilVillageScene extends Phaser.Scene {
    * Update held item position to follow Tarzan's hand
    */
   private updateHeldItemPosition(): void {
-    if (this.heldItemSprite && this.tarzan) {
+    if (this.heldItemSprite && this.hero) {
       // Position item near Tarzan's hand (offset based on facing direction)
-      const handOffsetX = this.tarzan.flipX ? -25 : 25;
+      const handOffsetX = this.hero.flipX ? -25 : 25;
       const handOffsetY = -40;
       this.heldItemSprite.setPosition(
-        this.tarzan.x + handOffsetX,
-        this.tarzan.y + handOffsetY
+        this.hero.x + handOffsetX,
+        this.hero.y + handOffsetY
       );
       // Flip item to match character direction
-      this.heldItemSprite.setFlipX(this.tarzan.flipX);
+      this.heldItemSprite.setFlipX(this.hero.flipX);
     }
   }
 
@@ -514,29 +514,29 @@ export class BrazilVillageScene extends Phaser.Scene {
       const speed = this.moveSpeed * (delta / 1000);
 
       if (this.cursors.A.isDown) {
-        this.tarzan.x -= speed;
-        this.tarzan.setFlipX(true);
+        this.hero.x -= speed;
+        this.hero.setFlipX(true);
         moving = true;
       } else if (this.cursors.D.isDown) {
-        this.tarzan.x += speed;
-        this.tarzan.setFlipX(false);
+        this.hero.x += speed;
+        this.hero.setFlipX(false);
         moving = true;
       }
 
       if (this.cursors.W.isDown) {
-        this.tarzan.y -= speed;
+        this.hero.y -= speed;
         moving = true;
       } else if (this.cursors.S.isDown) {
-        this.tarzan.y += speed;
+        this.hero.y += speed;
         moving = true;
       }
 
       // Play walk animation when moving, idle when stopped
       if (moving && !this.isMoving) {
-        this.tarzan.play('tarzan-walk');
+        this.hero.play('hero-run');
         this.isMoving = true;
       } else if (!moving && this.isMoving) {
-        this.tarzan.play('tarzan-idle');
+        this.hero.play('hero-idle');
         this.isMoving = false;
       }
 
@@ -545,8 +545,8 @@ export class BrazilVillageScene extends Phaser.Scene {
       const maxX = this.cameras.main.width - 50;
       const minY = 200; // Upper boundary
       const maxY = this.cameras.main.height - 60; // Ground level
-      this.tarzan.x = Phaser.Math.Clamp(this.tarzan.x, minX, maxX);
-      this.tarzan.y = Phaser.Math.Clamp(this.tarzan.y, minY, maxY);
+      this.hero.x = Phaser.Math.Clamp(this.hero.x, minX, maxX);
+      this.hero.y = Phaser.Math.Clamp(this.hero.y, minY, maxY);
     }
 
     // Update held item position
@@ -556,7 +556,7 @@ export class BrazilVillageScene extends Phaser.Scene {
     this.checkTraderProximity();
 
     // Update character depth sorting
-    const characters = [this.tarzan, this.pig, this.deer];
+    const characters = [this.hero, this.pig, this.deer];
     characters.sort((a, b) => a.y - b.y);
     characters.forEach((char, index) => {
       char.setDepth(100 + index);

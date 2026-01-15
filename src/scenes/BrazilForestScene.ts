@@ -255,7 +255,7 @@ export class BrazilForestScene extends Phaser.Scene {
                 id: 'flower',
                 name: 'Exotic Flower',
                 description: 'A beautiful red flower from the Brazilian rainforest.',
-                icon: 'flower',
+                icon: 'flower-icon',
               });
               this.hotspotManager.setEnabled('flower', false);
               // Hide the flower sprite when picked

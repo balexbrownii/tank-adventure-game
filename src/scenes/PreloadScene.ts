@@ -58,6 +58,12 @@ export class PreloadScene extends Phaser.Scene {
       frameHeight: 32,
     });
 
+    // Trader NPC sprite (64x64 frames)
+    this.load.spritesheet('trader', 'assets/images/characters/sprites/trader_walk.png', {
+      frameWidth: 64,
+      frameHeight: 64,
+    });
+
     // Backgrounds (pixel art style)
     this.load.image('title-screen', 'assets/images/backgrounds/title-screen.png');
     this.load.image('brazil-forest', 'assets/images/backgrounds/forest.png');
@@ -116,6 +122,14 @@ export class PreloadScene extends Phaser.Scene {
       frames: [{ key: 'deer', frame: 0 }],
       frameRate: 1,
       repeat: 0,
+    });
+
+    // Trader NPC animation
+    this.anims.create({
+      key: 'trader-idle',
+      frames: this.anims.generateFrameNumbers('trader', { start: 0, end: 3 }),
+      frameRate: 6,
+      repeat: -1,
     });
   }
 
